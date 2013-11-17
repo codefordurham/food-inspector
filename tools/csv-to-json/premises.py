@@ -5,6 +5,7 @@ import requests
 import pprint
 import json
 
+LIMIT = 100
 
 def main():
     premises = []
@@ -16,6 +17,8 @@ def main():
                 premise = {'name': row['Premise Name'].title(),
                            'address': row['Premise Address1'].title()}
                 premises.append(premise)
+            if index == LIMIT:
+                break
     print json.dumps(premises, indent=4)
 
 
