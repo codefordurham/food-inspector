@@ -1,6 +1,8 @@
 Health Rating Restaurant App
 ============================
 
+http://codefordurham.com/Durham-Restaurants/
+
 Reasons why we want build an application
 ----------------------------------------
 * An easy win to show city and county commissioners what can be done with open data.
