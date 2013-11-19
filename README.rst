@@ -1,7 +1,7 @@
 Health Rating Restaurant App
 ============================
 
-Reasons why we want build an application
+Reasons why we want to build an application
 ----------------------------------------
 * An easy win to show city and county commissioners what can be done with open data.
 * Demonstrate that having city/county data available and accessible will allow developers to be innovative.
