@@ -20,26 +20,29 @@
                 };
 
             // clean this up at some point
-            if (typeof markerHexColor !== 'undefined') {
+            if (markerHexColor === undefined) {
                 markerInfo.properties['marker-color'] = markerHexColor;
             }
 
-            if (typeof markerSymbol !== 'undefined') {
+            if (markerSymbol === undefined) {
                 markerInfo.properties['marker-symbol'] = markerSymbol;
             }
 
-            if (typeof markerSize !== 'undefined') {
+            if (markerSize === undefined) {
                 markerInfo.properties['marker-size'] = markerSize;
             }
 
             L.mapbox.markerLayer(markerInfo).addTo(map);
+        },
+        moveMapCenter = function (lat, lng) {
+            map.panTo([lat, lng]);
         },
         getUserLocation = function (callbackFunc) {
             var success = function (position) {
                     userLocation.lat = position.coords.latitude;
                     userLocation.lng = position.coords.longitude;
 
-                    if (typeof callbackFunc !== 'undefined') {
+                    if (callbackFunc !== undefined) {
                         callbackFunc();
                     }
                 },
@@ -47,12 +50,7 @@
                     console.log("Something went wrong trying to detect user's location.");
                 };
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(success, error);
-            } else {
-                // add better fallback?
-                alert("Please access this site with a browser that supports geolocation");
-            }
+            navigator.geolocation.getCurrentPosition(success, error);
         },
         initMap = function () {
             var markerLayer = L.mapbox.markerLayer();
@@ -72,16 +70,18 @@
 
         },
         init = function () {
+            initMap();
+
             if (navigator.geolocation) {
                 getUserLocation(function () {
-                    // create map
-                    initMap();
-
                     // add a marker for the user's detected location
                     addMarker(userLocation.lat, userLocation.lng, '#41b649', 'star', 'large');
+
+                    // move the center of map to user's detected location
+                    moveMapCenter(userLocation.lat, userLocation.lng);
                 });
             } else {
-                initMap();
+                alert("To automatically view locations nearby, please access this site with a browser that supports geolocation");
             }
         };
 
