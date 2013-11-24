@@ -20,15 +20,15 @@
                 };
 
             // clean this up at some point
-            if (markerHexColor === undefined) {
+            if (markerHexColor !== undefined) {
                 markerInfo.properties['marker-color'] = markerHexColor;
             }
 
-            if (markerSymbol === undefined) {
+            if (markerSymbol !== undefined) {
                 markerInfo.properties['marker-symbol'] = markerSymbol;
             }
 
-            if (markerSize === undefined) {
+            if (markerSize !== undefined) {
                 markerInfo.properties['marker-size'] = markerSize;
             }
 
