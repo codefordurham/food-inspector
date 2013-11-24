@@ -8,7 +8,7 @@
             lat: 35.9886,
             lng: -78.9072
         },
-        locationLayerPath = "/data/food-locations.geojson",
+        locationLayerPath = "data/food-locations.geojson",
         initMap = function () {
             var markerLayer = L.mapbox.markerLayer();
 
