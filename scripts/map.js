@@ -9,12 +9,12 @@
             lng: -78.9072
         },
         locationLayerPath = "/data/food-locations.geojson",
-        createMap = function () {
+        initMap = function () {
             var markerLayer = L.mapbox.markerLayer();
 
             // setup a Code for Durham MapBox account for map?
             map = L.mapbox.map('map', 'tylerpearson.gc56ggok', {zoomControl: false})
-                      .setView([userLocation.lat, userLocation.lng], 18);
+                      .setView([userLocation.lat, userLocation.lng], 17);
 
             new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
 
@@ -28,6 +28,10 @@
 
                 layer.bindPopup(content);
             });
+
+            map.markerLayer.on('click', function(e) {
+                    map.panTo(e.layer.getLatLng());
+                });
 
         },
         getUserLocation = function (callbackFunc) {
@@ -51,7 +55,7 @@
         },
         init = function () {
             getUserLocation(function () {
-                createMap();
+                initMap();
             });
         };
 
