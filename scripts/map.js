@@ -20,15 +20,15 @@
                 };
 
             // clean this up at some point
-            if (markerHexColor !== undefined) {
+            if (typeof markerHexColor !== 'undefined') {
                 markerInfo.properties['marker-color'] = markerHexColor;
             }
 
-            if (markerSymbol !== undefined) {
+            if (typeof markerSymbol !== 'undefined') {
                 markerInfo.properties['marker-symbol'] = markerSymbol;
             }
 
-            if (markerSize !== undefined) {
+            if (typeof markerSize !== 'undefined') {
                 markerInfo.properties['marker-size'] = markerSize;
             }
 
@@ -39,7 +39,7 @@
                     userLocation.lat = position.coords.latitude;
                     userLocation.lng = position.coords.longitude;
 
-                    if (callbackFunc !== undefined) {
+                    if (typeof callbackFunc !== 'undefined') {
                         callbackFunc();
                     }
                 },
