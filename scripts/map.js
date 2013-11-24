@@ -72,13 +72,17 @@
 
         },
         init = function () {
-            getUserLocation(function () {
-                // create map
-                initMap();
+            if (navigator.geolocation) {
+                getUserLocation(function () {
+                    // create map
+                    initMap();
 
-                // add a marker for the user's detected location
-                addMarker(userLocation.lat, userLocation.lng, '#41b649', 'star', 'large');
-            });
+                    // add a marker for the user's detected location
+                    addMarker(userLocation.lat, userLocation.lng, '#41b649', 'star', 'large');
+                });
+            } else {
+                initMap();
+            }
         };
 
 
