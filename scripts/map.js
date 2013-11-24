@@ -22,13 +22,6 @@
             markerLayer.loadURL(locationLayerPath)
                 .addTo(map);
 
-            markerLayer.eachLayer(function (layer) {
-                var content = '<h1>size: ' + layer.feature.properties.size + '<\/h1>' +
-                        '<h2>population: ' + layer.feature.properties.population + '<\/h2>';
-
-                layer.bindPopup(content);
-            });
-
             map.markerLayer.on('click', function(e) {
                     map.panTo(e.layer.getLatLng());
                 });
