@@ -64,8 +64,20 @@
             markerLayer.loadURL(locationLayerPath)
                 .addTo(map);
 
-            map.markerLayer.on('click', function (e) {
-                map.panTo(e.layer.getLatLng());
+            markerLayer.on('click', function (e) {
+                e.layer.unbindPopup();
+                var latlng = e.latlng;
+                var popup = L.popup();
+                var content = [
+                    '<div>',
+                    '<h2>' + e.layer.feature.properties.title + '</h2>',
+                    '<strong>Inspection Score:</strong><br/>',
+                    '<strong>Yelp Score:</strong><br/>',
+                    '</div>'
+                ].join('\n');
+                popup.setLatLng(latlng).setContent(content);
+                map.panTo(latlng);
+                popup.openOn(map);
             });
 
         },
