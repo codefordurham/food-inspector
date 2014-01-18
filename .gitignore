@@ -1,2 +1,13 @@
-.*.swp
-.*.un~
+*.py[co]
+.project
+.pydevproject
+*~
+*.db
+*.orig
+*.DS_Store
+.coverage
+.vagrant
+*/settings/local.py
+public/static/
+public/media/
+secrets.sls

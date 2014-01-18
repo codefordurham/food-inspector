@@ -1,82 +1,77 @@
-Health Rating Restaurant App
-============================
 
-http://codefordurham.com/Durham-Restaurants/
 
-Reasons why we want build an application
-----------------------------------------
-* An easy win to show city and county commissioners what can be done with open data.
-* Demonstrate that having city/county data available and accessible will allow developers to be innovative.
-* This is just the start. We're excited to get access to more data sets to help organizations like Durham Cares use this data to help our community.
-* Tastiest town of the south. Foody app.
+Eatsmart
+========================
 
-Success metrics
----------------
-* Raise average restaurant inspection scores in Durham
-* Educate residents about inspections and the process
-* Increase awareness of the Durham brigade
+Below you will find basic setup and deployment instructions for the eatsmart
+project. To begin you should have the following applications installed on your
+local development system:
 
-City/County role
-----------------
-* One portal for city/county data
-* Create something that's consumable by any platform (JSON, XML, etc.)
-* Work with Raleigh/Cary to create common schema
+- Python == 3.3
+- `pip >= 1.4 <http://www.pip-installer.org/>`_
+- `virtualenv >= 1.10 <http://www.virtualenv.org/>`_
+- `virtualenvwrapper >= 3.0 <http://pypi.python.org/pypi/virtualenvwrapper>`_
+- Postgres >= 9.1
+- git >= 1.7
 
-Brigade's role
----------------
-* Citizens joining together to improve restaurants
-* Help build the application
+The deployment uses SSH with agent forwarding so you'll need to enable agent
+forwarding if it is not already by adding ``ForwardAgent yes`` to your SSH config.
 
-Data Source
------------
-* Same source that WRAL uses for their restaurant inspections website
-    * Excel file uploaded/emailed to WRAL
-    * Only summary information, no inspection details or historic data
-* Currently in a proprietary, 3rd party application
-    * CDP – What does this stand for?
-    * Web portal
-* Mickey is working to get the data in a better form. In contact with the Director of Environmental Health
-* Code should be shared with others on GitHub
 
-Data Next Steps
----------------
-* Rather than email WRAL, data could be posted on Durham data portal
-* County can host data, not the application
-* Update it frequently, once a week at first
-    * Real time data later, if possible
-    * Work with Raleigh to use a common data schema and field names
-* Include latitude/longitude so we don't have to geocode addresses
-    * Tax data has every address in Durham
+Getting Started
+------------------------
 
-Would people use the app? Is the information in demand?
--------------------------------------------------------
-* Eat/don't eat
-* Want this to be a win/win for Durham. Don't want to alienate ourselves from owners.
-* Provide opportunity for restaurants and owner/staff to use the website
-* Use multiple sources and metrics so customer can make a choice
-* Aggregated grade. Shifts the blame.
+If you need Python 3.3 installed, you can use this PPA::
 
-How important is a health rating of a restaurant?
--------------------------------------------------
-* Yelp or Tripadvisor sticker
-* Restaurants will be proud to distinguish themselves
-* All restaurants, including food trucks. Rating is for the kitchen, not the trucks. Trucks have different type of inspection.
+    sudo add-apt-repository ppa:fkrull/deadsnakes
+    sudo apt-get update
+    sudo apt-get install python3.3 python3.3-dev
 
-Restaurant inspector
---------------------
-* What are their thoughts on the matter
-* Good/dumb violations
+The tool that we use to deploy code is called `Fabric
+<http://docs.fabfile.org/>`_, which is not yet Python3 compatible. So,
+we need to install that globally in our Python2 environment::
 
-Other data sources/related ideas
---------------------------------
-* Who's opening up a new restaurant
-* Which restaurants are owned by the same people?
-* Where are the food trucks?  
+    sudo pip install fabric==1.8.0
 
-Action Items
-------------
-* Data: Get our hands on what's available. Just start looking at it so we can think about how to display it:
-* Integration: Look at what's available on Yelp, Foursquare, Google, etc.
-* People:
-    * Find a health inspector to talk to. What questions should we ask?
-    * Restaurant owner. What questions should we ask?
+To setup your local environment you should create a virtualenv and install the
+necessary requirements::
+
+    mkvirtualenv --python=python3.3 eatsmart
+    $VIRTUAL_ENV/bin/pip install -r $PWD/requirements/dev.txt
+
+Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use it::
+
+    cp eatsmart/settings/local.example.py eatsmart/settings/local.py
+    echo "export DJANGO_SETTINGS_MODULE=eatsmart.settings.local" >> $VIRTUAL_ENV/bin/postactivate
+    echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
+
+Exit the virtualenv and reactivate it to activate the settings just changed::
+
+    deactivate
+    workon eatsmart
+
+Create the Postgres database and run the initial syncdb/migrate::
+
+    createdb -E UTF-8 eatsmart
+    psql eatsmart -c "CREATE EXTENSION postgis;"
+    python manage.py syncdb
+    python manage.py migrate
+
+You should now be able to run the development server::
+
+    python manage.py runserver
+
+
+Deployment
+------------------------
+
+You can deploy changes to a particular environment with
+the ``deploy`` command. This takes an optional branch name to deploy. If the branch
+is not given, it will use the default branch defined for this environment in
+``env.branch``::
+
+    fab staging deploy
+    fab staging deploy:new-feature
+
+New requirements or South migrations are detected by parsing the VCS changes and
+will be installed/run automatically.
