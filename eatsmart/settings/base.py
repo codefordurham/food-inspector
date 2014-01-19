@@ -103,6 +103,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'eatsmart.middleware.XsSharing',
 )
 
 ROOT_URLCONF = 'eatsmart.urls'
@@ -131,6 +132,7 @@ INSTALLED_APPS = (
     # External apps
     'south',
     'compressor',
+    'tastypie',
     # Internal apps
     'inspections',
 )

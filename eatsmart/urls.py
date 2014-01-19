@@ -3,10 +3,16 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
+from tastypie.api import Api
+from inspections.api.resources import EstablishmentResource
+
 
 admin.autodiscover()
+v1_api = Api(api_name='v1')
+v1_api.register(EstablishmentResource())
 
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
+    (r'^api/', include(v1_api.urls)),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

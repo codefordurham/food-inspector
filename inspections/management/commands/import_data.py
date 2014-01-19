@@ -16,7 +16,7 @@ DATA_ROOT = os.path.join(PARENT_DIR, 'Durham-Data', 'Restaurants')
 CSV_FILES = {
     'Establishment': os.path.join(DATA_ROOT, '2014-1-14-Establishments.csv'),
     'Inspection': os.path.join(DATA_ROOT, '2013-12-17-Inspections.csv'),
-    'Violation': os.path.join(DATA_ROOT, '2014-12-17-Violations.csv'),
+    'Violation': os.path.join(DATA_ROOT, '2013-12-17-Violations.csv'),
 }
 
 
