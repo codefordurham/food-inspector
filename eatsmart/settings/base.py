@@ -15,7 +15,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'eatsmart',
         'USER': '',
         'PASSWORD': '',
@@ -127,9 +127,12 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+    'django.contrib.gis',
     # External apps
     'south',
     'compressor',
+    # Internal apps
+    'inspections',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -145,12 +148,30 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
+    'formatters': {
+        'basic': {
+            'format': '%(asctime)s %(name)-20s %(levelname)-8s %(message)s',
+        },
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'basic',
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'basic',
+            'filename': os.path.join(PROJECT_ROOT, 'inspections.log'),
+            'maxBytes': 10 * 1024 * 1024,  # 10 MB
+            'backupCount': 10,
+        },
     },
     'loggers': {
         'django.request': {
@@ -158,6 +179,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'inspections': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        }
     }
 }
 
