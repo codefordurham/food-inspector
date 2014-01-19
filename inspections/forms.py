@@ -3,7 +3,7 @@ import logging
 from django.contrib.gis import forms
 from django.contrib.gis.geos import Point
 
-from inspections.models import Establishment
+from inspections.models import Establishment, Inspection, Violation
 
 
 DATE_FORMATS = ['%Y-%m-%d %H:%M:%S',     # '2006-10-25 14:30:59'
@@ -59,3 +59,21 @@ class EstablishmentForm(forms.ModelForm):
         if lat and lon:
             self.cleaned_data['location'] = Point(lon, lat)
         return self.cleaned_data
+
+
+class InspectionForm(forms.ModelForm):
+
+    insp_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
+    setup_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
+    update_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
+    void_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
+    verification_required_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
+
+    class Meta:
+        model = Inspection
+
+
+class ViolationForm(forms.ModelForm):
+
+    class Meta:
+        model = Violation
