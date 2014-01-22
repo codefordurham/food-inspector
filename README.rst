@@ -31,7 +31,7 @@ The tool that we use to deploy code is called `Fabric
 <http://docs.fabfile.org/>`_, which is not yet Python3 compatible. So,
 we need to install that globally in our Python2 environment::
 
-    sudo pip install fabric==1.8.0
+    sudo pip install fabric==1.8.1
 
 To setup your local environment you should create a virtualenv and install the
 necessary requirements::

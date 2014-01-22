@@ -1,4 +1,3 @@
-# FIXME: Change to match project name
-project_name: example
+project_name: eatsmart
 
-python_version: 2.7
+python_version: 3.3

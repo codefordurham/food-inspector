@@ -5,28 +5,31 @@ Vagrant Testing
 Starting the VM
 ------------------------
 
-You can test the provisioning/deployment using `Vagrant <http://vagrantup.com/>`_.
-Using the included Vagrantfile you can start up the VM. This requires Vagrant 1.3+ and
-the ``precise32`` box. The box will be installed if you don't have it already.::
+You can test the provisioning/deployment using `Vagrant
+<http://vagrantup.com/>`_. Using the included Vagrantfile you can start up the
+VM. This requires Vagrant 1.3+ and the ``precise32`` box. The box will be
+installed if you don't have it already.::
 
     vagrant up
 
-The general provision workflow is the same as in the previous :doc:`provisioning guide </provisioning>`
-so here are notes of the Vagrant specifics.
+The general provision workflow is the same as in the previous
+:doc:`provisioning guide </provisioning>` so here are notes of the Vagrant
+specifics.
 
 
 Provisioning the VM
 ------------------------
 
-The Vagrantfile is configured to install the Salt Master and Minion inside the VM once you've
-run ``vagrant up``. To finalize the provisioning you simply need to run::
+The Vagrantfile is configured to install the Salt Master and Minion inside the
+VM once you've run ``vagrant up``. To finalize the provisioning you simply need
+to run::
 
     fab vagrant salt:saltutil.sync_all
     fab vagrant highstate
 
-The Vagrant box will use the current working copy of the project and the local.py settings. If you want
-to use this for development/testing it is helpful to change your local settings to extend from staging
-instead of dev::
+The Vagrant box will use the current working copy of the project and the
+local.py settings. If you want to use this for development/testing it is
+helpful to change your local settings to extend from staging instead of dev::
 
     # Example local.py
     from eatsmart.settings.staging import *
@@ -37,8 +40,9 @@ instead of dev::
     
     DEBUG = True
 
-This won't have the same nice features of the development server such as auto-reloading but it will
-run with a stack which is much closer to the production environment.
+This won't have the same nice features of the development server such as auto-
+reloading but it will run with a stack which is much closer to the production
+environment.
 
 
 Testing on the VM
