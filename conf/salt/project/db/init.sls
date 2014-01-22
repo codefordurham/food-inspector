@@ -30,6 +30,35 @@ database-{{ pillar['project_name'] }}:
       - file: hba_conf
       - file: postgresql_conf
 
+{% if salt['pillar.get']('spatial_database', '') %}
+ubuntugis:
+  pkgrepo.managed:
+    - humanname: UbuntuGIS PPA
+    - ppa: ubuntugis/ppa
+
+postgis-packages:
+  pkg:
+    - installed
+    - names:
+      - postgresql-9.1-postgis
+    - require:
+      - pkgrepo: ubuntugis
+      - pkg: db-packages
+    - require_in:
+      - virtualenv: venv
+
+create-postgis-extension:
+  cmd.run:
+    - name: psql -U postgres {{ pillar['project_name'] }}_{{ pillar['environment'] }} -c "CREATE EXTENSION postgis;"
+    - unless: psql -U postgres {{ pillar['project_name'] }}_{{ pillar['environment'] }} -c "\dx+" | grep postgis
+    - user: postgres
+    - require:
+      - pkg: postgis-packages
+      - postgres_database: database-{{ pillar['project_name'] }}
+    - require_in:
+      - virtualenv: venv
+{% endif %}
+
 hba_conf:
   file.managed:
     - name: /etc/postgresql/9.1/main/pg_hba.conf
