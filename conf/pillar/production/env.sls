@@ -1,12 +1,10 @@
 environment: production
 
-# FIXME: Change to match production domain name
-domain: example.com
+domain: 54.84.3.26
 
-# FIXME: Update to the correct project repo
 repo:
-  url: git@github.com:CHANGEME/CHANGEME.git
-  branch: master
+  url: git@github.com:codefordurham/Durham-Restaurants.git
+  branch: feature/backend
 
 # Addtional public environment variables to set for the project
 env:
