@@ -36,6 +36,6 @@ SESSION_COOKIE_HTTPONLY = True
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(';')
 
 # Uncomment if using celery worker configuration
-# BROKER_URL = 'amqp://eatsmart_staging:%(BROKER_PASSWORD)s@%(BROKER_HOST)s/eatsmart_staging' % os.environ
+BROKER_URL = 'amqp://eatsmart_staging:%(BROKER_PASSWORD)s@%(BROKER_HOST)s/eatsmart_staging' % os.environ
 
 LOGGING['handlers']['file']['filename'] = '/var/www/eatsmart/log/inspections.log'
