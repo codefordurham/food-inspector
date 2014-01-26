@@ -1,6 +1,6 @@
 environment: production
 
-domain: 54.84.3.26
+domain: 107.170.26.176
 
 repo:
   url: git@github.com:codefordurham/Durham-Restaurants.git
