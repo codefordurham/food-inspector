@@ -14,5 +14,6 @@ class EstablishmentResource(GisModelResource):
         limit = 40
         filtering = {
             'est_type': ALL,
+            'location': ALL,
         }
         ordering = ['update_date']
