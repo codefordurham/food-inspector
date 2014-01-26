@@ -165,7 +165,7 @@ class Inspection(models.Model):
     id = models.IntegerField(primary_key=True)
     district = models.CharField(max_length=255, blank=True)
     county = models.IntegerField()
-    est_id = models.ForeignKey("Establishment")
+    est_id = models.ForeignKey("Establishment", related_name='inspections')
     state_id = models.BigIntegerField()
     request_number = models.CharField(max_length=255, blank=True)
     ehs_id = models.IntegerField(null=True)
