@@ -1,8 +1,9 @@
 from django.contrib import admin
 from inspections.models import Establishment, Inspection, Violation
+from leaflet.admin import LeafletGeoAdmin
 
 
-class EstablishmentAdmin(admin.ModelAdmin):
+class EstablishmentAdmin(LeafletGeoAdmin):
     search_fields = ('premise_name', 'owner_name')
     list_display = ('id', 'premise_name', 'est_type', 'update_date',
                     'state_id')

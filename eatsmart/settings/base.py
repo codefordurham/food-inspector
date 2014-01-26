@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'south',
     'compressor',
     'tastypie',
+    'leaflet',
     # Internal apps
     'inspections',
 )
