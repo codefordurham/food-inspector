@@ -8,7 +8,7 @@
             lat: 35.9886,
             lng: -78.9072
         },
-        locationLayerPath = "data/food-locations.geojson",
+        locationLayerPath = 'https://107.170.26.176/api/v1/establishment/?format=geojson&est_type=1&ordering=-update_date&within=-78.90999913215637,35.992712509370044,-78.889399766922,35.99845018569175',
         addMarker = function (lat, lng, markerHexColor, markerSymbol, markerSize) {
             var markerInfo = {
                     type: 'Feature',
@@ -70,7 +70,7 @@
                 var popup = L.popup();
                 var content = [
                     '<div>',
-                    '<h2>' + e.layer.feature.properties.title + '</h2>',
+                    '<h2>' + e.layer.feature.properties.premise_name + '</h2>',
                     '<strong>Inspection Score:</strong><br/>',
                     '<strong>Yelp Score:</strong><br/>',
                     '</div>'
@@ -78,6 +78,11 @@
                 popup.setLatLng(latlng).setContent(content);
                 map.panTo(latlng);
                 popup.openOn(map);
+            });
+
+            map.on('moveend', function(e) {
+                console.log(map.getBounds());
+                console.log(map.getBounds().toBBoxString());
             });
 
         },
