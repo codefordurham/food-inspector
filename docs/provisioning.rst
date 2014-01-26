@@ -182,7 +182,7 @@ as a root user. This is to install the Salt Minion which will connect to the Mas
 to complete the provisioning. To setup a minion you call the Fabric command::
 
     fab <environment> setup_minion:<roles> -H <ip-of-new-server> -u <root-user>
-    fab staging setup_minion:web,balancer,db-master,cache -H  33.33.33.10 -u root
+    fab production setup_minion:web,balancer,db-master,cache,worker,queue,salt-master -H 107.170.26.176 -u root
 
 The available roles are ``salt-master``, ``web``, ``worker``, ``balancer``, ``db-master``,
 ``queue`` and ``cache``. If you are running everything on a single server you need to enable
