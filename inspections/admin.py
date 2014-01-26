@@ -11,12 +11,14 @@ class EstablishmentAdmin(admin.ModelAdmin):
 
 
 class InspectionAdmin(admin.ModelAdmin):
+    search_fields = ('id', 'est_id__id')
     list_display = ('id', 'est_id', 'insp_date', 'classification_desc')
     list_filter = ('classification_desc',)
     ordering = ('-insp_date',)
 
 
 class ViolationAdmin(admin.ModelAdmin):
+    search_fields = ('id', 'inspection_id__id')
     list_display = ('id', 'inspection_id', 'weight_sum', 'comments')
     list_filter = ('item',)
     ordering = ('-inspection_id',)
