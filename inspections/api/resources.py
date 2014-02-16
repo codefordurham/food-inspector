@@ -41,7 +41,8 @@ class InspectionResource(ModelResource):
         queryset = Inspection.objects.all()
         allowed_methods = ['get']
         limit = 20
-        insp_date = ['update_date']
         filtering = {
             'est_id': ALL,
+            'insp_date': ALL,
         }
+        ordering = ['insp_date']
