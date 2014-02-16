@@ -1,8 +1,9 @@
-from tastypie.resources import ALL
+from tastypie import fields
+from tastypie.resources import ModelResource, ALL
 from tastypie.contrib.gis.resources import ModelResource as GisModelResource
 from django.contrib.gis.geos import Polygon
 
-from inspections.models import Establishment
+from inspections.models import Establishment, Inspection
 from inspections.api.serializers import GeoJSONSerializer
 
 
@@ -30,3 +31,16 @@ class EstablishmentResource(GisModelResource):
             orm_filters["location__within"] = Polygon.from_bbox(bbox)
 
         return orm_filters
+
+
+class InspectionResource(ModelResource):
+    est_id = fields.ForeignKey(EstablishmentResource, 'est_id')
+
+    class Meta(object):
+        queryset = Inspection.objects.all()
+        allowed_methods = ['get']
+        limit = 20
+        insp_date = ['update_date']
+        filtering = {
+            'est_id': ALL,
+        }

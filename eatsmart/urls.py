@@ -4,12 +4,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 from tastypie.api import Api
-from inspections.api.resources import EstablishmentResource
+from inspections.api import resources
 
 
 admin.autodiscover()
 v1_api = Api(api_name='v1')
-v1_api.register(EstablishmentResource())
+v1_api.register(resources.EstablishmentResource())
+v1_api.register(resources.InspectionResource())
 
 
 urlpatterns = patterns('',
