@@ -15,6 +15,7 @@ class EstablishmentResource(GisModelResource):
         serializer = GeoJSONSerializer()
         limit = 40
         filtering = {
+            'id': ALL,
             'est_type': ALL,
             'location': ALL,
             'premise_name': ALL,
@@ -43,6 +44,7 @@ class InspectionResource(ModelResource):
         limit = 20
         filtering = {
             'est_id': ALL,
+            'insp_type': ALL,
             'insp_date': ALL,
         }
         ordering = ['insp_date']
