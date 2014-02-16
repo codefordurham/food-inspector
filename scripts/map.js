@@ -8,7 +8,7 @@
             lat: 35.9886,
             lng: -78.9072
         },
-        locationLayerPath = 'https://107.170.26.176/api/v1/establishment/?format=geojson&est_type=1&ordering=-update_date&within=-78.90999913215637,35.992712509370044,-78.889399766922,35.99845018569175',
+        locationLayerPath = 'http://107.170.26.176/api/v1/establishment/?format=geojson&est_type=1&ordering=-update_date&within=-78.90999913215637,35.992712509370044,-78.889399766922,35.99845018569175',
         addMarker = function (lat, lng, markerHexColor, markerSymbol, markerSize) {
             var markerInfo = {
                     type: 'Feature',
