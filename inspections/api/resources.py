@@ -3,7 +3,7 @@ from tastypie.resources import ModelResource, ALL
 from tastypie.contrib.gis.resources import ModelResource as GisModelResource
 from django.contrib.gis.geos import Polygon
 
-from inspections.models import Establishment, Inspection
+from inspections.models import Establishment, Inspection, Violation
 from inspections.api.serializers import GeoJSONSerializer
 
 
@@ -46,3 +46,18 @@ class InspectionResource(ModelResource):
             'insp_date': ALL,
         }
         ordering = ['insp_date']
+
+
+class ViolationResource(ModelResource):
+    inspection_id = fields.ForeignKey(InspectionResource, 'inspection_id')
+
+    class Meta(object):
+        queryset = Violation.objects.all()
+        allowed_methods = ['get']
+        limit = 20
+        filtering = {
+            'item': ALL,
+            'inspection_id': ALL,
+            'rpt_area_desc': ALL,
+            'weight_sum': ALL,
+        }

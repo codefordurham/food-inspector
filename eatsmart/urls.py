@@ -11,6 +11,7 @@ admin.autodiscover()
 v1_api = Api(api_name='v1')
 v1_api.register(resources.EstablishmentResource())
 v1_api.register(resources.InspectionResource())
+v1_api.register(resources.ViolationResource())
 
 
 urlpatterns = patterns('',
