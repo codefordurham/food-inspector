@@ -9,7 +9,7 @@ from inspections.api.serializers import GeoJSONSerializer
 
 class EstablishmentResource(GisModelResource):
 
-    class Meta:
+    class Meta(object):
         queryset = Establishment.objects.all()
         allowed_methods = ['get']
         serializer = GeoJSONSerializer()
@@ -17,6 +17,7 @@ class EstablishmentResource(GisModelResource):
         filtering = {
             'est_type': ALL,
             'location': ALL,
+            'premise_name': ALL,
         }
         ordering = ['update_date']
 
