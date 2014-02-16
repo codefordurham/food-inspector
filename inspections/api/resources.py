@@ -10,7 +10,7 @@ from inspections.api.serializers import GeoJSONSerializer
 class EstablishmentResource(GisModelResource):
 
     class Meta(object):
-        queryset = Establishment.objects.all()
+        queryset = Establishment.objects.filter(status='ACTIVE')
         allowed_methods = ['get']
         serializer = GeoJSONSerializer()
         limit = 40
