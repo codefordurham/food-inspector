@@ -11,9 +11,9 @@ v1 of the API is currently located at: http://107.170.26.176/api/v1/?format=json
 
 There are 3 endpoints:
 
-* `Establishments <http://107.170.26.176/api/v1/establishment/?format=json>`_
-* `Inspections <http://107.170.26.176/api/v1/inspection/?format=json>`_
-* `Violations <http://107.170.26.176/api/v1/violation/?format=json>`_
+* `Establishments <http://107.170.26.176/api/v1/establishment/?format=json>`_ (`Establishment schema <http://107.170.26.176/api/v1/establishment/schema/?format=json>`_)
+* `Inspections <http://107.170.26.176/api/v1/inspection/?format=json>`_ (`Inspection schema <http://107.170.26.176/api/v1/inspection/schema/?format=json>`_)
+* `Violations <http://107.170.26.176/api/v1/violation/?format=json>`_ (`Violation schema <http://107.170.26.176/api/v1/violation/schema/?format=json>`_)
 
 The ``format=json`` query string argument is a convenience for viewing within your browser. It's helpful to have a plugin to pretty print JSON, such as `JSONView <https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en>`_ for Chrome. Alternatively, you can set the ``Accept: application/json`` header.
 
