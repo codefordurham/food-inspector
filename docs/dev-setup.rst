@@ -4,7 +4,22 @@ Eat Smart Development Setup
 Front-end Setup
 ---------------
 
-**Insert front-end development setup instructions here.**
+The front-end application is built in HTML, CSS, and JavaScript. If you want to
+help develop it, once you've cloned this repository, you can use Python to
+serve front-end app on your local development machine. Just run the following:
+
+Python 2.x::
+
+    python -m SimpleHTTPServer
+
+Python 3.x::
+
+    python -m http.server
+
+Now you should be able to open http://localhost:8000/ in your browser.
+**Note:** By default the app will connect to the production server for it's
+data. If you want to develop against your local back-end API setup, you'll need
+to adjust the JS code to point locally.
 
 
 Back-end API Setup
