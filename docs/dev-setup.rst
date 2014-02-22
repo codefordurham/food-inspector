@@ -6,6 +6,7 @@ Front-end Setup
 
 **Insert front-end development setup instructions here.**
 
+
 Back-end API Setup
 ------------------
 
@@ -68,6 +69,38 @@ Create the Postgres database and run the initial syncdb/migrate::
 You should now be able to run the development server::
 
     python manage.py runserver
+
+
+Loading Durham Data
+-------------------
+
+Now you can import some data. To import Durham's data, you'll need to clone the
+`Durham-Data repository <https://github.com/codefordurham/Durham-Data>`_ along
+side your Durham-Restaurants repository, e.g.:
+
+* /<my-projects-dir>/Durham-Restaurants/
+* /<my-projects-dir>/Durham-Data/
+
+Within your virtual environment, run the following command::
+
+    python manage.py import_data
+
+You should start to see output like this::
+
+    Establishment ID: 58442 (46.45 records/sec)
+    Establishment ID: 58942 (43.33 records/sec)
+    Establishment ID: 60690 (44.71 records/sec)
+    Establishment ID: 76487 (50.30 records/sec)
+    Establishment ID: 85926 (48.40 records/sec)
+    Establishment ID: 105925 (40.33 records/sec)
+    ....
+    Inspection ID: 2307977 (24.67 records/sec)
+    Inspection ID: 894236 (39.92 records/sec)
+    Inspection ID: 897425 (38.02 records/sec)
+    Inspection ID: 902462 (39.50 records/sec)
+    Inspection ID: 916736 (36.35 records/sec)
+
+It may take a while to import on your machine.
 
 
 Deployment
