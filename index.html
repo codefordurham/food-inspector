@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="demoapp">
+<html lang="en" ng-app="durhamRestaurants">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,23 +38,23 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li><a target="_blank" href="https://github.com/codefordurham/Durham-Restaurants">About</a></li>
-          <!--<li><a href="#">Restaurants</a></li>-->
         </ul>
-      </div><!--/.nav-collapse -->
-    </div>
-
-    <div class="map">
-      <div ng-controller="EstablishmentsController">
-        <leaflet center="durham" geojson="geojson"></leaflet>
       </div>
     </div>
 
+    <div ng-view></div>
+
+
     <!-- JS -->
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
-    <script src="scripts/angular-leaflet-directive.min.js"></script>
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-route.min.js"></script>-->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-route.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/controllers.js"></script>
+    <script src="scripts/angular-leaflet-directive.min.js"></script>
   </body>
 </html>
