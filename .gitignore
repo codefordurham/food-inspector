@@ -12,3 +12,4 @@ public/static/
 public/media/
 secrets.sls
 inspections.log*
+*.swp
