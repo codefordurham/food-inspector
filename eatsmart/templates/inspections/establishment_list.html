@@ -9,6 +9,7 @@
     <ul id='establishments'>
         {% for establishment in establishments %}
         <li>
+            <span class="glyphicon glyphicon-cutlery"></span>
             <a href="{% url "establishment-detail" establishment.pk %}">
                 {{ establishment|lower|titlecase }}
             </a>

@@ -1,6 +1,5 @@
 /* Space out content a bit */
 body {
-  padding-top: 20px;
   padding-bottom: 20px;
 }
 
@@ -12,23 +11,28 @@ body {
   padding-left: 15px;
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-}
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
-  padding-bottom: 19px;
   margin-top: 0;
   margin-bottom: 0;
   line-height: 40px;
 }
 
+.header {
+  background-color: #ADBABF;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-shadow: 0 1px 2px rgba(30, 30, 30,.5);
+}
+
+.header a {
+  color: #FFF;
+}
+
 /* Custom page footer */
-.footer {
-  padding-top: 19px;
+footer {
+  margin-top: 12px;
   color: #777;
-  border-top: 1px solid #e5e5e5;
 }
 
 .header h3 {
@@ -69,8 +73,8 @@ ul#establishments {
 }
 
 ul#establishments li {
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 18px;
+  padding-bottom: 18px;
   border-bottom: 1px solid #DEDFFF;
 }
 
@@ -86,6 +90,8 @@ ul#establishments li {
   /* Space out the masthead */
   .header {
     margin-bottom: 30px;
+    padding-right: 15px;
+    padding-left: 15px;
   }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
