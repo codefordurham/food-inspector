@@ -15,13 +15,42 @@
     {% block extra-css %}{% endblock %}
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.dev.js"></script>
 </head>
-<body>
-    <div class="container">
-        {% block content %}{% endblock %}
+<body id="{% block body_id %}{% endblock body_id %}" class="{% block body_class %}{% endblock body_class %}">
+    <div class='container'>
+        <div class="header">
+            <ul class="nav nav-pills pull-right">
+                <li><a href="#">About</a></li>
+            </ul>
+            <h3 class="text-muted"><a href='{% url "establishment-list" %}'>Eat Smart Durham</a></h3>
+        </div>
+        {% block content-outer %}
+        <div id="content-outer">
+            <div class="row">
+                {% block messages-outer %}
+                <div id="messages" class="span12">
+                    {% block messages %}
+                    {% for msg in messages %}
+                        {% include "includes/message.html" with msg=msg %}
+                    {% endfor %}
+                    {% endblock messages %}
+                </div>
+                {% endblock messages-outer %}
+            </div>
+            <div id="content">
+              {% block content %}{% endblock content %}
+            </div>
+        </div>
+        {% endblock content-outer %}
+        {% block footer %}
+        <div id="footer">
+            <span class='pull-right small'><a href='http://codefordurham.com/'>Durham CfA</a></span>
+            <span class="text-muted small">Eat Smart Durham.</span>
+        </div>
     </div>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="{% static 'js/site.js' %}"></script>
+    {% endblock footer %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/site.js' %}"></script>
     {% block extra-js %}{% endblock %}
 </body>
 </html>

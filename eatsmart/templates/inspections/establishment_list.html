@@ -1,12 +1,18 @@
 {% extends "base.html" %}
+{% load inspection_tags %}
+
+{% block body_class %}establishments{% endblock %}
+{% block body_id %}establishment-list{% endblock %}
 
 {% block content %}
-<h2>Establishments</h2>
-
-<div class="row">
-    <ul>
+<div class="row col-md-12">
+    <ul id='establishments'>
         {% for establishment in establishments %}
-        <li><a href="{% url "establishment-detail" establishment.pk %}">{{ establishment }}</a></li>
+        <li>
+            <a href="{% url "establishment-detail" establishment.pk %}">
+                {{ establishment|lower|titlecase }}
+            </a>
+        </li>
         {% endfor %}
     </ul>
 </div>
