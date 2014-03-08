@@ -254,7 +254,7 @@ class Inspection(models.Model):
 
 class Violation(models.Model):
     id = models.IntegerField(primary_key=True)
-    inspection_id = models.ForeignKey("Inspection")
+    inspection_id = models.ForeignKey("Inspection", related_name='violations')
     item = models.IntegerField()
     weight_sum = models.FloatField()
     critical = models.CharField(max_length=255, blank=True)
