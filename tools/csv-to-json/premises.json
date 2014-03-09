@@ -1,0 +1,290 @@
+[
+    {
+        "name": "Morehead Lunchroom", 
+        "address": "909 W Cobb Street"
+    }, 
+    {
+        "name": "Quintiles Barrington", 
+        "address": "5927 S Miami Blvd"
+    }, 
+    {
+        "name": "Captain D'S", 
+        "address": "4300 N Roxboro Rd"
+    }, 
+    {
+        "name": "Thai Cafe", 
+        "address": "2501 University Drive"
+    }, 
+    {
+        "name": "Zaxby'S", 
+        "address": "3820 N Roxboro Road"
+    }, 
+    {
+        "name": "Tacos Salsabanero Fresh", 
+        "address": "200 N Alston Ave"
+    }, 
+    {
+        "name": "Hot Dog Place", 
+        "address": "3600 N Duke Street"
+    }, 
+    {
+        "name": "Honey'S", 
+        "address": "2700 Guess Rd"
+    }, 
+    {
+        "name": "Mr Wok -Durham", 
+        "address": "4831 S Apex Hwy"
+    }, 
+    {
+        "name": "Oak Grove Athletic Association", 
+        "address": "Stallings Rd."
+    }, 
+    {
+        "name": "Lowes Food Store Deli  443", 
+        "address": "1001 N Miami Blvd"
+    }, 
+    {
+        "name": "Cresset Christian Academy", 
+        "address": "3707 Garrett Road"
+    }, 
+    {
+        "name": "School For Creative Studies Jr High Slr", 
+        "address": "6819 Red Mill Road"
+    }, 
+    {
+        "name": "Rogers Herr School Lunchroom", 
+        "address": "911 W Cornwallis Road"
+    }, 
+    {
+        "name": "W G Pearson School Lunchroom", 
+        "address": "3501 Fayetteville St"
+    }, 
+    {
+        "name": "Big Cheese Pizza", 
+        "address": "3405 Hillsborough Road"
+    }, 
+    {
+        "name": "Hibachi Grill & Supreme Buffet", 
+        "address": "4600 Durham-Chapel Hill Blvd."
+    }, 
+    {
+        "name": "Pie Pushers", 
+        "address": "1101 W Chapel Hill St The Cookery"
+    }, 
+    {
+        "name": "Big Deal Dogs", 
+        "address": "Mama Jean'S 308 S Driver St"
+    }, 
+    {
+        "name": "Happy China Sushi Bar", 
+        "address": "2505 Durham Chapel Hill Rd"
+    }, 
+    {
+        "name": "Taco Truck Dc #72", 
+        "address": "3801 Wake Forest Hwy  #106 La Plazacatinacarnice"
+    }, 
+    {
+        "name": "Briggs At The Park", 
+        "address": "4900  Nc 55"
+    }, 
+    {
+        "name": "Alivias", 
+        "address": "900 W Main St"
+    }, 
+    {
+        "name": "Eno Valley School Lunchroom", 
+        "address": "117 Milton Road"
+    }, 
+    {
+        "name": "Food Express", 
+        "address": "3701 South Miami Blvd"
+    }, 
+    {
+        "name": "Quick Lunch Rico Taco", 
+        "address": "2405 Holloway St"
+    }, 
+    {
+        "name": "Quick Lunch Rico Taco", 
+        "address": "2405 Holloway St"
+    }, 
+    {
+        "name": "Quick Lunch Rico Taco", 
+        "address": "2405 Holloway St"
+    }, 
+    {
+        "name": "Krisse Meeks Dc #100", 
+        "address": "2100 Angier Ave Joe'S Diner"
+    }, 
+    {
+        "name": "Rib Master Iii Dc #107", 
+        "address": "2100 Angier Ave, Joe'S Diner"
+    }, 
+    {
+        "name": "Liv'S  Dc 113", 
+        "address": "900 W Main St Alivias"
+    }, 
+    {
+        "name": "Ping Pong", 
+        "address": "5400 S Miami Blvd Suite 132"
+    }, 
+    {
+        "name": "Orient Cafe", 
+        "address": "2806 South Miami Blvd"
+    }, 
+    {
+        "name": "Devine'S Restaurant", 
+        "address": "904 W Main St"
+    }, 
+    {
+        "name": "China Star", 
+        "address": "5128 N Roxboro Rd"
+    }, 
+    {
+        "name": "La Vaquita  #1", 
+        "address": "2700 Chapel Hill Rd"
+    }, 
+    {
+        "name": "Durham Ridge Assisted Living", 
+        "address": "3420 Holloway St"
+    }, 
+    {
+        "name": "Neo Japan", 
+        "address": "1125 West Hwy. 54 Suite 401"
+    }, 
+    {
+        "name": "El Agave Mexican Grill", 
+        "address": "4818 Nc Hwy 55"
+    }, 
+    {
+        "name": "Taqueria San Pablito", 
+        "address": "2104 Angier Ave"
+    }, 
+    {
+        "name": "Elements", 
+        "address": "433 W Murray Ave"
+    }, 
+    {
+        "name": "The Grove Cafe", 
+        "address": "110 Clayton Road"
+    }, 
+    {
+        "name": "Doubletree Guest Suites Food S", 
+        "address": "2515 Meredian Packway"
+    }, 
+    {
+        "name": "Basf Cafeteria", 
+        "address": "26 Davis Drive"
+    }, 
+    {
+        "name": "Chick-Fil-A", 
+        "address": "6910 Fayetteville Rd Ste 246"
+    }, 
+    {
+        "name": "Suman'S Catering", 
+        "address": "1101 W Chapel Hill St The Cookery"
+    }, 
+    {
+        "name": "Durham Athletic Park", 
+        "address": "500 W Corporation St"
+    }, 
+    {
+        "name": "The Cupcake Bar", 
+        "address": "101 E Chapel Hill St Suite C"
+    }, 
+    {
+        "name": "The Cupcake Bar", 
+        "address": "101 E Chapel Hill St Suite C"
+    }, 
+    {
+        "name": "Pizzeria Toro", 
+        "address": "105 E Chapel Hill St"
+    }, 
+    {
+        "name": "Pizzeria Toro", 
+        "address": "105 E Chapel Hill St"
+    }, 
+    {
+        "name": "Azi Catering110", 
+        "address": "1101 Chapel Hill Road"
+    }, 
+    {
+        "name": "Rue  Cler", 
+        "address": "401 E Chapel Hill Street"
+    }, 
+    {
+        "name": "Tasty Dogg", 
+        "address": "3519 Fayetteville St"
+    }, 
+    {
+        "name": "118 Got Soul", 
+        "address": "118 West Parrish Street"
+    }, 
+    {
+        "name": "Cree Cafeteria", 
+        "address": "4425 Silicon Drive"
+    }, 
+    {
+        "name": "Pie Pushers", 
+        "address": "1101 W Chapel Hill St The Cookery"
+    }, 
+    {
+        "name": "Short Winter Soups", 
+        "address": "1101 W Chapel Hill St The Cookery"
+    }, 
+    {
+        "name": "Will And Pops", 
+        "address": "308 S Driver Street"
+    }, 
+    {
+        "name": "Joe Van Gogh", 
+        "address": "1104 Broad St"
+    }, 
+    {
+        "name": "Palace International", 
+        "address": "1104 Broad Street Ste K"
+    }, 
+    {
+        "name": "Broad Street Cafe", 
+        "address": "1116 Broad Street"
+    }, 
+    {
+        "name": "Tom Inscoe Wholesale Meats", 
+        "address": "4130 S Alston St"
+    }, 
+    {
+        "name": "Compare Foods Supermarket", 
+        "address": "1233 University Drive"
+    }, 
+    {
+        "name": "El Rodeo Of Durham Inc", 
+        "address": "905 W Main Street"
+    }, 
+    {
+        "name": "Dragon Gate", 
+        "address": "2000 Chapel Hill Road"
+    }, 
+    {
+        "name": "Cree B10 Cafeteria", 
+        "address": "4600 Silicon Drive"
+    }, 
+    {
+        "name": "Cree B10 Cafeteria", 
+        "address": "4600 Silicon Drive"
+    }, 
+    {
+        "name": "Chamas Churras Caria", 
+        "address": "905 W Main St"
+    }, 
+    {
+        "name": "China Star", 
+        "address": "5128 N Roxboro Rd"
+    }, 
+    {
+        "name": "Kangaroo Express # 838", 
+        "address": "2503 Highway 55"
+    }, 
+    {
+        "name": "Cresset Christian Academy", 
+        "address": "3707 Garrett Road"
+    }
+]

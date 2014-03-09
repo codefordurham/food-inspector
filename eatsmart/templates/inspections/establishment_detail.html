@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}
+<h2>{{ establishment }}</h2>
+
+<ul>
+    {% for inspection in inspections %}
+    <li>{{ inspection.insp_date }} - {{ inspection.grade }}
+    <ul>
+        {% for violation in inspection.violations.all %}
+        <li>{{ violation.comments }}</li>
+        {% endfor %}
+    </ul>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
