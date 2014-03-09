@@ -8,6 +8,7 @@ class EstablishmentList(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(EstablishmentList, self).get_context_data(**kwargs)
         establishments = Establishment.objects.filter(status='ACTIVE')
+        establishments = establishments.order_by('premise_name')
         context['establishments'] = establishments[:10]
         return context
 
