@@ -6,6 +6,7 @@ class EstablishmentList(ListView):
     model = Establishment
     context_object_name = 'establishments'
     template_name = 'inspections/establishment_list.html'
+    paginate_by = 20
 
     def get_queryset(self):
         query = self.request.GET.get('q', '')
@@ -14,6 +15,11 @@ class EstablishmentList(ListView):
             objects = objects.filter(premise_name__icontains=query)
         objects = objects.filter(status='ACTIVE', est_type=1)
         objects = objects.order_by('premise_name')
+        objects = objects.extra(
+            select={
+                'grade': "SELECT score_sum FROM inspections_inspection WHERE inspections_inspection.est_id_id = inspections_establishment.id AND inspections_inspection.insp_type = '1' ORDER BY inspections_inspection.insp_date DESC LIMIT 1"
+            },
+        )
         return objects
 
 
