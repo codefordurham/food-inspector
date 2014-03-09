@@ -1,13 +1,27 @@
 {% extends "base.html" %}
+{% load inspection_tags %}
+
+{% block body_class %}establishments{% endblock %}
+{% block body_id %}establishment-list{% endblock %}
 
 {% block content %}
-<h2>Establishments</h2>
-
-<div class="row">
-    <ul>
+<div class="row col-md-12">
+    <form id='search' class="form-inline" role="search" action="{% url 'establishment-list' %}" method="get">
+        <div class="input-group">
+            <input name='q' class="form-control" type="text" placeholder="Search restaurants..." value="{{ request.GET.q }}">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Search</button>
+            </span>
+        </div>
+    </form>
+    <div class="list-group">
         {% for establishment in establishments %}
-        <li><a href="{% url "establishment-detail" establishment.pk %}">{{ establishment }}</a></li>
+        <a href="{% url "establishment-detail" establishment.pk %}" class="list-group-item">
+            {% if establishment.grade %}<span class="badge">{{ establishment.grade }}</span>{% endif %}
+            <h5 class="list-group-item-heading">{{ establishment|lower|titlecase }}</h5>
+            <p class="list-group-item-text"><span class='text-muted small'>{{ establishment.premise_address1|lower|titlecase }}</span></p>
+        </a>
         {% endfor %}
-    </ul>
+    </div>
 </div>
 {% endblock %}

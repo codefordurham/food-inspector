@@ -12,7 +12,7 @@ class EstablishmentAdmin(LeafletGeoAdmin):
 
 
 class InspectionAdmin(admin.ModelAdmin):
-    search_fields = ('id', 'est_id__id')
+    search_fields = ('id', 'est_id__id', 'est_id__premise_name')
     list_display = ('id', 'est_id', 'insp_date', 'classification_desc')
     list_filter = ('classification_desc',)
     ordering = ('-insp_date',)
