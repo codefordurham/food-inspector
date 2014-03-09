@@ -6,6 +6,14 @@
 
 {% block content %}
 <div class="row col-md-12">
+    <form id='search' class="form-inline" role="search" action="{% url 'establishment-list' %}" method="get">
+        <div class="input-group">
+            <input name='q' class="form-control" type="text" placeholder="Search restaurants..." value="{{ request.GET.q }}">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Search</button>
+            </span>
+        </div>
+    </form>
     <div class="list-group">
         {% for establishment in establishments %}
         <a href="{% url "establishment-detail" establishment.pk %}" class="list-group-item">

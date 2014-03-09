@@ -86,6 +86,10 @@ ul#establishments li {
   border-bottom: 1px solid #DEDFFF;
 }
 
+form#search {
+  margin-bottom: 10px;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
