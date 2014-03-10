@@ -10,6 +10,9 @@ body > .container {
   margin: 20px 0;
 }
 
+.badge-date {
+ font-size: 62.5%;
+}
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
