@@ -4,7 +4,7 @@ from django import template
 from django.utils.safestring import mark_safe
 from django.utils.html import conditional_escape
 
-SMALL = 'a|an|and|as|at|but|by|en|for|if|in|of|on|or|the|to|v\.?|via|vs\.?'
+SMALL = 'a|&amp;|an|and|as|at|but|by|en|for|if|in|of|on|or|the|to|v\.?|via|vs\.?'
 PUNCT = "[!\"#$%&'‘()*+,-./:;?@[\\\\\\]_`{|}~]"
 
 SMALL_WORDS = re.compile(r'^(%s)$' % SMALL, re.I)
