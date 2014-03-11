@@ -6,7 +6,7 @@
 
 <ul>
     {% for inspection in inspections %}
-    <li>{{ inspection.insp_date }} - {{ inspection.grade }}
+    <li>{{ inspection.insp_date|date:"M dS Y" }} - {{ inspection.grade }}
     <ul>
         {% for violation in inspection.violations.all %}
         <li>{{ violation.comments }}</li>
