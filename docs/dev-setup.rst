@@ -1,33 +1,8 @@
 Eat Smart Development Setup
 ===========================
 
-Front-end Setup
----------------
-
-The front-end application is built in HTML, CSS, and JavaScript. If you want to
-help develop it, once you've cloned this repository, you can use Python to
-serve front-end app on your local development machine. Just run the following:
-
-Python 2.x::
-
-    python -m SimpleHTTPServer
-
-Python 3.x::
-
-    python -m http.server
-
-Now you should be able to open http://localhost:8000/ in your browser.
-**Note:** By default the app will connect to the production server for it's
-data. If you want to develop against your local back-end API setup, you'll need
-to adjust the JS code to point locally.
-
-
-Back-end API Setup
-------------------
-
 Below you will find basic setup and deployment instructions for the
-Django-powered API back-end. **Back-end setup is not required if you only want to
-develop front-end JavaScript/HTML/CSS.** To begin you should have the following
+Django-powered API. To begin you should have the following
 applications installed on your local development system:
 
 - Python == 3.3
@@ -38,7 +13,7 @@ applications installed on your local development system:
 - PostGIS == 2.0
 - git >= 1.7
 
-The deployment uses SSH with agent forwarding so you'll need to enable agent
+[root]/requirements/base.txt contains a list of modules installed automatically. The deployment uses SSH with agent forwarding so you'll need to enable agent
 forwarding if it is not already by adding ``ForwardAgent yes`` to your SSH config.
 
 
