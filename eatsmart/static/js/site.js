@@ -8,3 +8,45 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 
 
 // place any jQuery/helper plugins in here, instead of separate, slower script files.
+$(document).ready(function(){
+    UserGeoLocation.init();
+});
+
+var UserGeoLocation = {
+    success_url: "/user/location/",
+
+    success: function(position) {
+        var data;
+        this.lat = position.coords.latitude;
+        this.lon = position.coords.longitude;
+        // let's show a map or do something interesting!
+        data = {
+            'lat': this.lat,
+            'lon': this.lon
+        };
+        $.post(this.success_url, data, function() {
+            // server has updated the user location
+            location.reload(); // reloads page to user current location.
+        })
+    },
+
+    error: function() {
+        // to be implemented
+        console.log("error");
+    },
+
+    get_location: function() {
+      if (Modernizr.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.success, this.error);
+      } else {
+        // no native support; maybe try a fallback?
+        this.error();
+      }
+    },
+
+    init: function() {
+        // asks user for location.
+        this.get_location();
+    }
+
+};
