@@ -18,8 +18,10 @@
         {% for establishment in establishments %}
         <a href="{% url "establishment-detail" establishment.pk %}" class="list-group-item">
             {% if establishment.grade %}<span class="badge">{{ establishment.grade }}</span>{% endif %}
-            <h5 class="list-group-item-heading">{{ establishment|title }}</h5>
-			{% if establishment.insp_date %}<span class="badge badge-date">{{ establishment.insp_date|date:"M dS Y" }}</span>{% endif %}
+            <h5 class="list-group-item-heading">{{ establishment|title }} 
+                {% if establishment.property_id %}<span class="glyphicon glyphicon-camera"></span>{% endif %}
+            </h5>
+            {% if establishment.insp_date %}<span class="badge badge-date">{{ establishment.insp_date|date:"M dS Y" }}</span>{% endif %}
             <p class="list-group-item-text"><span class='text-muted small'>{{ establishment.premise_address1|title }}</span></p>
         </a>
         {% endfor %}
@@ -31,7 +33,7 @@
                     <a href="{% url 'establishment-list' %}?page={{ page_obj.previous_page_number }}">previous</a>
                 {% endif %}
                 <span class="page-current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
                 </span>
                 {% if page_obj.has_next %}
                     <a href="{% url 'establishment-list' %}?page={{ page_obj.next_page_number }}">next</a>
