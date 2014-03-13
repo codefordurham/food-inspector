@@ -8,23 +8,17 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 
 
 // place any jQuery/helper plugins in here, instead of separate, slower script files.
-$(document).ready(function(){
-    UserGeoLocation.init();
-});
-
 var UserGeoLocation = {
-    success_url: "/user/location/",
+    success_url: "/users/location/add/",
 
     success: function(position) {
-        var data;
-        this.lat = position.coords.latitude;
-        this.lon = position.coords.longitude;
         // let's show a map or do something interesting!
-        data = {
-            'lat': this.lat,
-            'lon': this.lon
+        var data = {
+            'csrfmiddlewaretoken': csrf_token,
+            'lat': position.coords.latitude,
+            'lon': position.coords.longitude
         };
-        $.post(this.success_url, data, function() {
+        $.post(UserGeoLocation.success_url, data, function() {
             // server has updated the user location
             location.reload(); // reloads page to user current location.
         })
