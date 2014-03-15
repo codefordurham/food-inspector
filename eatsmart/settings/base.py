@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'leaflet',
     # Internal apps
     'inspections',
+    'users'
 )
 
 # A sample logging configuration. The only tangible logging

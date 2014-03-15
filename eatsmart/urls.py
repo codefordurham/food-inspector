@@ -17,5 +17,6 @@ v1_api.register(resources.ViolationResource())
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     (r'^api/', include(v1_api.urls)),
+    url(r'^users/', include('users.urls')),
     url(r'', include('inspections.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
