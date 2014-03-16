@@ -37,7 +37,7 @@ class ForceIntegerField(forms.IntegerField):
 
     def to_python(self, value):
         value = super(forms.IntegerField, self).to_python(value)
-        if value in self.empty_values:
+        if value is None or value in self.empty_values:
             return None
         try:
             value = int(value)
@@ -84,7 +84,6 @@ class EstablishmentForm(forms.ModelForm):
     service_type2_id = ForceIntegerField()
     state_id = ForceIntegerField()
     state_owned_id = ForceIntegerField()
-    territory = ForceIntegerField()
     update_user_id = ForceIntegerField()
     wic_id = ForceIntegerField()
     est_type = ForceIntegerField()
@@ -127,9 +126,13 @@ class InspectionForm(forms.ModelForm):
     county = ForceIntegerField()
     ehs_id = ForceIntegerField()
     group_code_id = ForceIntegerField()
+    est_group_id = ForceIntegerField()
     permit_status_id = ForceIntegerField()
     state_id = ForceIntegerField()
     violations_id = ForceIntegerField()
+    epi_type_id = ForceIntegerField()
+    territory = ForceIntegerField()
+    update_user_id = ForceIntegerField()
     insp_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
     setup_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
     update_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
@@ -144,18 +147,13 @@ class InspectionForm(forms.ModelForm):
         self.fields['epi_type_id'].required = False
         self.fields['est_group_id'].required = False
         self.fields['est_id'].required = False
+        self.fields['group_code_id'].required = False
         self.fields['inspection_reason_id'].required = False
         self.fields['oss_id'].required = False
         self.fields['permit_type_id'].required = False
         self.fields['territory'].required = False
         self.fields['update_user_id'].required = False
-        self.fields['est_id'] = CleanModelChoiceField(queryset=Inspection.objects.all())
-
-    def clean_est_id_id(self):
-        raise(Exception())
-        est_id = self.cleaned_data('est_id')
-        print(est_id)
-        return est_id
+        self.fields['est_id'] = CleanModelChoiceField(queryset=Establishment.objects.all())
 
     class Meta:
         model = Inspection

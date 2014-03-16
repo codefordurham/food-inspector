@@ -1,4 +1,3 @@
-import csv
 import pprint
 import logging
 import time
@@ -10,27 +9,28 @@ from inspections.models import Establishment, Inspection, Violation
 from inspections.forms import EstablishmentForm, InspectionForm, ViolationForm
 
 
-API_ENDPOINTS = {
-    'Establishment': 'http://data.dconc.gov/ResturantData.aspx',
-    'Inspection': 'http://data.dconc.gov/ResturantData.aspx?table=inspections',
-    'Violation': 'http://data.dconc.gov/ResturantData.aspx',
-}
-
-
 logger = logging.getLogger(__name__)
+
+
+class DurhamAPI(object):
+    url = "http://data.dconc.gov/ResturantData.aspx"
+
+    def __init__(self, *args, **kwargs):
+        self.params = kwargs
+
+    def json(self):
+        self.request = requests.get(self.url, params=self.params)
+        logger.info("Requested {}".format(self.request.url))
+        return self.request.json()
 
 
 class Command(BaseCommand):
     """Import Durham inspections data from CSV files"""
 
-    def import_api(self, name, Model, Form):
-        Model.objects.all().delete()
-        self.stdout.write("Requesting {}".format(API_ENDPOINTS[name]))
-        r = requests.get(API_ENDPOINTS[name])
-        self.stdout.write("Processing...")
+    def import_api(self, json, Model, Form):
         objects = []
         start_time = time.time()
-        for index, raw_row in enumerate(r.json()):
+        for index, raw_row in enumerate(json):
             # create new row with matching field names
             row = {}
             for key, val in raw_row.items():
@@ -38,35 +38,40 @@ class Command(BaseCommand):
                 row[new_key] = val
             form = Form(dict(row))
             if not form.is_valid():
-                errors = dict(form.errors.items())
-                logger.error(pprint.pformat(row, indent=4))
-                logger.error(pprint.pformat(form.cleaned_data, indent=4))
+                errors = {'model': Model._meta.object_name,
+                          'errors': dict(form.errors.items()),
+                          'cleaned_data': form.cleaned_data,
+                          'row': row}
                 logger.error(pprint.pformat(errors, indent=4))
                 continue
-            objects.append(form.save(commit=False))
+            objects.append(form.save())
             if index % 20 == 0:
-                Model.objects.bulk_create(objects)
                 elapsed_time = time.time() - start_time
-                msg = "{} ID: {} ({s:.2f} records/sec)".format(name, row['id'], s=len(objects)/elapsed_time)
-                self.stdout.write(msg)
+                msg = "{} ID: {} ({s:.2f} records/sec)".format(Model._meta.object_name, row['id'], s=len(objects)/elapsed_time)
                 logger.debug(msg)
                 start_time = time.time()
                 objects = []
 
     def handle(self, *args, **options):
-        if not args:
-            args = ['Establishment', 'Inspection', 'Violation']
-        for name in args:
-            if name == 'Establishment':
-                Model = Establishment
-                Form = EstablishmentForm
-            elif name == 'Inspection':
-                Model = Inspection
-                Form = InspectionForm
-            elif name == 'Violation':
-                Model = Violation
-                Form = ViolationForm
-            else:
-                self.stdout.write("Invalid name: {}".format(name))
-                continue
-            self.import_api(name, Model, Form)
+        self.import_api(DurhamAPI(est_type=1).json(),
+                        Establishment, EstablishmentForm)
+        for e in Establishment.objects.all():
+            logger.debug(str(e))
+            request = DurhamAPI(table="inspections", est_id=e.id)
+            self.import_api(request.json(), Inspection, InspectionForm)
+        # if not args:
+        #     args = ['Establishment', 'Inspection', 'Violation']
+        # for name in args:
+        #     if name == 'Establishment':
+        #         Model = Establishment
+        #         Form = EstablishmentForm
+        #     elif name == 'Inspection':
+        #         Model = Inspection
+        #         Form = InspectionForm
+        #     elif name == 'Violation':
+        #         Model = Violation
+        #         Form = ViolationForm
+        #     else:
+        #         self.stdout.write("Invalid name: {}".format(name))
+        #         continue
+        #     self.import_api(name, Model, Form)
