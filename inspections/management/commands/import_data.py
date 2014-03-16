@@ -5,6 +5,7 @@ import logging
 import time
 
 from django.conf import settings
+from django.core import management
 from django.core.management.base import BaseCommand
 
 from inspections.models import Establishment, Inspection, Violation
@@ -49,6 +50,7 @@ class Command(BaseCommand):
                     logger.debug(msg)
                     start_time = time.time()
                     objects = []
+            management.call_command('importer')
 
     def handle(self, *args, **options):
         if not args:
