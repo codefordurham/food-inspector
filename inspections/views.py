@@ -1,4 +1,7 @@
+from django.conf import settings
+from django.contrib.gis.geos import Point
 from django.views.generic import ListView, DetailView
+
 from inspections.models import Establishment
 
 
@@ -11,6 +14,7 @@ class EstablishmentList(ListView):
     def get_queryset(self):
         query = self.request.GET.get('q', '')
         objects = self.model.objects.all()
+        user_location = self.get_user_location()
         if query:
             objects = objects.filter(premise_name__icontains=query)
         objects = objects.filter(status='ACTIVE', est_type=1)
@@ -22,6 +26,15 @@ class EstablishmentList(ListView):
             },
         )
         return objects
+
+    def get_user_location(self):
+        """Returns a Point object that represent the location of a user, if
+        the user did not allow us to use his location it returns a Point with
+        a default predefined location."""
+        session = self.request.session
+        lat = session.get('location', {}).get('lat', settings.LATITUDE)
+        lon = session.get('location', {}).get('lon', settings.LONGITUDE)
+        return Point(lat, lon)
 
 
 class EstablishmentDetail(DetailView):
