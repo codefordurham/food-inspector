@@ -11,7 +11,7 @@
     </div>
     <div class='col-md-6'>
         <h3>{{establishment.premise_address1}}<br/>
-            {% if establishment.premise_address2 and establishment.premise_address2 != 0%} {{establishment.premise_address2}}<br/>{%endif%}
+            {% if establishment.premise_address2 and establishment.premise_address2 != '0' %} {{establishment.premise_address2}}<br/>{%endif%}
             {{establishment.premise_city}},{{establishment.premise_state}} {{establishment.premise_zip}}
         </h3>
     </div>
