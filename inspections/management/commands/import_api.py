@@ -39,7 +39,7 @@ class Command(BaseCommand):
             instance = None
             try:
                 instance = Model.objects.get(id=row['id'])
-            except Model.objects.DoesNotExist:
+            except Model.DoesNotExist:
                 pass
             form = Form(dict(row), instance=instance)
             if not form.is_valid():
@@ -61,6 +61,5 @@ class Command(BaseCommand):
         self.import_api(DurhamAPI(est_type=1).json(),
                         Establishment, EstablishmentForm)
         for e in Establishment.objects.all():
-            logger.debug(str(e))
             request = DurhamAPI(table="inspections", est_id=e.id)
             self.import_api(request.json(), Inspection, InspectionForm)
