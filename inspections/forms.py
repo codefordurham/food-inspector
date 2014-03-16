@@ -33,6 +33,12 @@ class DateTimeFieldNull0(forms.DateTimeField):
 
 
 class ForceIntegerField(forms.IntegerField):
+    """
+    The DCO API returns decimals for fields that are really integers. Until
+    Mikey fixes it, this form field forces input (floating point numbers)
+    to integers.
+    """
+
     empty_values = ['NO']
 
     def to_python(self, value):
