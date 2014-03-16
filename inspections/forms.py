@@ -167,5 +167,7 @@ class InspectionForm(forms.ModelForm):
 
 class ViolationForm(forms.ModelForm):
 
+    item = ForceIntegerField()
+
     class Meta:
         model = Violation

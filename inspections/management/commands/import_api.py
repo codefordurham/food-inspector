@@ -63,3 +63,6 @@ class Command(BaseCommand):
         for e in Establishment.objects.all():
             request = DurhamAPI(table="inspections", est_id=e.id)
             self.import_api(request.json(), Inspection, InspectionForm)
+        for i in Inspection.objects.all():
+            request = DurhamAPI(table="violations", inspection_id=i.id)
+            self.import_api(request.json(), Violation, ViolationForm)
