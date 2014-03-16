@@ -36,7 +36,12 @@ class Command(BaseCommand):
             for key, val in raw_row.items():
                 new_key = key.lower().replace(' ', '_').replace('?', '')
                 row[new_key] = val
-            form = Form(dict(row))
+            instance = None
+            try:
+                instance = Model.objects.get(id=row['id'])
+            except Model.objects.DoesNotExist:
+                pass
+            form = Form(dict(row), instance=instance)
             if not form.is_valid():
                 errors = {'model': Model._meta.object_name,
                           'errors': dict(form.errors.items()),
