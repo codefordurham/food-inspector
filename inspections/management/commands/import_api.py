@@ -59,19 +59,3 @@ class Command(BaseCommand):
             logger.debug(str(e))
             request = DurhamAPI(table="inspections", est_id=e.id)
             self.import_api(request.json(), Inspection, InspectionForm)
-        # if not args:
-        #     args = ['Establishment', 'Inspection', 'Violation']
-        # for name in args:
-        #     if name == 'Establishment':
-        #         Model = Establishment
-        #         Form = EstablishmentForm
-        #     elif name == 'Inspection':
-        #         Model = Inspection
-        #         Form = InspectionForm
-        #     elif name == 'Violation':
-        #         Model = Violation
-        #         Form = ViolationForm
-        #     else:
-        #         self.stdout.write("Invalid name: {}".format(name))
-        #         continue
-        #     self.import_api(name, Model, Form)
