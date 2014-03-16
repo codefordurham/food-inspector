@@ -17,7 +17,7 @@
         {% for establishment in establishments %}
         <a href="{% url "establishment-detail" establishment.pk %}" class="list-group-item">
             {% if establishment.grade %}<span class="badge">{{ establishment.grade }}</span>{% endif %}
-            <h5 class="list-group-item-heading">{{ establishment|title }} 
+            <h5 class="list-group-item-heading">{{ establishment|title }}  {{ establishment.distance.mi|floatformat:"2" }} mi
                 {% if establishment.property_id %}<span class="glyphicon glyphicon-camera"></span>{% endif %}
             </h5>
             {% if establishment.insp_date %}<span class="badge badge-date">{{ establishment.insp_date|date:"M dS Y" }}</span>{% endif %}
