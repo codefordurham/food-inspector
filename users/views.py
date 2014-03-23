@@ -1,11 +1,18 @@
-from decimal import Decimal
 import json
 
 from django.http import HttpResponse
 from django.views.generic import View
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 
-class UserAddLocationView(View):
+class CSRFExemptMixin(object):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(CSRFExemptMixin, self).dispatch(*args, **kwargs)
+
+
+class UserAddLocationView(CSRFExemptMixin, View):
     def post(self, request, *args, **kwargs):
         lat = request.POST.get('lat', '')
         lon = request.POST.get('lon', '')
@@ -15,7 +22,7 @@ class UserAddLocationView(View):
         return HttpResponse(data, 'application/json')
 
 
-class UserRemoveLocation(View):
+class UserRemoveLocation(CSRFExemptMixin, View):
     def post(self, request, *args, **kwargs):
         if 'location' in request.session:
             del request.session['location']
