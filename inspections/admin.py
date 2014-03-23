@@ -22,6 +22,7 @@ class ViolationAdmin(admin.ModelAdmin):
     search_fields = ('id', 'inspection_id__id')
     list_display = ('id', 'inspection_id', 'weight_sum', 'comments')
     list_filter = ('item',)
+    raw_id_fields = ('inspection_id',)
     ordering = ('-inspection_id',)
 
 

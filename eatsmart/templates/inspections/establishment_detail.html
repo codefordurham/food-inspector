@@ -3,6 +3,7 @@
 
 {% block content %}
 <h2>{{ establishment }}</h2>
+
 <div class='row'>
     <div class='col-md-6'>
         {% if establishment.property_id %}
@@ -16,16 +17,32 @@
         </h3>
     </div>
 </div>
-<ul>
-    {% for inspection in inspections %}
-    <li>{{ inspection.insp_date|date:"M dS Y" }} - {{ inspection.grade }}
-    <ul>
-        {% for violation in inspection.violations.all %}
-        <li>{{ violation.comments }}</li>
+
+<div class="accordion" id="inspection-details-accordion" class="list-group">
+    <div class="accordion-group">
+        {% for inspection in inspections %}
+        <div class="accordion-heading">
+            <a class="accordion-toggle list-group-item" data-toggle="collapse" data-parent="#inspection-details-accordion"
+               href="#collapse{{ forloop.counter }}">
+                {{ inspection.insp_date|date:"M dS Y" }} - {{ inspection.grade }}
+            </a>
+        </div>
+        <div id="collapse{{ forloop.counter }}" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <table class="table table-striped">
+                    <tbody>
+                    {% for key, value in inspection.dump.items %}
+                    <tr>
+                        <td>{{ key }}</td><td>{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
-    </li>
-    {% endfor %}
-</ul>
+    </div>
+</div>
+
 
 {% endblock %}

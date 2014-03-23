@@ -251,6 +251,9 @@ class Inspection(models.Model):
 
     objects = models.GeoManager()
 
+    def __str__(self):
+        return "Inspection #{}".format(self.pk)
+
 
 class Violation(models.Model):
     id = models.IntegerField(primary_key=True)
