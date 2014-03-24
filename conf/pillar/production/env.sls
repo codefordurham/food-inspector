@@ -1,6 +1,6 @@
 environment: production
 
-domain: 107.170.26.176
+domain: ncfoodinspector.com
 
 repo:
   url: git@github.com:codefordurham/Durham-Restaurants.git
