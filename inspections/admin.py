@@ -6,9 +6,12 @@ from leaflet.admin import LeafletGeoAdmin
 class EstablishmentAdmin(LeafletGeoAdmin):
     search_fields = ('premise_name', 'owner_name')
     list_display = ('id', 'premise_name', 'est_type', 'update_date',
-                    'state_id')
+                    'state_id', 'point')
     list_filter = ('type_description',)
     ordering = ('-update_date',)
+
+    def point(self, obj):
+        return "{}, {}".format(obj.location[0], obj.location[1])
 
 
 class InspectionAdmin(admin.ModelAdmin):
