@@ -3,7 +3,7 @@ import tempfile
 
 import yaml
 
-from fabric.api import env, get, hide, lcd, local, put, require, run, settings, sudo, task
+from fabric.api import env, execute, get, hide, lcd, local, put, require, run, settings, sudo, task
 from fabric.colors import red
 from fabric.contrib import files, project
 from fabric.contrib.console import confirm
@@ -221,3 +221,14 @@ def deploy():
         target = "-G 'environment:{0}'".format(env.environment)
         salt('saltutil.sync_all', target)
         highstate(target)
+
+
+@task
+def code_deploy():
+    require('environment')
+    with settings(host_string=env.master):
+        sync()
+        target = '-C G@roles:web'
+        salt('saltutil.sync_all', target)
+        salt('state.sls project.web.app', target)
+
