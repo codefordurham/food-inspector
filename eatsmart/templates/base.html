@@ -64,7 +64,8 @@
         {% block footer %}
         <footer class='row col-md-12'>
             <span class='pull-right small'>By <a href='http://codefordurham.com/'>Code for Durham</a>.</span>
-            <p><span class="text-muted small">Eat Smart Durham</span></p>
+            
+            <p><span class="text-muted small">Eat Smart Durham{% if request.session.location %} - Location: <a href='https://maps.google.com/?q={{ request.session.location.lat|floatformat:5 }},{{ request.session.location.lon|floatformat:5 }}'>({{ request.session.location.lat|floatformat:5 }}, {{ request.session.location.lon|floatformat:5 }})</a>{% endif %}</span></p>
         </footer>
         {% endblock footer %}
     </div>
