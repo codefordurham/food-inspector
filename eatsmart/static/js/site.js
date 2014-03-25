@@ -7,8 +7,10 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 (function(){try{console.log();return window.console;}catch(a){return (window.console={});}}());
 
 $(document).ready(function(){
-    $("#update-location").click(function(){
+    $(document).on('click touchstart', '#update-location', function(){
+        console.log("clicked");
        UserGeoLocation.init();
+        return false;
     });
 });
 
@@ -18,6 +20,7 @@ var UserGeoLocation = {
 
     success: function(position) {
         // let's show a map or do something interesting!
+        console.log(position)
         var data = {
             'csrfmiddlewaretoken': csrf_token,
             'lat': position.coords.latitude,
@@ -25,6 +28,7 @@ var UserGeoLocation = {
         };
         $.post(UserGeoLocation.success_url, data, function() {
             // server has updated the user location
+            console.log("updating geo location.");
             location.reload(); // reloads page to user current location.
         })
     },
@@ -36,6 +40,7 @@ var UserGeoLocation = {
 
     get_location: function() {
       if (Modernizr.geolocation) {
+        console.log("have geolocation");
         navigator.geolocation.getCurrentPosition(this.success, this.error);
       } else {
         // no native support; maybe try a fallback?

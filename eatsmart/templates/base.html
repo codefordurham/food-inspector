@@ -72,8 +72,8 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="{% static 'js/site.js' %}"></script>
     <script>
+      var csrf_token = "{{ csrf_token }}";
       {% if not request.session.location %}
-        var csrf_token = "{{ csrf_token }}";
         UserGeoLocation.init();
       {% endif %}
     </script>
