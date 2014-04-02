@@ -1,0 +1,19 @@
+{% load establishmentdetailstags %}
+<div class="accordion-inner">
+{% for key, value in inspection_details.items %}
+    <p>{{ key|capfirst }}:</p>
+    {% if key == 'violations' and not value.all|length_is:'0' %}
+        <ul>
+        {% for v in value.all %}
+            {% if v.comments != '0' %}
+                <li>{{ v.comments }}</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+        {% elif key != 'violations' %}
+            <div class="detail-value">{{ value }}</div>
+        {% else %}
+            <div class="detail-value">N</div>
+    {% endif %}
+{% endfor %}
+</div>
