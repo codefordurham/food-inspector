@@ -4,7 +4,7 @@
 {% block body_id %}establishment-list{% endblock %}
 
 {% block content %}
-<div class="row col-md-12">
+<div class="row">
     <form id='search' class="form-inline" role="search" action="{% url 'establishment-list' %}" method="get">
         <div class="input-group">
             <input name='q' class="form-control" type="text" placeholder="Search restaurants..." value="{{ request.GET.q }}">
