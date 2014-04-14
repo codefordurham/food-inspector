@@ -104,6 +104,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'eatsmart.middleware.XsSharing',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'eatsmart.urls'
