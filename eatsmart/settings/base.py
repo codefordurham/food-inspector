@@ -137,7 +137,8 @@ INSTALLED_APPS = (
     'users',
     # Internal apps
     'inspections',
-    'users'
+    'users',
+    'eatsmart.locations.durham',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -185,6 +186,11 @@ LOGGING = {
             'propagate': True,
         },
         'inspections': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'eatsmart': {
             'handlers': ['file'],
             'level': 'DEBUG',
             'propagate': False,
