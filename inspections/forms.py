@@ -18,6 +18,7 @@ DATE_FORMATS = ['%Y-%m-%dT%H:%M:%S',     # '2006-10-25T14:30:59'
                 '%m/%d/%y %H:%M',        # '10/25/06 14:30'
                 '%m/%d/%y',              # '10/25/06'
                 '%d-%b-%Y',              # '25-Oct-2006'
+                '%m/%d/%Y %I:%M:%S %p',  # '12/6/2013 12:00:00 AM'
                 ]
 
 
@@ -61,63 +62,23 @@ class CleanModelChoiceField(forms.ModelChoiceField):
 
 class EstablishmentForm(forms.ModelForm):
 
-    bond_type_id = ForceIntegerField()
-    caterer_id = ForceIntegerField()
-    certified_manager_id = ForceIntegerField()
-    contact_type_id = ForceIntegerField()
-    county = ForceIntegerField()
-    disinfectant_id = ForceIntegerField()
-    district_id = ForceIntegerField()
-    drivethru_id = ForceIntegerField()
-    est_group_id = ForceIntegerField()
-    est_type = ForceIntegerField()
-    food_stamps_id = ForceIntegerField()
-    handicap_access_id = ForceIntegerField()
-    home_county_id = ForceIntegerField()
-    inspection_type_id = ForceIntegerField()
-    language_id = ForceIntegerField()
-    license_type_id = ForceIntegerField()
-    licensed_plumber_id = ForceIntegerField()
-    menu_type_id = ForceIntegerField()
-    owner_type_id = ForceIntegerField()
-    permit_ehs_id = ForceIntegerField()
-    pool_filter_type_id = ForceIntegerField()
-    prev_state_id = ForceIntegerField()
-    print_permit_id = ForceIntegerField()
-    property_id = ForceIntegerField()
-    renewal_status_id = ForceIntegerField()
-    service_type1_id = ForceIntegerField()
-    service_type2_id = ForceIntegerField()
-    state_id = ForceIntegerField()
-    state_owned_id = ForceIntegerField()
-    update_user_id = ForceIntegerField()
-    wic_id = ForceIntegerField()
-    est_type = ForceIntegerField()
-    territory = ForceIntegerField()
-    county = ForceIntegerField()
-    closing_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    construction_expiration_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    inactivate_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    last_plan_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    next_inspection_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    opening_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    permit_expiration_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    permit_print_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    reactivate_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    renewal_received_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    renewal_sent_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    setup_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    status_change_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    test_expiration_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    status_change_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    test_expiration_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
-    update_date = DateTimeFieldNull0(input_formats=DATE_FORMATS, required=False)
+    status = forms.CharField()
     lat = forms.FloatField(required=False)
     lon = forms.FloatField(required=False)
-    location = forms.PointField(required=False)
+    update_date = forms.DateTimeField(input_formats=DATE_FORMATS)
+    opening_date = forms.DateTimeField(input_formats=DATE_FORMATS)
 
     class Meta:
         model = Establishment
+        exclude = ('location',)
+
+    def clean_status(self):
+        status = self.cleaned_data['status']
+        if status == 'ACTIVE':
+            return 'active'
+        elif status == 'DELETED':
+            return 'deleted'
+        raise forms.ValidationError('Invalid status')
 
     def clean(self):
         lat = self.cleaned_data.get('lat', None)
@@ -125,6 +86,13 @@ class EstablishmentForm(forms.ModelForm):
         if lat and lon:
             self.cleaned_data['location'] = Point(lon, lat)
         return self.cleaned_data
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if 'location' in self.cleaned_data:
+            instance.location = self.cleaned_data['location']
+        instance.save()
+        return instance
 
 
 class InspectionForm(forms.ModelForm):

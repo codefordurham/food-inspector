@@ -18,7 +18,7 @@ class EstablishmentList(ListView):
         objects = objects.distance(user_location).order_by('distance')
         if query:
             objects = objects.filter(premise_name__icontains=query)
-        objects = objects.filter(status='ACTIVE', est_type=1)
+        objects = objects.filter(status='active', type=1)
         objects = objects.extra(
             select={
 	    'grade': "SELECT score_sum FROM inspections_inspection WHERE inspections_inspection.est_id_id = inspections_establishment.id AND inspections_inspection.insp_type = '1' ORDER BY inspections_inspection.insp_date DESC LIMIT 1",

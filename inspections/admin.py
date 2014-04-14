@@ -4,14 +4,16 @@ from leaflet.admin import LeafletGeoAdmin
 
 
 class EstablishmentAdmin(LeafletGeoAdmin):
-    search_fields = ('premise_name', 'owner_name')
-    list_display = ('id', 'premise_name', 'est_type', 'update_date',
-                    'state_id', 'point')
-    list_filter = ('type_description',)
+    search_fields = ('name', 'address')
+    list_display = ('id', 'name', 'type',
+                    'county', 'state_id', 'point', 'update_date')
+    list_filter = ('county', 'postal_code')
     ordering = ('-update_date',)
 
     def point(self, obj):
-        return "{}, {}".format(obj.location[0], obj.location[1])
+        if obj.location:
+            return "{}, {}".format(obj.location[0], obj.location[1])
+        return None
 
 
 class InspectionAdmin(admin.ModelAdmin):

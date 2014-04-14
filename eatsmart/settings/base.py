@@ -189,10 +189,10 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': False,
         },
-        '': {
-            'handlers': ['file'],
-            'level': 'ERROR',
-        },
+        # '': {
+        #     'handlers': ['file'],
+        #     'level': 'ERROR',
+        # },
     }
 }
 
