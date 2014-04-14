@@ -25,6 +25,7 @@ logger = logging.getLogger(__name__)
 
 
 class EstablishmentForm(forms.ModelForm):
+    "Validate and clean Durham's establishment data"
 
     status = forms.CharField()
     lat = forms.FloatField(required=False)
@@ -60,6 +61,7 @@ class EstablishmentForm(forms.ModelForm):
 
 
 class InspectionForm(forms.ModelForm):
+    "Validate and clean Durham's inspection data"
 
     score = forms.FloatField(required=False)
     date = forms.DateTimeField(input_formats=DATE_FORMATS)
@@ -84,6 +86,7 @@ class InspectionForm(forms.ModelForm):
 
 
 class ViolationForm(forms.ModelForm):
+    "Validate and clean Durham's violation data"
 
     date = forms.DateTimeField(input_formats=DATE_FORMATS)
     update_date = forms.DateTimeField(input_formats=DATE_FORMATS)

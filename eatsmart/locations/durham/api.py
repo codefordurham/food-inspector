@@ -1,11 +1,12 @@
-import io
 import csv
-import requests
+import io
 import logging
+import requests
 
 from eatsmart.locations.base import Importer
+from eatsmart.locations.durham.forms import (EstablishmentForm, InspectionForm,
+                                             ViolationForm)
 from inspections.models import Establishment, Inspection, Violation
-from inspections.forms import EstablishmentForm, InspectionForm, ViolationForm
 
 
 logger = logging.getLogger(__name__)
