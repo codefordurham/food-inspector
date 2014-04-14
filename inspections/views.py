@@ -21,8 +21,8 @@ class EstablishmentList(ListView):
         objects = objects.filter(status='active', type=1)
         objects = objects.extra(
             select={
-	    'grade': "SELECT score_sum FROM inspections_inspection WHERE inspections_inspection.est_id_id = inspections_establishment.id AND inspections_inspection.insp_type = '1' ORDER BY inspections_inspection.insp_date DESC LIMIT 1",
-	    'insp_date': "SELECT insp_date FROM inspections_inspection WHERE inspections_inspection.est_id_id = inspections_establishment.id AND inspections_inspection.insp_type = '1' ORDER BY inspections_inspection.insp_date DESC LIMIT 1"
+	    'grade': "SELECT score FROM inspections_inspection WHERE inspections_inspection.establishment_id = inspections_establishment.id AND inspections_inspection.type = '1' ORDER BY inspections_inspection.date DESC LIMIT 1",
+	    'insp_date': "SELECT date FROM inspections_inspection WHERE inspections_inspection.establishment_id = inspections_establishment.id AND inspections_inspection.type = '1' ORDER BY inspections_inspection.date DESC LIMIT 1"
             },
         )
         return objects
@@ -44,5 +44,5 @@ class EstablishmentDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(EstablishmentDetail, self).get_context_data(**kwargs)
         establishment = context['establishment']
-        context['inspections'] = establishment.inspections.order_by('-insp_date')
+        context['inspections'] = establishment.inspections.order_by('-date')
         return context

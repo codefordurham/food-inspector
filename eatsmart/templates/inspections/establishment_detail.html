@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% load establishmentdetailstags %}
+
 {% block content %}
 <h2>{{ establishment }}</h2>
 
@@ -12,9 +13,8 @@
     </div>
     <div class='col-md-6'>
         <h3>
-            {{establishment.premise_address1|title }}<br/>
-            {% if establishment.premise_address2 and establishment.premise_address2 != '0' %} {{establishment.premise_address2|title }}<br/>{%endif%}
-            {{establishment.premise_city|title }}, {{establishment.premise_state }} {{establishment.premise_zip }}<br/>
+            {{establishment.address|title }}<br/>
+            {{establishment.city|title }}, {{establishment.state }} {{establishment.postal_code }}<br/>
             <br/>
             {% if inspections.values and not inspections.values|length_is:'0' %}{{ inspections.values.first.final_score_sum }}<br/>{% endif %}
         </h3>
@@ -25,10 +25,9 @@
     <div class="accordion-group">
         {% for inspection in inspections %}
         <div class="accordion-heading">
-            <a class="accordion-toggle list-group-item" data-toggle="collapse" data-parent="#inspection-details-accordion"
-               href="#collapse{{ forloop.counter }}">
-                {{ inspection.insp_date|date:"M dS Y" }}
-                {% if inspection.final_score_sum != '0' %}<span class="badge">{{ inspection.final_score_sum }}</span>{% endif %}
+            <a class="accordion-toggle list-group-item" data-toggle="collapse" data-parent="#inspection-details-accordion" href="#collapse{{ forloop.counter }}">
+                {{ inspection.date|date:"M dS Y" }}
+                {% if inspection.score != '0' %}<span class="badge">{{ inspection.score }}</span>{% endif %}
             </a>
         </div>
         <div id="collapse{{ forloop.counter }}" class="accordion-body collapse">
@@ -37,6 +36,4 @@
         {% endfor %}
     </div>
 </div>
-
-
 {% endblock %}
