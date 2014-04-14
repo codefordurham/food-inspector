@@ -1,5 +1,6 @@
-{% load compress %}
+{% load compress i18n %}
 {% load static from staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
@@ -31,12 +32,12 @@
                <ul class="nav navbar-nav navbar-right">
                    <li><a href="#about">About</a></li>
                     {% if not user.is_authenticated %}
-                        <li><a href="{% url "admin:index" %}">Log In</a></li>
+                        <li><a href="{% url "admin:index" %}">{% trans "Log In" %}</a></li>
                     {% else %}
                         {% if user.is_staff %}
-                          <li><a href="{% url "admin:index" %}">Admin</a></li>
+                          <li><a href="{% url "admin:index" %}">{% trans "Admin" %}</a></li>
                         {% endif %}
-                        <li><a href="{% url "admin:logout" %}">Log Out</a></li>
+                        <li><a href="{% url "admin:logout" %}">{% trans "Log Out" %}</a></li>
                     {% endif %}
                </ul>
             </div><!--/.nav-collapse -->
@@ -64,7 +65,7 @@
         {% block footer %}
         <footer class='row col-md-12'>
             <span class='pull-right small'>By <a href='http://codefordurham.com/'>Code for Durham</a>.</span>
-            <p><span class="text-muted small">Eat Smart Durham{% if request.session.location %} - Location: <a href='https://maps.google.com/?q={{ request.session.location.lat|floatformat:5 }},{{ request.session.location.lon|floatformat:5 }}'>({{ request.session.location.lat|floatformat:5 }}, {{ request.session.location.lon|floatformat:5 }})</a>{% endif %}</span></p>
+            <p><span class="text-muted small">Eat Smart Durham{% if request.session.location %} - {% trans 'Location' %}: <a href='https://maps.google.com/?q={{ request.session.location.lat|floatformat:5 }},{{ request.session.location.lon|floatformat:5 }}'>({{ request.session.location.lat|floatformat:5 }}, {{ request.session.location.lon|floatformat:5 }})</a>{% endif %}</span></p>
         </footer>
         {% endblock footer %}
     </div>
