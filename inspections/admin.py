@@ -17,18 +17,29 @@ class EstablishmentAdmin(LeafletGeoAdmin):
 
 
 class InspectionAdmin(admin.ModelAdmin):
-    search_fields = ('id', 'est_id__id', 'est_id__premise_name')
-    list_display = ('id', 'est_id', 'insp_date', 'classification_desc')
-    list_filter = ('classification_desc',)
-    ordering = ('-insp_date',)
+    search_fields = ('id', 'establishment__external_id', 'external_id',
+                     'establishment__name')
+    list_display = ('id', 'external_id', 'establishment', 'type',
+                    'date', 'update_date')
+    list_filter = ('update_date', 'type')
+    ordering = ('-date',)
+    raw_id_fields = ('establishment',)
+    date_hierarchy = 'date'
 
 
 class ViolationAdmin(admin.ModelAdmin):
-    search_fields = ('id', 'inspection_id__id')
-    list_display = ('id', 'inspection_id', 'weight_sum', 'comments')
-    list_filter = ('item',)
-    raw_id_fields = ('inspection_id',)
-    ordering = ('-inspection_id',)
+    search_fields = ('id', 'external_id', 'code', 'description')
+    list_display = ('id', 'external_id', 'establishment', 'code',
+                    'date', 'comments')
+    list_filter = ('code',)
+    raw_id_fields = ('establishment', 'inspection')
+    ordering = ('-date',)
+    date_hierarchy = 'date'
+
+    def comments(self, obj):
+        if obj.description:
+            return "{}...".format(obj.description[:50])
+        return ''
 
 
 admin.site.register(Establishment, EstablishmentAdmin)
