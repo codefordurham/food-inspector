@@ -10,28 +10,19 @@
 </h2>
 
 <div class='row'>
+    <div class='col-md-6'>
+        <h3>
+            {{establishment.premise_address1|title }}<br/>
+            {% if establishment.premise_address2 and establishment.premise_address2 != '0' %} {{establishment.premise_address2|title }}<br/>{%endif%}
+            {{establishment.premise_city|title }}, {{establishment.premise_state }} {{establishment.premise_zip }}<br/>
+            <br/>
+        </h3>
+    </div>
     {% if establishment.property_id %}
         <div class='col-md-6'>
             {% if establishment.property_id %}
                 <img src='http://www.ustaxdata.com/nc/durham/photos_renamed/{{establishment.property_id}}.jpg' class="img-responsive img-thumbnail" />
             {% endif %}
-        </div>
-        <div class='col-md-6'>
-            <h3>
-                {{establishment.premise_address1|title }}<br/>
-                {% if establishment.premise_address2 and establishment.premise_address2 != '0' %} {{establishment.premise_address2|title }}<br/>{%endif%}
-                {{establishment.premise_city|title }}, {{establishment.premise_state }} {{establishment.premise_zip }}<br/>
-                <br/>
-            </h3>
-        </div>
-    {% else %}
-        <div class="col-md-12">
-            <h3>
-                {{establishment.premise_address1|title }}<br/>
-                {% if establishment.premise_address2 and establishment.premise_address2 != '0' %} {{establishment.premise_address2|title }}<br/>{%endif%}
-                {{establishment.premise_city|title }}, {{establishment.premise_state }} {{establishment.premise_zip }}<br/>
-                <br/>
-            </h3>
         </div>
     {% endif %}
 </div>
