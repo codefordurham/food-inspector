@@ -5,7 +5,7 @@ import yaml
 
 from fabric.api import env, execute, get, hide, lcd, local, put, require, run, settings, sudo, task
 from fabric.colors import red
-from fabric.contrib import files, project
+from fabric.contrib import files, project, console
 from fabric.contrib.console import confirm
 from fabric.utils import abort
 
@@ -232,3 +232,19 @@ def code_deploy():
         salt('saltutil.sync_all', target)
         salt('state.sls project.web.app', target)
 
+
+@task
+def reset_local_db(confirm_first=True):
+    """ Reset local database from remote host """
+    require('environment', provided_by=('production',))
+    if confirm_first:
+        question = 'Are you sure you want to reset your local ' \
+                   'database with the %(environment)s database?' % env
+        if not console.confirm(question, default=False):
+            abort('Local database reset aborted.')
+    with settings(warn_only=True):
+        local('dropdb eatsmart')
+    local('createdb eatsmart')
+    host = 'ncfoodinspector.com'
+    remote_db = 'eatsmart_production'
+    local('ssh -C %s sudo -u postgres pg_dump -Ox %s | psql eatsmart' % (host, remote_db, ))
