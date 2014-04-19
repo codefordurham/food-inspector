@@ -28,7 +28,8 @@ class InspectionAdmin(admin.ModelAdmin):
 
 
 class ViolationAdmin(admin.ModelAdmin):
-    search_fields = ('id', 'external_id', 'code', 'description')
+    search_fields = ('id', 'external_id', 'code', 'description',
+                     'establishment__name')
     list_display = ('id', 'external_id', 'establishment', 'code',
                     'date', 'comments')
     list_filter = ('code',)

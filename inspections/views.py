@@ -44,5 +44,11 @@ class EstablishmentDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(EstablishmentDetail, self).get_context_data(**kwargs)
         establishment = context['establishment']
-        context['inspections'] = establishment.inspections.order_by('-date')
+        inspections = establishment.inspections.prefetch_related('violations')
+        inspections = inspections.order_by('-date')
+        try:
+            context['latest'] = inspections.filter(type=1)[0]
+        except IndexError:
+            context['latest'] = None
+        context['inspections'] = inspections
         return context

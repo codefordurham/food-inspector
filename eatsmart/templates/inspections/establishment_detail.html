@@ -2,38 +2,91 @@
 {% load humanize %}
 {% load establishmentdetailstags %}
 
+{% block body_class %}establishment-detail{% endblock %}
+{% block body_id %}establishment-{{ establishment.pk }}{% endblock %}
+
 {% block content %}
-<h2>{{ establishment }}</h2>
+<div class="page-header">
+  <h1>{{ establishment|title }}</h1>
+</div>
 
 <div class='row'>
-    <div class='col-md-6'>
-        {% if establishment.property_id %}
-            <img src='http://www.ustaxdata.com/nc/durham/photos_renamed/{{establishment.property_id}}.jpg' class="img-responsive img-thumbnail" />
-        {% endif %}
+    <div class='col-xs-12 col-sm-6 col-sm-push-6'>
+        <div class='score bg-info'>
+            <h2>Health Score</h2>
+            <p class='value'>{{ latest.score }}</p>
+            <p class='outof'>out of 100</p>
+        </div>
     </div>
-    <div class='col-md-6'>
-        <h3>
-            {{establishment.address|title }}<br/>
-            {{establishment.city|title }}, {{establishment.state }} {{establishment.postal_code }}<br/>
-            <br/>
-            {% if inspections.values and not inspections.values|length_is:'0' %}{{ inspections.values.first.final_score_sum }}<br/>{% endif %}
-        </h3>
+    <div class='col-xs-12 col-sm-6 col-sm-pull-6'>
+        <address class='establishment'>
+          {{ establishment.address|title }}<br>
+          {{ establishment.city }}, {{ establishment.state }} {{ establishment.postal_code }}<br>
+          {% if establishment.phone_number %}
+          <abbr title="Phone">P:</abbr> {{ establishment.phone_number }}
+          {% endif %}
+        </address>
+        <p class='latest-type'>{{ latest.get_type_display }}<br>{{ latest.date|date:"l, F j, Y" }}</p>
     </div>
 </div>
 
-<div class="accordion" id="inspection-details-accordion" class="list-group">
-    <div class="accordion-group">
+{% if latest.violations.exists %}
+<h2>Violations</h2>
+<dl>
+    {% for violation in latest.violations.all %}
+    <dt>Code {{ violation.code }}</dt>
+    <dd>{{ violation.description }}</dd>
+    {% endfor %}
+</dl>
+{% endif %}
+
+{% if inspections.exists %}
+<div class="row">
+    <div class='col-md-12'>
+        <h2>Previous Inspections</h2>
+        <table class="table table-condensed">
+            <tr>
+                <th class='short-date hidden-sm hidden-md hidden-lg'>Date</th>
+                <th class='hidden-xs'>Date</th>
+                <th>Inspection Type</th>
+                <th class='violations hidden-xs'>Violations</th>
+                <th class='score'>Score</th>
+            </tr>
         {% for inspection in inspections %}
-        <div class="accordion-heading">
-            <a class="accordion-toggle list-group-item" data-toggle="collapse" data-parent="#inspection-details-accordion" href="#collapse{{ forloop.counter }}">
-                {{ inspection.date|date:"M dS Y" }}
-                {% if inspection.score != '0' %}<span class="badge">{{ inspection.score }}</span>{% endif %}
-            </a>
-        </div>
-        <div id="collapse{{ forloop.counter }}" class="accordion-body collapse">
-            {% details_to_table inspection %}
-        </div>
+            <tr>
+                <td class='short-date hidden-sm hidden-md hidden-lg'>{{ inspection.date|date:"n/Y" }}</td>
+                <td class='hidden-xs'>{{ inspection.date|date:"F j, Y" }}</td>
+                <td>{{ inspection.get_type_display }}</td>
+                <td class='violations hidden-xs'>
+                    {% if inspection.violations.exists %}
+                        {{ inspection.violations.count }}
+                    {% endif %}
+                </td>
+                <td class='score'>
+                    {% if inspection.violations.exists %}
+                        <a href='#' class="violations">{{ inspection.score|default:"" }}</a>
+                    {% else %}
+                        {{ inspection.score|default:"" }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% if inspection.violations.exists %}
+                <tr class='success' style="display: none;">
+                    <td class='violation-list' colspan='4'>
+                        <dl>
+                            {% for violation in inspection.violations.all %}
+                            <dt>Code {{ violation.code }}</dt>
+                            <dd>{{ violation.description }}</dd>
+                            {% endfor %}
+                        </dl>
+                    </td>
+                </tr>
+            {% endif %}
         {% endfor %}
+        </table>
+        <p><small>{{ inspections.count }} total inspections</small></p>
     </div>
 </div>
+{% endif %}
+
 {% endblock %}
