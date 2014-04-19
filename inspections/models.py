@@ -37,13 +37,28 @@ class Establishment(models.Model):
 class Inspection(models.Model):
     """Information about inspectors' visits to establishments"""
 
+    TYPE_CHOICES = (
+        (0, 'Unknown'),
+        (1, 'Routine Inspection'),
+        (2, 'Re-inspection'),
+        (5, 'Permit'),
+        (6, 'Visit'),
+        (8, 'Name Change'),
+        (9, 'Verification'),
+        (10, 'Other'),
+        (12, 'Status Change'),
+        (13, 'Pre-opening Visit'),
+        (31, 'Critical Violation Visit'),
+        (32, 'Critical Violation Followup'),
+    )
+
     establishment = models.ForeignKey(Establishment,
                                       related_name='inspections')
     external_id = models.CharField("External ID", max_length=128)
     date = models.DateTimeField(db_index=True)
     score = models.FloatField(null=True, blank=True)
     description = models.TextField(blank=True)
-    type = models.PositiveIntegerField(default=0)
+    type = models.PositiveIntegerField(default=0, choices=TYPE_CHOICES)
     update_date = models.DateTimeField(null=True, blank=True, db_index=True)
 
     def __str__(self):
