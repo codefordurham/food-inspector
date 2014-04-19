@@ -24,7 +24,7 @@
                 {% if establishment.property_id %}<span class="glyphicon glyphicon-camera"></span>{% endif %}
             </h5>
             {% if establishment.insp_date %}<span class="badge badge-date">{{ establishment.insp_date|date:"M dS Y" }}</span>{% endif %}
-            <p class="list-group-item-text"><span class='text-muted small'>{{ establishment.premise_address1|title }}</span></p>
+            <p class="list-group-item-text"><span class='text-muted small'>{{ establishment.address|title }}</span></p>
         </a>
         {% endfor %}
     </div>
