@@ -23,7 +23,7 @@
             <h5 class="list-group-item-heading">{{ establishment|title }}
                 {% if establishment.property_id %}<span class="glyphicon glyphicon-camera"></span>{% endif %}
             </h5>
-            {% if establishment.insp_date %}<span class="badge badge-date">{{ establishment.insp_date|date:"M dS Y" }}</span>{% endif %}
+            {% if establishment.insp_date %}<span class="badge badge-date hidden-xs">{{ establishment.insp_date|date:"M dS Y" }}</span>{% endif %}
             <p class="list-group-item-text">
                 <span class='text-muted small'>{{ establishment.address|title }} - {{ establishment.distance.mi|floatformat:"2" }} mi</span>
             </p>
