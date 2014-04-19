@@ -151,17 +151,22 @@ td.violation-list dl {
   body.establishment-detail address.establishment, body.establishment-detail p.latest-type {
     text-align: left;
   }
-  body.establishment-detail address.establishment {
+  body.establishment-detail p.latest-type {
     margin-top: 0;
+  }
+  img.property {
+    width: 90%;
+    text-align: center;
+    margin-top: 15px;
   }
 }
 
 address.establishment {
-  margin-top: 10px;
   text-align: center;
 }
 
 p.latest-type {
+  margin-top: 10px;
   text-align: center;
 }
 

@@ -11,6 +11,7 @@ class Establishment(models.Model):
 
     external_id = models.CharField("External ID", max_length=128)
     state_id = models.BigIntegerField("State ID")
+    property_id = models.CharField("Property ID", max_length=128, blank=True)
     name = models.CharField(max_length=255)
     type = models.PositiveIntegerField(default=0)
     address = models.CharField(max_length=255)

@@ -19,6 +19,7 @@
         </div>
     </div>
     <div class='col-xs-12 col-sm-6 col-sm-pull-6'>
+        <p class='latest-type'>{{ latest.get_type_display }}<br>{{ latest.date|date:"l, F j, Y" }}</p>
         <address class='establishment'>
           {{ establishment.address|title }}<br>
           {{ establishment.city }}, {{ establishment.state }} {{ establishment.postal_code }}<br>
@@ -26,9 +27,18 @@
           <abbr title="Phone">P:</abbr> {{ establishment.phone_number }}
           {% endif %}
         </address>
-        <p class='latest-type'>{{ latest.get_type_display }}<br>{{ latest.date|date:"l, F j, Y" }}</p>
     </div>
 </div>
+
+{% if establishment.property_id %}
+<div class="row">
+    <div class='col-md-12'>
+        <div class="clear-fix center-block text-center">
+            <img src='http://www.ustaxdata.com/nc/durham/photos_renamed/{{establishment.property_id}}.jpg' class="property img-responsive img-thumbnail" />
+        </div>
+    </div>
+</div>
+{% endif %}
 
 {% if latest.violations.exists %}
 <h2>Violations</h2>
