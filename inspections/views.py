@@ -17,7 +17,7 @@ class EstablishmentList(ListView):
         user_location = self.get_user_location()
         objects = objects.distance(user_location).order_by('distance')
         if query:
-            objects = objects.filter(premise_name__icontains=query)
+            objects = objects.filter(name__icontains=query)
         objects = objects.filter(status='active', type=1)
         objects = objects.extra(
             select={
