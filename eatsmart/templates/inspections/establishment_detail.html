@@ -75,15 +75,21 @@
                 <td class='score'>
                     {% if inspection.violations.exists %}
                         <a href='#' class="violations">{{ inspection.score|default:"" }}</a>
+                    {% elif inspection.description %}
+                        <a href='#' class="violations">Comments</a>
                     {% else %}
                         {{ inspection.score|default:"" }}
                     {% endif %}
                 </td>
             </tr>
-            {% if inspection.violations.exists %}
+            {% if inspection.violations.exists or inspection.description %}
                 <tr class='success' style="display: none;">
                     <td class='violation-list' colspan='4'>
                         <dl>
+                            {% if inspection.description %}
+                            <dt>Inspector's Comments</dt>
+                            <dd>{{ inspection.description }}</dd>
+                            {% endif %}
                             {% for violation in inspection.violations.all %}
                             <dt>Code {{ violation.code }}</dt>
                             <dd>{{ violation.description }}</dd>
