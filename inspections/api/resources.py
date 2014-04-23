@@ -36,22 +36,22 @@ class EstablishmentResource(GisModelResource):
 
 
 class InspectionResource(ModelResource):
-    est_id = fields.ForeignKey(EstablishmentResource, 'external_id')
+    est_id = fields.ForeignKey(EstablishmentResource, 'establishment')
 
     class Meta(object):
         queryset = Inspection.objects.all()
         allowed_methods = ['get']
         limit = 20
         filtering = {
-            'external_id': ALL,
+            'est_id': ALL,
             'type': ALL,
             'date': ALL,
         }
-        ordering = ['insp_date']
+        ordering = ['date','score']
 
 
 class ViolationResource(ModelResource):
-    inspection_id = fields.ForeignKey(InspectionResource, 'inspection_id')
+    inspection_id = fields.ForeignKey(InspectionResource, 'inspection')
 
     class Meta(object):
         queryset = Violation.objects.all()
