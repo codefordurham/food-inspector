@@ -10,15 +10,15 @@ from inspections.api.serializers import GeoJSONSerializer
 class EstablishmentResource(GisModelResource):
 
     class Meta(object):
-        queryset = Establishment.objects.filter(status='ACTIVE')
+        queryset = Establishment.objects.filter(status='active')
         allowed_methods = ['get']
         serializer = GeoJSONSerializer()
         limit = 40
         filtering = {
-            'id': ALL,
-            'est_type': ALL,
+            'external_id': ALL,
+            'type': ALL,
             'location': ALL,
-            'premise_name': ALL,
+            'name': ALL,
         }
         ordering = ['update_date']
 
@@ -36,16 +36,16 @@ class EstablishmentResource(GisModelResource):
 
 
 class InspectionResource(ModelResource):
-    est_id = fields.ForeignKey(EstablishmentResource, 'est_id')
+    est_id = fields.ForeignKey(EstablishmentResource, 'external_id')
 
     class Meta(object):
         queryset = Inspection.objects.all()
         allowed_methods = ['get']
         limit = 20
         filtering = {
-            'est_id': ALL,
-            'insp_type': ALL,
-            'insp_date': ALL,
+            'external_id': ALL,
+            'type': ALL,
+            'date': ALL,
         }
         ordering = ['insp_date']
 
@@ -58,8 +58,7 @@ class ViolationResource(ModelResource):
         allowed_methods = ['get']
         limit = 20
         filtering = {
-            'item': ALL,
+            'code': ALL,
+            'date': ALL,
             'inspection_id': ALL,
-            'rpt_area_desc': ALL,
-            'weight_sum': ALL,
         }
