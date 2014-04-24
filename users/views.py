@@ -24,6 +24,7 @@ class UserAddLocationView(CSRFExemptMixin, View):
         logger.debug("Latitude: {0} and longitude: {1}".format(lat, lon))
         # adds the lation object into the session
         request.session['location'] = {'lat': lat, 'lon': lon}
+        request.session.set_expiry(300)
         data = json.dumps({'status': 'success'})
         return HttpResponse(data, 'application/json')
 
