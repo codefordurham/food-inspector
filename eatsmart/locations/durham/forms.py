@@ -47,9 +47,9 @@ class EstablishmentForm(forms.ModelForm):
 
     def clean_phone(self):
         phone = self.cleaned_data['phone']
-        # Force empty phone value to None so we saveto DB as NULL
-        if phone == 0:
-            phone = None
+        # Force empty phone value to empty string 
+        if phone == '0':
+            phone = ''
         return phone 
 
     def clean(self):

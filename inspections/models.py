@@ -19,7 +19,7 @@ class Establishment(models.Model):
     county = models.CharField(max_length=64, db_index=True)
     state = models.CharField(max_length=64)
     postal_code = models.CharField(max_length=16)
-    phone_number = models.CharField(max_length=64, null=True, blank=True)
+    phone_number = models.CharField(max_length=64, blank=True)
     opening_date = models.DateTimeField()
     update_date = models.DateTimeField(null=True, blank=True, db_index=True)
     status = models.CharField(choices=STATUS_CHOICES, max_length=32,
