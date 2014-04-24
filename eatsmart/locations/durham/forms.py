@@ -45,6 +45,13 @@ class EstablishmentForm(forms.ModelForm):
             return 'deleted'
         raise forms.ValidationError('Invalid status')
 
+    def clean_phone(self):
+        phone = self.cleaned_data['phone']
+        # Force empty phone value to empty string 
+        if phone == '0':
+            phone = ''
+        return phone 
+
     def clean(self):
         lat = self.cleaned_data.get('lat', None)
         lon = self.cleaned_data.get('lon', None)
