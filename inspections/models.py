@@ -8,12 +8,52 @@ class Establishment(models.Model):
     """Business or restaurant property"""
 
     STATUS_CHOICES = (('deleted', 'Deleted'), ('active', 'Active'))
-
+    TYPE_CHOICES = (
+        (0, 'Unknown'),
+        (1, 'Restaurant'),
+        (2, 'Food Stand'),
+        (3, 'Mobile Food'),
+        (4, 'Push Cart'),
+        (5, 'Private School\'s Cafeteria'),
+        (6, 'Educational Food Service'),
+        (9, 'Elderly Nutrition'),
+        (11, 'Public School\'s Cafeteria'),
+        (12, 'Elderly Nutrition'),
+        (14, 'Limited Food'),
+        (15, 'Commissary (Pushcarts/Mobile Food),'),
+        (16, 'Institutional Food Service'),
+        (20, 'Lodging'),
+        (21, 'Bed & Breakfast Home'),
+        (22, 'Summer Camp'),
+        (23, 'Bed & Breakfast Inn'),
+        (25, 'Primitive Experience Camp'),
+        (26, 'Resident Camp'),
+        (30, 'Meat Market'),
+        (40, 'Rest/Nursing Home'),
+        (41, 'Hospital'),
+        (42, 'Child Care'),
+        (43, 'Residential Care'),
+        (44, 'School Building'),
+        (45, 'Local Confinement'),
+        (46, 'Private Boarding School/College'),
+        (47, 'Orphanage, Children\'s Home'),
+        (48, 'Adult Day Care'),
+        (49, 'Adult Day Service'),
+        (50, 'Seasonal Swimming Pool'),
+        (51, 'Seasonal Wading Pool'),
+        (52, 'Seasonal Spa'),
+        (53, 'Year-Round Swimming Pool'),
+        (54, 'Year-Round Wading Pool'),
+        (55, 'Year-Round Spa'),
+        (61, 'Tattoo Artist'),
+        (72, 'Summer Feeding Program'),
+        (73, 'Temporary Food Establishment'),
+    )
     external_id = models.CharField("External ID", max_length=128)
     state_id = models.BigIntegerField("State ID")
     property_id = models.CharField("Property ID", max_length=128, blank=True)
     name = models.CharField(max_length=255)
-    type = models.PositiveIntegerField(default=0)
+    type = models.PositiveIntegerField(default=0, choices=TYPE_CHOICES)
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=64)
     county = models.CharField(max_length=64, db_index=True)
