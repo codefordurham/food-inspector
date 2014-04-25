@@ -1,16 +1,11 @@
 import csv
 import os
-import pprint
 import logging
-import time
-import sys
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
-from django.db.models import Q
 
-from inspections.models import Establishment, Inspection, Violation
-from inspections.forms import EstablishmentForm, InspectionForm, ViolationForm
+from inspections.models import Establishment
 
 
 PARENT_DIR = os.path.abspath(os.path.join(settings.PROJECT_ROOT, os.pardir))
@@ -28,13 +23,13 @@ logger = logging.getLogger(__name__)
 class Command(BaseCommand):
 
     """Import Durham inspections data from CSV files"""
-    def importer(self, name, Model, Form):
+    def importer(self, name, Model):
         with open(CSV_FILES[name], encoding='latin-1') as f:
             reader = csv.DictReader(f)
             for row in reader:
-                for m in Model.objects.filter(id=int(row['Establishment.id'])):
+                for m in Model.objects.filter(external_id=int(row['Establishment.id'])):
                     m.property_id = int(row['Establishment.property_id'])
                     m.save()
 
     def handle(self, *args, **options):
-        self.importer('EstToProp',Establishment,EstablishmentForm)        
+        self.importer('EstToProp', Establishment)

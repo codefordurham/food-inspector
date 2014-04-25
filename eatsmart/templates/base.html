@@ -5,14 +5,15 @@
 <html lang="en" class="no-js">
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}NC Food Inspector{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <meta name="description" content="{% block meta-description %}{% endblock %}">
     <meta name="author" content="{% block meta-author %}{% endblock %}">
     <meta name="keywords" content="{% block meta-keywords %}{% endblock %}">
     {% block extra-meta %}{% endblock %}
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="all" href="{% static 'css/site.css' %}">
+    <link rel="stylesheet" type="text/less" media="all" href="{% static 'css/site.css' %}">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
     {% block extra-css %}{% endblock %}
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.dev.js"></script>
 </head>
@@ -30,7 +31,7 @@
             </div>
             <div class="collapse navbar-collapse">
                <ul class="nav navbar-nav navbar-right">
-                   <li><a href="#about">About</a></li>
+                   <li><a href="{% url 'about' %}">About</a></li>
                     {% if not user.is_authenticated %}
                         <li><a href="{% url "admin:index" %}">Log In</a></li>
                     {% else %}

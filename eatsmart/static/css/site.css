@@ -1,11 +1,23 @@
 /* Space out content a bit */
 body {
   padding-bottom: 20px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 body > .container {
   padding: 60px 15px 0;
 }
+
+h1 {
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 400;
+}
+
 .container .text-muted {
   margin: 20px 0;
 }
@@ -121,4 +133,64 @@ form#search {
 
 footer a{
     color: #999;
+}
+div.page-header {
+  margin-top: 0;
+}
+
+table .short-date, table .score, table .violations {
+  text-align: right;
+}
+
+td.violation-list dl {
+  font-size: 12px;
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  div.score {
+    float: right;
+  }
+  body.establishment-detail address.establishment, body.establishment-detail p.latest-type {
+    text-align: left;
+  }
+  body.establishment-detail p.latest-type {
+    margin-top: 0;
+  }
+  img.property {
+    width: 90%;
+    text-align: center;
+    margin-top: 15px;
+  }
+}
+
+address.establishment {
+  text-align: center;
+}
+
+p.latest-type {
+  margin-top: 10px;
+  text-align: center;
+}
+
+div.score {
+  text-align: center;
+  padding: 12px;
+  border-radius: 5px;
+}
+
+div.score h2 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+div.score .value {
+  font-size: 25px;
+  font-weight: 800;
+}
+
+div.score .outof {
+  color: #999;
+  font-size: 10px;
+  margin-bottom: 0;
 }
