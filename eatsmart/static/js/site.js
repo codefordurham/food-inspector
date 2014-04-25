@@ -12,6 +12,12 @@ $(document).ready(function(){
        UserGeoLocation.init();
         return false;
     });
+
+    $('a.violations').on('click touchstart', function(e) {
+        e.preventDefault();
+        var tr = $(e.target).parents('tr').next();
+        $(tr).toggle();
+    })
 });
 
 // place any jQuery/helper plugins in here, instead of separate, slower script files.
