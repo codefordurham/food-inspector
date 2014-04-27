@@ -1,4 +1,5 @@
 {% load compress %}
+
 {% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -26,7 +27,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href='{% url "establishment-list" %}'>Eat Smart Durham</a>
+                <a class="navbar-brand" href='{% url "establishment-list" %}'>NC Food Inspector</a>
             </div>
             <div class="collapse navbar-collapse">
                <ul class="nav navbar-nav navbar-right">
@@ -63,9 +64,22 @@
         </div>
         {% endblock content-outer %}
         {% block footer %}
-        <footer class='row col-md-12'>
-            <span class='pull-right small'>By <a href='http://codefordurham.com/'>Code for Durham</a>.</span>
-            <p><span class="text-muted small">Eat Smart Durham{% if request.session.location %} - Location: <a href='https://maps.google.com/?q={{ request.session.location.lat|floatformat:5 }},{{ request.session.location.lon|floatformat:5 }}'>({{ request.session.location.lat|floatformat:5 }}, {{ request.session.location.lon|floatformat:5 }})</a>{% endif %}</span></p>
+        <footer>
+            <hr>
+            <div class="text-center">
+                <a href="https://github.com/codefordurham/Durham-Restaurants">
+                    <img src="{% static 'images/GitHub-Mark-32px.png' %}" height="24"/> <strong>Find us on GitHub</strong>
+                </a><br>
+                <span>By <a href='http://codefordurham.com/' class="muted">Code for Durham</a></span><br>
+                <span class="text-muted">NC Food Inspector
+                    {% if request.session.location %}<br>
+                        <a class="muted" href='https://maps.google.com/?q={{ request.session.location.lat|floatformat:5 }},{{ request.session.location.lon|floatformat:5 }}'
+                           title="{{ request.session.location.lat|floatformat:5 }}, {{ request.session.location.lon|floatformat:5 }}">
+                            Where am I?
+                        </a>
+                    {% endif %}
+                </span>
+            </div>
         </footer>
         {% endblock footer %}
     </div>
