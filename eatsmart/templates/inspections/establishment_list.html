@@ -76,21 +76,30 @@
             </a>
             {% endfor %}
         </div>
-        {% if is_paginated %}
-            <div class="pagination">
-                <span class="page-links">
+        <div class="pagination">
+            <span>There are {{page_obj.paginator.count}} restaurants in the current view.</span>
+            {% if is_paginated %}
+                <ul class="pager">
                     {% if page_obj.has_previous %}
-                        <a href="{% url 'establishment-list' %}?page={{ page_obj.previous_page_number }}">previous</a>
+		       <li class="previous">
+                           <a href="{% url 'establishment-list' %}?page={{ page_obj.previous_page_number }}">previous</a>
+                       </li>
+		    {% else %}
+		       <li class="previous .disabled">
+		           <span>previous</span>
+                       </li>
                     {% endif %}
-                    <span class="page-current">
-                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                    <span>
+                        page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
                     </span>
                     {% if page_obj.has_next %}
-                        <a href="{% url 'establishment-list' %}?page={{ page_obj.next_page_number }}">next</a>
+                        <li class="next">
+                            <a href="{% url 'establishment-list' %}?page={{ page_obj.next_page_number }}">next</a>
+                        </li>
                     {% endif %}
-                </span>
-            </div>
-        {% endif %}
+                </ul>
+            {% endif %}
+        </div>
     </div>
 </div>
 {% endblock %}

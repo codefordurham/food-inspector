@@ -224,3 +224,9 @@ div.score .outof {
         height: 150px;
     }
 }
+
+.pager span {
+ display: inline-block;
+ padding-top: 5px; 
+ padding-right: 13px;
+}
