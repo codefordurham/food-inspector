@@ -65,20 +65,22 @@
         {% endblock content-outer %}
         {% block footer %}
         <footer>
-            <hr>
-            <div class="text-center">
-                <a href="https://github.com/codefordurham/Durham-Restaurants">
-                    <img src="{% static 'images/GitHub-Mark-32px.png' %}" height="24"/> <strong>Find us on GitHub</strong>
-                </a><br>
-                <span>By <a href='http://codefordurham.com/' class="muted">Code for Durham</a></span><br>
-                <span class="text-muted">NC Food Inspector
-                    {% if request.session.location %}<br>
-                        <a class="muted" href='https://maps.google.com/?q={{ request.session.location.lat|floatformat:5 }},{{ request.session.location.lon|floatformat:5 }}'
-                           title="{{ request.session.location.lat|floatformat:5 }}, {{ request.session.location.lon|floatformat:5 }}">
-                            Where am I?
-                        </a>
-                    {% endif %}
-                </span>
+            <div class='row'>
+                <hr>
+                <div class="text-center">
+                    <a href="https://github.com/codefordurham/Durham-Restaurants">
+                        <img src="{% static 'images/GitHub-Mark-32px.png' %}" height="24"/> <strong>Find us on GitHub</strong>
+                    </a><br>
+                    <span>By <a href='http://codefordurham.com/' class="muted">Code for Durham</a></span><br>
+                    <span class="text-muted">NC Food Inspector
+                        {% if request.session.location %}<br>
+                            <a class="muted" href='https://maps.google.com/?q={{ request.session.location.lat|floatformat:5 }},{{ request.session.location.lon|floatformat:5 }}'
+                               title="{{ request.session.location.lat|floatformat:5 }}, {{ request.session.location.lon|floatformat:5 }}">
+                                Where am I?
+                            </a>
+                        {% endif %}
+                    </span>
+                </div>
             </div>
         </footer>
         {% endblock footer %}
