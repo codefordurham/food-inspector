@@ -23,9 +23,9 @@ Establishment Extras
 
 Establishments are the only entities within the database with geographic elements. To help filtering by these elements, you can use the ``within`` query string argument, such as:
 
-http://ncfoodinspector.com/api/v1/establishment/?format=geojson&est_type=1&ordering=-update_date&within=-78.90999913215637,35.992712509370044,-78.889399766922,35.99845018569175
+http://ncfoodinspector.com/api/v1/establishment/?format=geojson&type=1&ordering=-update_date&within=-78.90999913215637,35.992712509370044,-78.889399766922,35.99845018569175
 
-This will return all restaurants (``est_type=1``) located within a bounding box of downtown Durham.
+This will return all restaurants (``type=1``) located within a bounding box of downtown Durham.
 
 
 Example
