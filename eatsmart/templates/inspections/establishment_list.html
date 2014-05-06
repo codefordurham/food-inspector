@@ -1,8 +1,20 @@
 {% extends "base.html" %}
+{% load leaflet_tags %}
 
 {% block body_class %}establishments{% endblock %}
 {% block body_id %}establishment-list{% endblock %}
 
+{% block map %}
+<h1>MAP</h1>
+<div class="row col-md-12">
+    {% leaflet_map "main-map" callback="main_map_init" %}
+    <script type="text/javascript">
+        function main_map_init (map, options) {
+            // Use Leaflet API here
+        }
+    </script>
+</div>
+{% endblock %}
 {% block content %}
 <div class="row col-md-12">
     <form id='search' class="form-inline" role="search" action="{% url 'establishment-list' %}" method="get">

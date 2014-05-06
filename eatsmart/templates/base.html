@@ -1,6 +1,7 @@
 {% load compress %}
 
 {% load static from staticfiles %}
+{% load leaflet_tags %}
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
@@ -16,6 +17,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
     {% block extra-css %}{% endblock %}
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.dev.js"></script>
+    {% leaflet_js %}
+    {% leaflet_css %}
 </head>
 <body id="{% block body_id %}{% endblock body_id %}" class="{% block body_class %}{% endblock body_class %}">
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -59,6 +62,7 @@
                 {% endblock messages-outer %}
             </div>
             <div id="content">
+              {% block map %}{% endblock map %}
               {% block content %}{% endblock content %}
             </div>
         </div>
