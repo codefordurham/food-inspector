@@ -4,46 +4,48 @@
 {% block body_id %}establishment-list{% endblock %}
 
 {% block content %}
-<div class="row col-md-12">
-    <form id='search' class="form-inline" role="search" action="{% url 'establishment-list' %}" method="get">
-        <div class="input-group">
-            <input name='q' class="form-control" type="text" placeholder="Search restaurants..." value="{{ request.GET.q }}">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="submit">Search</button>
-                <button class="btn btn-default" title="Update location" id="update-location">
-                  <i class="glyphicon glyphicon-globe"></i>
-                </button>
-            </span>
-        </div>
-    </form>
-    <div class="list-group">
-        {% for establishment in establishments %}
-        <a href="{% url "establishment-detail" establishment.pk %}" class="list-group-item">
-            {% if establishment.grade %}<span class="badge">{{ establishment.grade }}</span>{% endif %}
-            <h5 class="list-group-item-heading">{{ establishment|title }}
-                {% if establishment.property_id %}<span class="glyphicon glyphicon-camera"></span>{% endif %}
-            </h5>
-            {% if establishment.insp_date %}<span class="badge badge-date hidden-xs">{{ establishment.insp_date|date:"M dS Y" }}</span>{% endif %}
-            <p class="list-group-item-text">
-                <span class='text-muted small'>{{ establishment.address|title }} - {{ establishment.distance.mi|floatformat:"2" }} mi</span>
-            </p>
-        </a>
-        {% endfor %}
-    </div>
-    {% if is_paginated %}
-        <div class="pagination">
-            <span class="page-links">
-                {% if page_obj.has_previous %}
-                    <a href="{% url 'establishment-list' %}?page={{ page_obj.previous_page_number }}">previous</a>
-                {% endif %}
-                <span class="page-current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+<div class="row">
+    <div class='col-md-12'>
+        <form id='search' class="form-inline" role="search" action="{% url 'establishment-list' %}" method="get">
+            <div class="input-group">
+                <input name='q' class="form-control" type="text" placeholder="Search restaurants..." value="{{ request.GET.q }}">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Search</button>
+                    <button class="btn btn-default" title="Update location" id="update-location">
+                      <i class="glyphicon glyphicon-globe"></i>
+                    </button>
                 </span>
-                {% if page_obj.has_next %}
-                    <a href="{% url 'establishment-list' %}?page={{ page_obj.next_page_number }}">next</a>
-                {% endif %}
-            </span>
+            </div>
+        </form>
+        <div class="list-group">
+            {% for establishment in establishments %}
+            <a href="{% url "establishment-detail" establishment.pk %}" class="list-group-item">
+                {% if establishment.grade %}<span class="badge">{{ establishment.grade }}</span>{% endif %}
+                <h5 class="list-group-item-heading">{{ establishment|title }}
+                    {% if establishment.property_id %}<span class="glyphicon glyphicon-camera"></span>{% endif %}
+                </h5>
+                {% if establishment.insp_date %}<span class="badge badge-date hidden-xs">{{ establishment.insp_date|date:"M dS Y" }}</span>{% endif %}
+                <p class="list-group-item-text">
+                    <span class='text-muted small'>{{ establishment.address|title }} - {{ establishment.distance.mi|floatformat:"2" }} mi</span>
+                </p>
+            </a>
+            {% endfor %}
         </div>
-    {% endif %}
+        {% if is_paginated %}
+            <div class="pagination">
+                <span class="page-links">
+                    {% if page_obj.has_previous %}
+                        <a href="{% url 'establishment-list' %}?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="page-current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="{% url 'establishment-list' %}?page={{ page_obj.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
