@@ -7,15 +7,44 @@
 {% block map %}
 <h1>MAP</h1>
 <div class="row col-md-12">
-    {% leaflet_map "main-map" callback="main_map_init" %}
-    <script type="text/javascript">
-        function main_map_init (map, options) {
-            // Use Leaflet API here
-        }
-    </script>
+    <div id='map' style="width:100%;height:300px;"></div>
 </div>
 {% endblock %}
+
+{% block extra-js %}
+<script>
+    var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+        .setView([35.996345, -78.903022], 14)
+
+{% for establishment in establishments %}
+var points = L.mapbox.featureLayer({
+    // this feature is in the GeoJSON format: see geojson.org
+    // for the full specification
+    type: 'Feature',
+    geometry: {
+        type: 'Point',
+        // coordinates here are in longitude, latitude order because
+        // x, y is the standard for GeoJSON and many formats
+        coordinates: [{{establishment.location.x}}, {{establishment.location.y}}]
+    },
+    properties: {
+        title: 'A Single Marker',
+        description: 'Just one of me',
+        // one can customize markers by adding simplestyle properties
+        // http://mapbox.com/developers/simplestyle/
+        'marker-size': 'large',
+        'marker-color': '#f0a'
+    }
+}).addTo(map);
+
+{% endfor %}
+    var featureLayer = L.mapbox.featureLayer()
+    .addTo(map);
+</script>
+{% endblock %}
+
 {% block content %}
+
 <div class="row">
     <div class='col-md-12'>
         <form id='search' class="form-inline" role="search" action="{% url 'establishment-list' %}" method="get">
