@@ -5,18 +5,18 @@
 {% block body_id %}establishment-list{% endblock %}
 
 {% block map %}
-<h1>MAP</h1>
 <div class="row col-md-12">
-    <div id='map' style="width:100%;height:300px;"></div>
+    <div id='map' class="main-map"></div>
 </div>
 {% endblock %}
 
 {% block extra-js %}
     <script>
-        var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+        var map = L.mapbox.map('map', 'examples.c7d2024a')
             .setView([35.996345, -78.903022], 14)
         var points = []
         {% for establishment in establishments %}
+            var detailUrl = {% url "establishment-detail" establishment.pk %};
             points.push({
                 // this feature is in the GeoJSON format: see geojson.org
                 // for the full specification
@@ -29,17 +29,16 @@
                 },
                 properties: {
                     title: '{{establishment.name}}',
-                    description: '',
                     // one can customize markers by adding simplestyle properties
                     // http://mapbox.com/developers/simplestyle/
-                    'marker-size': 'large',
-                    'marker-color': '#f0a'
+                    'marker-size': 'medium',
+                    'marker-color': '#3887be'
                 }
             });
         {% endfor %}
         var pointLayer = L.mapbox.featureLayer(points)
         pointLayer.addTo(map);
-        map.on('ready', function(){
+        map.on('ready', function(e){
             map.fitBounds(pointLayer.getBounds());
         })
     </script>
