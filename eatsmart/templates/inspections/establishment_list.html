@@ -12,35 +12,35 @@
 {% endblock %}
 
 {% block extra-js %}
-<script>
-    var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
-        .setView([35.996345, -78.903022], 14)
-
-{% for establishment in establishments %}
-var points = L.mapbox.featureLayer({
-    // this feature is in the GeoJSON format: see geojson.org
-    // for the full specification
-    type: 'Feature',
-    geometry: {
-        type: 'Point',
-        // coordinates here are in longitude, latitude order because
-        // x, y is the standard for GeoJSON and many formats
-        coordinates: [{{establishment.location.x}}, {{establishment.location.y}}]
-    },
-    properties: {
-        title: 'A Single Marker',
-        description: 'Just one of me',
-        // one can customize markers by adding simplestyle properties
-        // http://mapbox.com/developers/simplestyle/
-        'marker-size': 'large',
-        'marker-color': '#f0a'
-    }
-}).addTo(map);
-
-{% endfor %}
-    var featureLayer = L.mapbox.featureLayer()
-    .addTo(map);
-</script>
+    <script>
+        var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+            .setView([35.996345, -78.903022], 14)
+        var points = []
+        {% for establishment in establishments %}
+            points.push({
+                // this feature is in the GeoJSON format: see geojson.org
+                // for the full specification
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    // coordinates here are in longitude, latitude order because
+                    // x, y is the standard for GeoJSON and many formats
+                    coordinates: [{{establishment.location.x}}, {{establishment.location.y}}]
+                },
+                properties: {
+                    title: '{{establishment.name}}',
+                    description: '',
+                    // one can customize markers by adding simplestyle properties
+                    // http://mapbox.com/developers/simplestyle/
+                    'marker-size': 'large',
+                    'marker-color': '#f0a'
+                }
+            });
+        {% endfor %}
+        var pointLayer = L.mapbox.featureLayer(points)
+        pointLayer.addTo(map);
+        map.fitBounds(pointLayer.getBounds());
+    </script>
 {% endblock %}
 
 {% block content %}
