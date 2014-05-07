@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load humanize %}
+{% load humanize i18n %}
 {% load establishmentdetailstags %}
 
 {% block body_class %}establishment-detail{% endblock %}
@@ -13,9 +13,9 @@
 <div class='row'>
     <div class='col-xs-12 col-sm-6 col-sm-push-6'>
         <div class='score bg-info'>
-            <h2>Health Score</h2>
+            <h2>{% trans 'Health Score' %}</h2>
             <p class='value'>{{ latest.score }}</p>
-            <p class='outof'>out of 100</p>
+            <p class='outof'>{% trans 'out of 100' %}</p>
         </div>
     </div>
     <div class='col-xs-12 col-sm-6 col-sm-pull-6'>
@@ -41,10 +41,10 @@
 {% endif %}
 
 {% if latest.violations.exists %}
-<h2>Violations</h2>
+<h2>{% trans 'Violations' %}</h2>
 <dl>
     {% for violation in latest.violations.all %}
-    <dt>Code {{ violation.code }}</dt>
+    <dt>{% trans 'Code' %} {{ violation.code }}</dt>
     <dd>{{ violation.description }}</dd>
     {% endfor %}
 </dl>
@@ -53,13 +53,13 @@
 {% if inspections.exists %}
 <div class="row">
     <div class='col-md-12'>
-        <h2>Previous Inspections</h2>
+        <h2>{% trans 'Previous Inspections' %}</h2>
         <table class="table table-condensed">
             <tr>
-                <th class='short-date hidden-sm hidden-md hidden-lg'>Date</th>
-                <th class='hidden-xs'>Date</th>
-                <th>Inspection Type</th>
-                <th class='violations hidden-xs'>Violations</th>
+                <th class='short-date hidden-sm hidden-md hidden-lg'>{% trans 'Date' %}</th>
+                <th class='hidden-xs'>{% trans 'Date' %}</th>
+                <th>{% trans 'Inspection Type' %}</th>
+                <th class='violations hidden-xs'>{% trans 'Violations' %}</th>
                 <th class='score'>Score</th>
             </tr>
         {% for inspection in inspections %}
@@ -76,7 +76,7 @@
                     {% if inspection.violations.exists %}
                         <a href='#' class="violations">{{ inspection.score|default:"" }}</a>
                     {% elif inspection.description %}
-                        <a href='#' class="violations">Comments</a>
+                        <a href='#' class="violations">{% trans 'Comments' %}</a>
                     {% else %}
                         {{ inspection.score|default:"" }}
                     {% endif %}
@@ -87,11 +87,11 @@
                     <td class='violation-list' colspan='4'>
                         <dl>
                             {% if inspection.description %}
-                            <dt>Inspector's Comments</dt>
+                            <dt>{% trans "Inspector's Comments" %}</dt>
                             <dd>{{ inspection.description }}</dd>
                             {% endif %}
                             {% for violation in inspection.violations.all %}
-                            <dt>Code {{ violation.code }}</dt>
+                            <dt>{% trans 'Code' %} {{ violation.code }}</dt>
                             <dd>{{ violation.description }}</dd>
                             {% endfor %}
                         </dl>
@@ -100,7 +100,7 @@
             {% endif %}
         {% endfor %}
         </table>
-        <p><small>{{ inspections.count }} total inspections</small></p>
+        <p><small>{{ inspections.count }} {% trans 'total inspections' %}</small></p>
     </div>
 </div>
 {% endif %}
