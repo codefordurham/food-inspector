@@ -7,6 +7,8 @@ PROJECT_ROOT = os.path.abspath(os.path.join(PROJECT_PATH, os.pardir))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+ugettext = lambda s: s
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -36,6 +38,13 @@ TIME_ZONE = 'America/New_York'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
+
+LANGUAGES = (
+    ('es', ugettext('Spanish')),
+    ('en-us', ugettext('English')),
+)
+
+LOCALE_PATHS = (os.path.join(PROJECT_ROOT, 'locale'), )
 
 SITE_ID = 1
 
@@ -99,6 +108,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
