@@ -39,7 +39,9 @@
         {% endfor %}
         var pointLayer = L.mapbox.featureLayer(points)
         pointLayer.addTo(map);
-        map.fitBounds(pointLayer.getBounds());
+        map.on('ready', function(){
+            map.fitBounds(pointLayer.getBounds());
+        })
     </script>
 {% endblock %}
 
