@@ -196,3 +196,8 @@ div.score .outof {
   font-size: 10px;
   margin-bottom: 0;
 }
+
+.main-map {
+  height: 300px;
+  margin-bottom: 10px;
+}

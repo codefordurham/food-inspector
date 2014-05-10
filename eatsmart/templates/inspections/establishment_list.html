@@ -1,11 +1,55 @@
 {% extends "base.html" %}
+{% load leaflet_tags %}
 
 {% load i18n %}
 
 {% block body_class %}establishments{% endblock %}
 {% block body_id %}establishment-list{% endblock %}
 
+{% block map %}
+<div class="row">
+    <div class=" col-md-12">
+        <div id='map' class="main-map"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra-js %}
+    <script>
+        var map = L.mapbox.map('map', 'examples.c7d2024a')
+            .setView([35.996345, -78.903022], 14)
+        var points = []
+        {% for establishment in establishments %}
+            var detailUrl = {% url "establishment-detail" establishment.pk %};
+            points.push({
+                // this feature is in the GeoJSON format: see geojson.org
+                // for the full specification
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    // coordinates here are in longitude, latitude order because
+                    // x, y is the standard for GeoJSON and many formats
+                    coordinates: [{{establishment.location.x}}, {{establishment.location.y}}]
+                },
+                properties: {
+                    title: '{{establishment.name}}',
+                    // one can customize markers by adding simplestyle properties
+                    // http://mapbox.com/developers/simplestyle/
+                    'marker-size': 'medium',
+                    'marker-color': '#3887be'
+                }
+            });
+        {% endfor %}
+        var pointLayer = L.mapbox.featureLayer(points)
+        pointLayer.addTo(map);
+        map.on('ready', function(e){
+            map.fitBounds(pointLayer.getBounds());
+        })
+    </script>
+{% endblock %}
+
 {% block content %}
+
 <div class="row">
     <div class='col-md-12'>
         <form id='search' class="form-inline" role="search" action="{% url 'establishment-list' %}" method="get">
