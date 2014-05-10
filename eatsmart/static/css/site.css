@@ -130,7 +130,9 @@ form#search {
     border-bottom: 0;
   }
 }
-
+.navbar-nav.navbar-right:last-child {
+    margin-right: 0 !important;
+}
 footer a{
     color: #999;
 }

@@ -2,6 +2,7 @@ import json
 import logging
 
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.views.generic import View
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -35,3 +36,11 @@ class UserRemoveLocation(CSRFExemptMixin, View):
             del request.session['location']
         data = json.dumps({'status': 'success'})
         return HttpResponse(data, 'application/json')
+
+
+class UserLanguageView(View):
+    def get(self, request, *args, **kwargs):
+        lang = self.request.GET.get('lang', 'en-us')
+        # set language for current user
+        request.session['django_language'] = lang
+        return redirect(request.META.get('HTTP_REFERER', '/'))
