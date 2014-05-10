@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-06 22:12-0400\n"
+"POT-Creation-Date: 2014-05-10 13:42-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,31 +70,31 @@ msgid ""
 "Give us feedback and keep coming back to see new iterations."
 msgstr "dar una calificacion digna de nuestro estatus de \"Pueblo más Delicioso del Sur\". Déjanos saber tu opinión y sigue regresando para ver las nuevas iteraciones."
 
-#: eatsmart/templates/base.html:34
+#: eatsmart/templates/base.html:35
 msgid "About"
 msgstr "Nosotros"
 
-#: eatsmart/templates/base.html:36
+#: eatsmart/templates/base.html:37
 msgid "Log In"
 msgstr "Entra"
 
-#: eatsmart/templates/base.html:39
+#: eatsmart/templates/base.html:40
 msgid "Admin"
 msgstr "Admin"
 
-#: eatsmart/templates/base.html:41
+#: eatsmart/templates/base.html:42
 msgid "Log Out"
 msgstr "Salir"
 
-#: eatsmart/templates/base.html:74
+#: eatsmart/templates/base.html:83
 msgid "Find us on GitHub"
 msgstr "Encuéntranos en GitHub"
 
-#: eatsmart/templates/base.html:76
+#: eatsmart/templates/base.html:85
 msgid "By"
 msgstr "Por"
 
-#: eatsmart/templates/base.html:81
+#: eatsmart/templates/base.html:90
 msgid "Where am I?"
 msgstr "¿Donde estoy?"
 
@@ -147,6 +147,18 @@ msgstr "Comentarios del Inspector"
 #: eatsmart/templates/inspections/establishment_detail.html:103
 msgid "total inspections"
 msgstr "inspecciones en total"
+
+#: eatsmart/templates/inspections/establishment_list.html:13
+msgid "Search restaurants..."
+msgstr "Busca restaurantes..."
+
+#: eatsmart/templates/inspections/establishment_list.html:15
+msgid "Search"
+msgstr "Buscar"
+
+#: eatsmart/templates/inspections/establishment_list.html:16
+msgid "Update location"
+msgstr "Actualize tu locación"
 
 #: inspections/models.py:10
 msgid "Deleted"
@@ -202,7 +214,7 @@ msgstr ""
 
 #: inspections/models.py:24
 msgid "Institutional Food Service"
-msgstr ""
+msgstr "Servicio de Comida Escolar"
 
 #: inspections/models.py:25
 msgid "Lodging"
@@ -214,7 +226,7 @@ msgstr ""
 
 #: inspections/models.py:27
 msgid "Summer Camp"
-msgstr ""
+msgstr "Campamento de verano"
 
 #: inspections/models.py:28
 msgid "Bed & Breakfast Inn"
@@ -230,7 +242,7 @@ msgstr ""
 
 #: inspections/models.py:31
 msgid "Meat Market"
-msgstr ""
+msgstr "Marcado de carne"
 
 #: inspections/models.py:32
 msgid "Rest/Nursing Home"
@@ -305,8 +317,9 @@ msgid "Summer Feeding Program"
 msgstr ""
 
 #: inspections/models.py:50
+#, fuzzy
 msgid "Temporary Food Establishment"
-msgstr ""
+msgstr "Establecimiento"
 
 #: inspections/models.py:52 inspections/models.py:99 inspections/models.py:121
 msgid "External ID"
@@ -366,8 +379,9 @@ msgid "Status"
 msgstr "Estado"
 
 #: inspections/models.py:67
+#, fuzzy
 msgid "location"
-msgstr "locación"
+msgstr "Actualize tu locación"
 
 #: inspections/models.py:83
 msgid "Routine Inspection"
