@@ -1,0 +1,440 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-05-10 13:42-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: eatsmart/settings/base.py:43
+msgid "Spanish"
+msgstr "Español"
+
+#: eatsmart/settings/base.py:44
+msgid "English"
+msgstr "Ingles"
+
+#: eatsmart/templates/about.html:9
+msgid "About NC Food Inspector"
+msgstr "Acerca de NC Food Inspector"
+
+#: eatsmart/templates/about.html:17
+msgid "We love the food and restaurants in the Triangle!"
+msgstr "Disfrutamos la comida y los restaurantes en el triángulo!"
+
+#: eatsmart/templates/about.html:19
+msgid ""
+"How often have you read a great Yelp review for a restaurant only to walk in\n"
+"and see that it's got a dismal public health inspection score? If you're the\n"
+"kind of person who pays attention to those ratings (or maybe you don't, but\n"
+"should!), this is the app for you."
+msgstr "¿Cuanta veces lees una buena reseña en Yelp de un restaurante solo para llegar y ver que tiene una calificación de salud pesima? Si eres el tipo de persona que le interesa ese tipo de cosas (O talves no, pero deberias!), esta es la aplicacion para ti."
+
+#: eatsmart/templates/about.html:24
+msgid ""
+"NC Food Inspector is a brand new app designed to give citizens easy access\n"
+"to public health scores at restaurants in our community. It was created by"
+msgstr "NC Food Inspector es una nueva aplicacion diseñada para dar a los ciudadanos fácil accesso a las calificaciones de restaurantes en nuestra comunidad. Fue creada por "
+
+#: eatsmart/templates/about.html:26
+msgid ""
+"a non-profit organization\n"
+"committed to building helpful resources for our community out of public\n"
+"data."
+msgstr ""
+"Una organizacion sin ánimo de lucro,\n"
+"cometida a construir recursos de datos públicos para nuestra comunidad."
+
+#: eatsmart/templates/about.html:30
+msgid ""
+"For now, it's simple: map restaurants according to their public health\n"
+"inspection scores. Eventually, we'd like to mash it up with Yelp and"
+msgstr "Por ahora, es sencillo: conecta restaurantes con su calificacion de salud publica. Eventualmente, nos gustaría conectar información de Yelp y"
+
+#: eatsmart/templates/about.html:32
+msgid ""
+"to give an\n"
+"uber-Durham score that's worthy of our \"Tastiest Town of the South\" status.\n"
+"Give us feedback and keep coming back to see new iterations."
+msgstr "dar una calificacion digna de nuestro estatus de \"Pueblo más Delicioso del Sur\". Déjanos saber tu opinión y sigue regresando para ver las nuevas iteraciones."
+
+#: eatsmart/templates/base.html:35
+msgid "About"
+msgstr "Nosotros"
+
+#: eatsmart/templates/base.html:37
+msgid "Log In"
+msgstr "Entra"
+
+#: eatsmart/templates/base.html:40
+msgid "Admin"
+msgstr "Admin"
+
+#: eatsmart/templates/base.html:42
+msgid "Log Out"
+msgstr "Salir"
+
+#: eatsmart/templates/base.html:83
+msgid "Find us on GitHub"
+msgstr "Encuéntranos en GitHub"
+
+#: eatsmart/templates/base.html:85
+msgid "By"
+msgstr "Por"
+
+#: eatsmart/templates/base.html:90
+msgid "Where am I?"
+msgstr "¿Donde estoy?"
+
+#: eatsmart/templates/inspections/establishment_detail.html:16
+msgid "Health Score"
+msgstr "Calificación Sanitária"
+
+#: eatsmart/templates/inspections/establishment_detail.html:18
+msgid "out of 100"
+msgstr "de 100"
+
+#: eatsmart/templates/inspections/establishment_detail.html:44
+#: eatsmart/templates/inspections/establishment_detail.html:62
+msgid "Violations"
+msgstr "Violaciones"
+
+#: eatsmart/templates/inspections/establishment_detail.html:47
+#: eatsmart/templates/inspections/establishment_detail.html:94
+#: inspections/models.py:123
+msgid "Code"
+msgstr "Codigo"
+
+#: eatsmart/templates/inspections/establishment_detail.html:56
+msgid "Previous Inspections"
+msgstr "Inspecciones Previas"
+
+#: eatsmart/templates/inspections/establishment_detail.html:59
+#: eatsmart/templates/inspections/establishment_detail.html:60
+#: inspections/models.py:100 inspections/models.py:122
+msgid "Date"
+msgstr "Fecha"
+
+#: eatsmart/templates/inspections/establishment_detail.html:61
+msgid "Inspection Type"
+msgstr "Tipo de inspección"
+
+#: eatsmart/templates/inspections/establishment_detail.html:63
+#: inspections/models.py:101
+msgid "Score"
+msgstr "Calificación"
+
+#: eatsmart/templates/inspections/establishment_detail.html:79
+msgid "Comments"
+msgstr "Comentarios"
+
+#: eatsmart/templates/inspections/establishment_detail.html:90
+msgid "Inspector's Comments"
+msgstr "Comentarios del Inspector"
+
+#: eatsmart/templates/inspections/establishment_detail.html:103
+msgid "total inspections"
+msgstr "inspecciones en total"
+
+#: eatsmart/templates/inspections/establishment_list.html:13
+msgid "Search restaurants..."
+msgstr "Busca restaurantes..."
+
+#: eatsmart/templates/inspections/establishment_list.html:15
+msgid "Search"
+msgstr "Buscar"
+
+#: eatsmart/templates/inspections/establishment_list.html:16
+msgid "Update location"
+msgstr "Actualize tu locación"
+
+#: inspections/models.py:10
+msgid "Deleted"
+msgstr "Eliminado"
+
+#: inspections/models.py:10
+msgid "Active"
+msgstr "Activo"
+
+#: inspections/models.py:12 inspections/models.py:82
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: inspections/models.py:13
+msgid "Restaurant"
+msgstr "Restaurante"
+
+#: inspections/models.py:14
+msgid "Food Stand"
+msgstr "Estampillas de Comida"
+
+#: inspections/models.py:15
+msgid "Mobile Food"
+msgstr "Comida Movil"
+
+#: inspections/models.py:16
+msgid "Push Cart"
+msgstr ""
+
+#: inspections/models.py:17
+msgid "Private School's Cafeteria"
+msgstr "Cafeteria de Escuala Privada"
+
+#: inspections/models.py:18
+msgid "Educational Food Service"
+msgstr "Servicio de Comida Escolar"
+
+#: inspections/models.py:19 inspections/models.py:21
+msgid "Elderly Nutrition"
+msgstr "Nutrición para Mayores"
+
+#: inspections/models.py:20
+msgid "Public School's Cafeteria"
+msgstr "Cafeteria de Escuela Publica"
+
+#: inspections/models.py:22
+msgid "Limited Food"
+msgstr "Comida Limidata"
+
+#: inspections/models.py:23
+msgid "Commissary (Pushcarts/Mobile Food),"
+msgstr ""
+
+#: inspections/models.py:24
+msgid "Institutional Food Service"
+msgstr "Servicio de Comida Escolar"
+
+#: inspections/models.py:25
+msgid "Lodging"
+msgstr "Alojamiento"
+
+#: inspections/models.py:26
+msgid "Bed & Breakfast Home"
+msgstr ""
+
+#: inspections/models.py:27
+msgid "Summer Camp"
+msgstr "Campamento de verano"
+
+#: inspections/models.py:28
+msgid "Bed & Breakfast Inn"
+msgstr ""
+
+#: inspections/models.py:29
+msgid "Primitive Experience Camp"
+msgstr ""
+
+#: inspections/models.py:30
+msgid "Resident Camp"
+msgstr ""
+
+#: inspections/models.py:31
+msgid "Meat Market"
+msgstr "Marcado de carne"
+
+#: inspections/models.py:32
+msgid "Rest/Nursing Home"
+msgstr ""
+
+#: inspections/models.py:33
+msgid "Hospital"
+msgstr "Hospital"
+
+#: inspections/models.py:34
+msgid "Child Care"
+msgstr "Cuidado Infantil"
+
+#: inspections/models.py:35
+msgid "Residential Care"
+msgstr ""
+
+#: inspections/models.py:36
+msgid "School Building"
+msgstr ""
+
+#: inspections/models.py:37
+msgid "Local Confinement"
+msgstr ""
+
+#: inspections/models.py:38
+msgid "Private Boarding School/College"
+msgstr ""
+
+#: inspections/models.py:39
+msgid "Orphanage, Children's Home"
+msgstr ""
+
+#: inspections/models.py:40
+msgid "Adult Day Care"
+msgstr ""
+
+#: inspections/models.py:41
+msgid "Adult Day Service"
+msgstr ""
+
+#: inspections/models.py:42
+msgid "Seasonal Swimming Pool"
+msgstr ""
+
+#: inspections/models.py:43
+msgid "Seasonal Wading Pool"
+msgstr ""
+
+#: inspections/models.py:44
+msgid "Seasonal Spa"
+msgstr ""
+
+#: inspections/models.py:45
+msgid "Year-Round Swimming Pool"
+msgstr ""
+
+#: inspections/models.py:46
+msgid "Year-Round Wading Pool"
+msgstr ""
+
+#: inspections/models.py:47
+msgid "Year-Round Spa"
+msgstr ""
+
+#: inspections/models.py:48
+msgid "Tattoo Artist"
+msgstr ""
+
+#: inspections/models.py:49
+msgid "Summer Feeding Program"
+msgstr ""
+
+#: inspections/models.py:50
+#, fuzzy
+msgid "Temporary Food Establishment"
+msgstr "Establecimiento"
+
+#: inspections/models.py:52 inspections/models.py:99 inspections/models.py:121
+msgid "External ID"
+msgstr "ID Externa"
+
+#: inspections/models.py:53
+msgid "State ID"
+msgstr "ID Estatal"
+
+#: inspections/models.py:54
+msgid "Property ID"
+msgstr "ID de Propiedad"
+
+#: inspections/models.py:55
+msgid "Name"
+msgstr "Nombre"
+
+#: inspections/models.py:56 inspections/models.py:103
+msgid "Type"
+msgstr "Tipo"
+
+#: inspections/models.py:57
+msgid "Address"
+msgstr "Dirección"
+
+#: inspections/models.py:58
+msgid "City"
+msgstr "Ciudad"
+
+#: inspections/models.py:59
+msgid "County"
+msgstr "Condado"
+
+#: inspections/models.py:60
+msgid "State"
+msgstr "Estado"
+
+#: inspections/models.py:61
+msgid "Postal Code"
+msgstr "Codigo Postal"
+
+#: inspections/models.py:62
+msgid "Phone Number"
+msgstr "Numero Telefonico"
+
+#: inspections/models.py:63
+msgid "Opening Date"
+msgstr "Fecha de Apertura"
+
+#: inspections/models.py:64 inspections/models.py:105
+#: inspections/models.py:125
+msgid "Update Date"
+msgstr "Fecha de Actualización"
+
+#: inspections/models.py:65
+msgid "Status"
+msgstr "Estado"
+
+#: inspections/models.py:67
+#, fuzzy
+msgid "location"
+msgstr "Actualize tu locación"
+
+#: inspections/models.py:83
+msgid "Routine Inspection"
+msgstr "Inspección Rutinaria"
+
+#: inspections/models.py:84
+msgid "Re-inspection"
+msgstr "Re-inspección"
+
+#: inspections/models.py:85
+msgid "Permit"
+msgstr "Permiso"
+
+#: inspections/models.py:86
+msgid "Visit"
+msgstr "Visita"
+
+#: inspections/models.py:87
+msgid "Name Change"
+msgstr "Cambio de Nombre"
+
+#: inspections/models.py:88
+msgid "Verification"
+msgstr "Verificación"
+
+#: inspections/models.py:89
+msgid "Other"
+msgstr "Otro"
+
+#: inspections/models.py:90
+msgid "Status Change"
+msgstr "Cambio de Estado"
+
+#: inspections/models.py:91
+msgid "Pre-opening Visit"
+msgstr "Visita de preapertura"
+
+#: inspections/models.py:92
+msgid "Critical Violation Visit"
+msgstr "Visita de Violacion Crítica"
+
+#: inspections/models.py:93
+msgid "Critical Violation Followup"
+msgstr "Seguimiento de Violacion Crítica"
+
+#: inspections/models.py:97 inspections/models.py:116
+msgid "Establishment"
+msgstr "Establecimiento"
+
+#: inspections/models.py:102 inspections/models.py:124
+msgid "Description"
+msgstr "Descripción"
+
+#: inspections/models.py:119
+msgid "Inspection"
+msgstr "Inpección"

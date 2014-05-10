@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}About{% endblock %}
 {% block body_class %}about{% endblock %}
 {% block body_id %}about{% endblock %}
 
 {% block content %}
-<h1>About NC Food Inspector</h1>
+<h1>{% trans 'About NC Food Inspector' %}</h1>
 
 <p>
     <a href="https://www.flickr.com/photos/mellodave/6183618324" title="durham, nc by David Mello, on Flickr">
@@ -13,22 +14,22 @@
     </a>
 </p>
 
-<p>We love the food and restaurants in the Triangle!</p>
+<p>{% trans 'We love the food and restaurants in the Triangle!' %}</p>
 
-<p>How often have you read a great Yelp review for a restaurant only to walk in
+<p>{% blocktrans %}How often have you read a great Yelp review for a restaurant only to walk in
 and see that it's got a dismal public health inspection score? If you're the
 kind of person who pays attention to those ratings (or maybe you don't, but
-should!), this is the app for you.</p>
+should!), this is the app for you.{% endblocktrans %}</p>
 
-<p>NC Food Inspector is a brand new app designed to give citizens easy access
-to public health scores at restaurants in our community. It was created by <a
-href="http://codefordurham.com/">Code for Durham</a>, a non-profit organization
+<p>{% blocktrans %}NC Food Inspector is a brand new app designed to give citizens easy access
+to public health scores at restaurants in our community. It was created by{% endblocktrans %}<a
+href="http://codefordurham.com/">Code for Durham</a>, {% blocktrans %}a non-profit organization
 committed to building helpful resources for our community out of public
-data.</p>
+data.{% endblocktrans %}</p>
 
-<p>For now, it's simple: map restaurants according to their public health
-inspection scores. Eventually, we'd like to mash it up with Yelp and
-<a href="https://www.bullcitybucks.com/">Bull City Bucks</a> to give an
+<p>{% blocktrans %}For now, it's simple: map restaurants according to their public health
+inspection scores. Eventually, we'd like to mash it up with Yelp and{% endblocktrans %}
+<a href="https://www.bullcitybucks.com/">Bull City Bucks</a> {% blocktrans %}to give an
 uber-Durham score that's worthy of our "Tastiest Town of the South" status.
-Give us feedback and keep coming back to see new iterations.</p>
+Give us feedback and keep coming back to see new iterations.{% endblocktrans %}</p>
 {% endblock %}
