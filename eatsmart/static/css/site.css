@@ -201,3 +201,8 @@ div.score .outof {
   height: 300px;
   margin-bottom: 10px;
 }
+@media screen and (max-width: 768px) {
+    .main-map {
+        height: 150px;
+    }
+}
