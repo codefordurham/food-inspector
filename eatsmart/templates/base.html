@@ -49,9 +49,7 @@
                        </a>
                    </li>
                    <li><a href="{% url 'about' %}">{% trans 'About' %}</a></li>
-                    {% if not user.is_authenticated %}
-                        <li><a href="{% url "admin:index" %}">{% trans "Log In" %}</a></li>
-                    {% else %}
+                    {% if user.is_authenticated %}
                         {% if user.is_staff %}
                           <li><a href="{% url "admin:index" %}">{% trans "Admin" %}</a></li>
                         {% endif %}
