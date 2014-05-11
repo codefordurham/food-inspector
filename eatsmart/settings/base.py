@@ -1,5 +1,7 @@
 # Django settings for eatsmart project.
 import os
+from celery.schedules import crontab
+
 
 PROJECT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 PROJECT_ROOT = os.path.abspath(os.path.join(PROJECT_PATH, os.pardir))
@@ -222,3 +224,10 @@ COMPRESS_PRECOMPILERS = (
 # Default user location
 LATITUDE = 35.988611
 LONGITUDE = -78.907222
+
+CELERYBEAT_SCHEDULE = {
+    'import-durham-data': {
+        'task': 'eatsmart.locations.durham.tasks.import_durham_data',
+        'schedule': crontab(minute=0, hour=0),  # Execute daily at midnight
+    },
+}
