@@ -40,6 +40,24 @@ h2 {
 }
 
 /* Make the masthead heading the same height as the navigation */
+.navbar-default {
+    background-color: #5996A8;
+    border-color: #e7e7e7;
+}
+.navbar-nav>li>a {
+    color: white !important;
+}
+.navbar-brand {
+    padding: 7px;
+}
+.navbar-brand img {
+    height: 40px;
+    width: 90px;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle, .navbar-default .navbar-toggle {
+    background-color: white;
+}
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
