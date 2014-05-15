@@ -43,10 +43,12 @@ class EstablishmentImporter(Importer):
 
     Model = Establishment
     Form = EstablishmentForm
+    ColumnList = ['ID','State_Id','Premise_Name','Est_Type','Premise_Address1','Premise_Zip','Premise_Phone','Opening_Date','Update_Date','Status','Lat','Lon']
 
     def run(self):
         "Fetch all Durham County establishments"
-        self.fetch(DurhamAPI().get(table="establishments", est_type=1))
+        cols = ','.join(self.ColumnList)
+        self.fetch(DurhamAPI().get(table="establishments", est_type=1, columns=cols))
 
     def get_instance(self, data):
         "Instance exists if we have external_id and it's within Durham County"
