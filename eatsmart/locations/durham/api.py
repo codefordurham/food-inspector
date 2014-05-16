@@ -43,7 +43,12 @@ class EstablishmentImporter(Importer):
 
     Model = Establishment
     Form = EstablishmentForm
-    ColumnList = ['ID','State_Id','Premise_Name','Est_Type','Premise_Address1','Premise_Zip','Premise_Phone','Opening_Date','Update_Date','Status','Lat','Lon']
+    ColumnList = ['ID','State_Id','Premise_Name',
+                  'Est_Type','Premise_Address1',
+                  'Premise_Zip','Premise_City',
+                  'Premise_Phone', 'Opening_Date',
+                  'Update_Date', 'Status',
+                  'Lat','Lon']
 
     def run(self):
         "Fetch all Durham County establishments"
@@ -62,7 +67,7 @@ class EstablishmentImporter(Importer):
                 'name': api['Premise_Name'],
                 'type': api['Est_Type'],
                 'address': api['Premise_Address1'],
-                'city': 'Durham',
+                'city': api['Premise_City'],
                 'county': 'Durham',
                 'state': 'NC',
                 'postal_code': api['Premise_Zip'],
@@ -79,12 +84,16 @@ class InspectionImporter(Importer):
 
     Model = Inspection
     Form = InspectionForm
+    ColumnList = ['Id', 'Insp_Date',
+                  'Insp_Type', 'Score_SUM',
+                  'Comments', 'Update_Date']
 
     def run(self):
         "Fetch inspections for all Durham County establishments"
+        cols = ','.join(self.ColumnList)
         for est in Establishment.objects.filter(county='Durham'):
             # Only fetch inspections for establishments in our database
-            api = DurhamAPI().get(table="inspections", est_id=est.external_id)
+            api = DurhamAPI().get(table="inspections", est_id=est.external_id, columns=cols)
             self.fetch(api, establishment=est)
 
     def get_instance(self, data, establishment):
@@ -108,14 +117,17 @@ class ViolationImporter(Importer):
 
     Model = Violation
     Form = ViolationForm
+    ColumnList = ['Id', 'Item', 'Comments']
 
     def run(self):
         "Fetch violations for all Durham County inspections"
+        cols = ','.join(self.ColumnList)
         inspections = Inspection.objects.filter(establishment__county='Durham')
         for insp in inspections.select_related('establishment'):
             # Only fetch violations for inspections in our database
             api = DurhamAPI().get(table="violations",
-                                  inspection_id=insp.external_id)
+                                  inspection_id=insp.external_id,
+                                  columns=cols)
             self.fetch(api, inspection=insp)
 
     def get_instance(self, data, inspection):
