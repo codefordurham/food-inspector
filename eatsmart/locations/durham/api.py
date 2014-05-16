@@ -52,11 +52,13 @@ class EstablishmentImporter(Importer):
                   'Lat', 'Lon']
     LastDate = Model.objects.filter(county='Durham').aggregate(Max('update_date'))['update_date__max']
 
-    def run(self):
+    def run(self, limit_set=False):
         "Fetch all Durham County establishments"
-        cols = ','.join(self.ColumnList)
-        self.fetch(DurhamAPI().get(table="establishments", est_type=1,
-                                   columns=cols))
+        api_kwargs = {'table': "establishments", 'est_type': 1, 
+                      'columns': ','.join(self.ColumnList)}
+        if (limit_set):
+           api_kwargs['Update_Date__gt'] = self.LastDate.strftime('%m/%d/%Y')
+        self.fetch(DurhamAPI().get(**api_kwargs))
 
     def get_instance(self, data):
         "Instance exists if we have external_id and it's within Durham County"
@@ -92,14 +94,15 @@ class InspectionImporter(Importer):
                   'Comments', 'Update_Date']
     LastDate = Model.objects.filter(establishment__county='Durham').aggregate(Max('update_date'))['update_date__max']
 
-    def run(self):
+    def run(self, limit_set=False):
         "Fetch inspections for all Durham County establishments"
-        cols = ','.join(self.ColumnList)
+        api_kwargs = {'table': "inspections", 'columns': ','.join(self.ColumnList)}
+        if (limit_set):
+            api_kwargs['Update_Date__gt'] = self.LastDate.strftime('%m/%d/%Y')
         for est in Establishment.objects.filter(county='Durham'):
             # Only fetch inspections for establishments in our database
-            api = DurhamAPI().get(table="inspections", est_id=est.external_id,
-                                  columns=cols)
-            self.fetch(api, establishment=est)
+            api_kwargs['est_id'] = est.external_id
+            self.fetch(DurhamAPI().get(**api_kwargs), establishment=est)
 
     def get_instance(self, data, establishment):
         "Instance exists if we have external_id for the given establishment"
@@ -127,16 +130,18 @@ class ViolationImporter(Importer):
     Form = ViolationForm
     ColumnList = ['Id', 'Item', 'Comments']
 
-    def run(self, lastInspDate):
+    def run(self, last_insp_date=None):
         "Fetch violations for all Durham County inspections"
         cols = ','.join(self.ColumnList)
-        inspections = Inspection.objects.filter(establishment__county='Durham', update_date__gt=lastInspDate)
+        if (last_insp_date):
+            inspections = Inspection.objects.filter(establishment__county='Durham', update_date__gt=last_insp_date)
+        else:
+            inspections = Inspection.objects.filter(establishment__county='Durham')
+        api_kwargs = {'table': "violations", 'columns': ','.join(self.ColumnList)}
         for insp in inspections.select_related('establishment'):
             # Only fetch violations for inspections in our database
-            api = DurhamAPI().get(table="violations",
-                                  inspection_id=insp.external_id,
-                                  columns=cols)
-            self.fetch(api, inspection=insp)
+            api_kwargs['inspection_id'] = insp.external_id
+            self.fetch(DurhamAPI().get(**api_kwargs), inspection=insp)
 
     def get_instance(self, data, inspection):
         "Instance exists if we have external_id for the given inspection"
