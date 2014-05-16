@@ -228,6 +228,10 @@ LONGITUDE = -78.907222
 CELERYBEAT_SCHEDULE = {
     'import-durham-data': {
         'task': 'eatsmart.locations.durham.tasks.import_durham_data',
-        'schedule': crontab(minute=0, hour=0),  # Execute daily at midnight
+        'schedule': crontab(minute=0, hour=0, day_of_week='sun'),  # Execute every sunday at midnight
+    },
+    'import-durham-data-incr': {
+        'task': 'eatsmart.locations.durham.tasks.import_durham_data_incr',
+        'schedule': crontab(minute=0, hour=0, day_of_week='mon-sat'), # Execute every day except for sunday
     },
 }
