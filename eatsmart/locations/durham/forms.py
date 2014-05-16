@@ -37,6 +37,10 @@ class EstablishmentForm(forms.ModelForm):
         model = Establishment
         exclude = ('location',)
 
+    def clean_city(self):
+        city = self.cleaned_data['city']
+        return city.title()
+
     def clean_status(self):
         status = self.cleaned_data['status']
         if status == 'ACTIVE':
@@ -48,7 +52,7 @@ class EstablishmentForm(forms.ModelForm):
     def clean_phone(self):
         phone = self.cleaned_data['phone']
         # Force empty phone value to empty string 
-        if phone == '0':
+        if phone == 'NULL':
             phone = ''
         return phone 
 
