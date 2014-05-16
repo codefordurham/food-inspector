@@ -3,6 +3,8 @@ import io
 import logging
 import requests
 
+from django.db.models import Max
+
 from eatsmart.locations.base import Importer
 from eatsmart.locations.durham.forms import (EstablishmentForm, InspectionForm,
                                              ViolationForm)
@@ -40,7 +42,6 @@ class DurhamAPI(object):
 
 class EstablishmentImporter(Importer):
     "Import Durham establishments"
-
     Model = Establishment
     Form = EstablishmentForm
     ColumnList = ['ID', 'State_Id', 'Premise_Name',
@@ -49,6 +50,7 @@ class EstablishmentImporter(Importer):
                   'Premise_Phone', 'Opening_Date',
                   'Update_Date', 'Status',
                   'Lat', 'Lon']
+    LastDate = Model.objects.filter(county='Durham').aggregate(Max('update_date'))['update_date__max']
 
     def run(self):
         "Fetch all Durham County establishments"
@@ -88,6 +90,7 @@ class InspectionImporter(Importer):
     ColumnList = ['Id', 'Insp_Date',
                   'Insp_Type', 'Score_SUM',
                   'Comments', 'Update_Date']
+    LastDate = Model.objects.filter(establishment__county='Durham').aggregate(Max('update_date'))['update_date__max']
 
     def run(self):
         "Fetch inspections for all Durham County establishments"
@@ -102,6 +105,9 @@ class InspectionImporter(Importer):
         "Instance exists if we have external_id for the given establishment"
         return self.Model.objects.get(external_id=data['external_id'],
                                       establishment=establishment)
+    def get_last_inspection(self):
+        "Retrieve the last inspection date"
+        return self.LastDate
 
     def map_fields(self, api, establishment):
         "Map CSV field names from Durham's API to our database schema"
@@ -121,10 +127,10 @@ class ViolationImporter(Importer):
     Form = ViolationForm
     ColumnList = ['Id', 'Item', 'Comments']
 
-    def run(self):
+    def run(self, lastInspDate):
         "Fetch violations for all Durham County inspections"
         cols = ','.join(self.ColumnList)
-        inspections = Inspection.objects.filter(establishment__county='Durham')
+        inspections = Inspection.objects.filter(establishment__county='Durham', update_date__gt=lastInspDate)
         for insp in inspections.select_related('establishment'):
             # Only fetch violations for inspections in our database
             api = DurhamAPI().get(table="violations",
