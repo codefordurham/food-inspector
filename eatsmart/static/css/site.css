@@ -77,8 +77,11 @@ h2 {
 
 /* Custom page footer */
 footer {
-  margin-top: 12px;
   color: #777;
+}
+
+footer hr {
+  margin-top: 8px;
 }
 
 .header h3 {
@@ -226,7 +229,7 @@ div.score .outof {
 }
 
 .pager span {
- display: inline-block;
- padding-top: 5px; 
- padding-right: 13px;
+  display: inline-block;
+  padding-top: 5px; 
+  padding-right: 13px;
 }

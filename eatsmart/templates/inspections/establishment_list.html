@@ -49,7 +49,6 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="row">
     <div class='col-md-12'>
         <form id='search' class="form-inline" role="search" action="{% url 'establishment-list' %}" method="get">
@@ -77,27 +76,19 @@
             </a>
             {% endfor %}
         </div>
-        <div class="pagination">
-            <span>{% blocktrans with count=page_obj.pagintor.count %}There are {{count}} restaurants in the current view.{% endblocktrans %}</span>
+        <div class="establishment-pagination">
+            <span>{% blocktrans with count=page_obj.paginator.count %}There are {{count}} restaurants in the current view.{% endblocktrans %}</span>
             {% if is_paginated %}
                 <ul class="pager">
-                    {% if page_obj.has_previous %}
-		       <li class="previous">
-                           <a href="?{% url_replace request 'page' page_obj.previous_page_number %}">{% trans 'previous' %}</a>
-                       </li>
-		    {% else %}
-		       <li class="previous .disabled">
-		           <span>{% trans 'previous' %}</span>
-                       </li>
-                    {% endif %}
+                    <li class="previous {% if not page_obj.has_previous %}disabled{% endif %}">
+                        <a href="{% if page_obj.has_previous %}?{% url_replace request 'page' page_obj.previous_page_number %}{% endif %}">{% trans 'Previous' %}</a>
+                    </li>
                     <span>
-                        {% blocktrans with number_t=page_obj.number num_pages_t=page_obj.paginator.num_pages %}page {{ number_t }} of {{ num_pages_t }}{% endblocktrans %}
+                        {% blocktrans with number_t=page_obj.number num_pages_t=page_obj.paginator.num_pages %}Page {{ number_t }} of {{ num_pages_t }}{% endblocktrans %}
                     </span>
-                    {% if page_obj.has_next %}
-                        <li class="next">
-                            <a href="?{% url_replace request 'page' page_obj.next_page_number %}">{% trans 'next' %}</a>
-                        </li>
-                    {% endif %}
+                    <li class="next {% if not page_obj.has_next %}disabled{% endif %}">
+                        <a href="{% if page_obj.has_next %}?{% url_replace request 'page' page_obj.next_page_number %}{% endif %}">{% trans 'Next' %}</a>
+                    </li>
                 </ul>
             {% endif %}
         </div>
