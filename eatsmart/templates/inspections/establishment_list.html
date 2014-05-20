@@ -77,7 +77,7 @@
             {% endfor %}
         </div>
         <div class="establishment-pagination">
-            <span>{% blocktrans with count=page_obj.paginator.count %}There are {{count}} restaurants in the current view.{% endblocktrans %}</span>
+            <span>{% blocktrans with count=page_obj.paginator.count %}{{count}} restaurants found{% endblocktrans %}</span>
             {% if is_paginated %}
                 <ul class="pager">
                     <li class="previous {% if not page_obj.has_previous %}disabled{% endif %}">
