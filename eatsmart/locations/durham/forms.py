@@ -51,10 +51,10 @@ class EstablishmentForm(forms.ModelForm):
 
     def clean_phone(self):
         phone = self.cleaned_data['phone']
-        # Force empty phone value to empty string 
+        # Force empty phone value to empty string
         if phone == 'NULL':
             phone = ''
-        return phone 
+        return phone
 
     def clean(self):
         lat = self.cleaned_data.get('lat', None)

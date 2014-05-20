@@ -43,17 +43,18 @@ class EstablishmentImporter(Importer):
 
     Model = Establishment
     Form = EstablishmentForm
-    ColumnList = ['ID','State_Id','Premise_Name',
-                  'Est_Type','Premise_Address1',
-                  'Premise_Zip','Premise_City',
+    ColumnList = ['ID', 'State_Id', 'Premise_Name',
+                  'Est_Type', 'Premise_Address1',
+                  'Premise_Zip', 'Premise_City',
                   'Premise_Phone', 'Opening_Date',
                   'Update_Date', 'Status',
-                  'Lat','Lon']
+                  'Lat', 'Lon']
 
     def run(self):
         "Fetch all Durham County establishments"
         cols = ','.join(self.ColumnList)
-        self.fetch(DurhamAPI().get(table="establishments", est_type=1, columns=cols))
+        self.fetch(DurhamAPI().get(table="establishments", est_type=1,
+                                   columns=cols))
 
     def get_instance(self, data):
         "Instance exists if we have external_id and it's within Durham County"
@@ -93,7 +94,8 @@ class InspectionImporter(Importer):
         cols = ','.join(self.ColumnList)
         for est in Establishment.objects.filter(county='Durham'):
             # Only fetch inspections for establishments in our database
-            api = DurhamAPI().get(table="inspections", est_id=est.external_id, columns=cols)
+            api = DurhamAPI().get(table="inspections", est_id=est.external_id,
+                                  columns=cols)
             self.fetch(api, establishment=est)
 
     def get_instance(self, data, establishment):
