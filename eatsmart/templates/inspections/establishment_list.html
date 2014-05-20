@@ -16,9 +16,8 @@
 
 {% block extra-js %}
     <script>
-        var map = L.mapbox.map('map', 'examples.c7d2024a')
-            .setView([35.996345, -78.903022], 14)
-        var points = []
+        var map = L.mapbox.map('map', 'examples.c7d2024a'),
+            points = [];
         {% for establishment in establishments %}
             var detailUrl = {% url "establishment-detail" establishment.pk %};
             points.push({
@@ -29,21 +28,33 @@
                     type: 'Point',
                     // coordinates here are in longitude, latitude order because
                     // x, y is the standard for GeoJSON and many formats
-                    coordinates: [{{establishment.location.x}}, {{establishment.location.y}}]
+                    coordinates: [{{ establishment.location.x|stringformat:"f" }}, {{ establishment.location.y|stringformat:"f" }}]
                 },
                 properties: {
                     title: '{{establishment.name}}',
+                    link: '{{establishment.pk}}',
                     // one can customize markers by adding simplestyle properties
                     // http://mapbox.com/developers/simplestyle/
+                    
                     'marker-size': 'medium',
                     'marker-color': '#3887be'
                 }
             });
+
         {% endfor %}
-        var pointLayer = L.mapbox.featureLayer(points)
+        var pointLayer = L.mapbox.featureLayer(points);
         pointLayer.addTo(map);
         map.on('ready', function(e){
             map.fitBounds(pointLayer.getBounds());
+
+            pointLayer.eachLayer(function(layer) {
+
+                // here you call `bindPopup` with a string of HTML you create - the feature
+                // properties declared above are available under `layer.feature.properties`
+
+                var content = '<a href="'+layer.feature.properties.link +'"><h1>' + layer.feature.properties.title + '<\/h1><\/a>';
+                layer.bindPopup(content);
+            });
         })
     </script>
 {% endblock %}
