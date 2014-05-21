@@ -50,14 +50,15 @@ class EstablishmentImporter(Importer):
                   'Premise_Phone', 'Opening_Date',
                   'Update_Date', 'Status',
                   'Lat', 'Lon']
-    LastDate = Model.objects.filter(county='Durham').aggregate(Max('update_date'))['update_date__max']
+    LastDate = Model.objects.filter(county='Durham')
+    LastDate = LastDate.aggregate(Max('update_date'))['update_date__max']
 
     def run(self, limit_set=False):
         "Fetch all Durham County establishments"
-        api_kwargs = {'table': "establishments", 'est_type': 1, 
+        api_kwargs = {'table': "establishments", 'est_type': 1,
                       'columns': ','.join(self.ColumnList)}
         if (limit_set):
-           api_kwargs['Update_Date__gt'] = self.LastDate.strftime('%m/%d/%Y')
+            api_kwargs['Update_Date__gt'] = self.LastDate.strftime('%m/%d/%Y')
         self.fetch(DurhamAPI().get(**api_kwargs))
 
     def get_instance(self, data):
@@ -92,11 +93,13 @@ class InspectionImporter(Importer):
     ColumnList = ['Id', 'Insp_Date',
                   'Insp_Type', 'Score_SUM',
                   'Comments', 'Update_Date']
-    LastDate = Model.objects.filter(establishment__county='Durham').aggregate(Max('update_date'))['update_date__max']
+    LastDate = Model.objects.filter(establishment__county='Durham')
+    LastDate = LastDate.aggregate(Max('update_date'))['update_date__max']
 
     def run(self, limit_set=False):
         "Fetch inspections for all Durham County establishments"
-        api_kwargs = {'table': "inspections", 'columns': ','.join(self.ColumnList)}
+        api_kwargs = {'table': "inspections",
+                      'columns': ','.join(self.ColumnList)}
         if (limit_set):
             api_kwargs['Update_Date__gt'] = self.LastDate.strftime('%m/%d/%Y')
         for est in Establishment.objects.filter(county='Durham'):
@@ -108,6 +111,7 @@ class InspectionImporter(Importer):
         "Instance exists if we have external_id for the given establishment"
         return self.Model.objects.get(external_id=data['external_id'],
                                       establishment=establishment)
+
     def get_last_inspection(self):
         "Retrieve the last inspection date"
         return self.LastDate
@@ -132,12 +136,15 @@ class ViolationImporter(Importer):
 
     def run(self, last_insp_date=None):
         "Fetch violations for all Durham County inspections"
-        cols = ','.join(self.ColumnList)
         if (last_insp_date):
-            inspections = Inspection.objects.filter(establishment__county='Durham', update_date__gt=last_insp_date)
+            inspections = Inspection.objects.filter(
+                establishment__county='Durham',
+                update_date__gt=last_insp_date)
         else:
-            inspections = Inspection.objects.filter(establishment__county='Durham')
-        api_kwargs = {'table': "violations", 'columns': ','.join(self.ColumnList)}
+            inspections = Inspection.objects.filter(
+                establishment__county='Durham')
+        api_kwargs = {'table': "violations",
+                      'columns': ','.join(self.ColumnList)}
         for insp in inspections.select_related('establishment'):
             # Only fetch violations for inspections in our database
             api_kwargs['inspection_id'] = insp.external_id
