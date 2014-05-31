@@ -50,7 +50,8 @@ class Establishment(models.Model):
         (73, ugettext_lazy('Temporary Food Establishment')),
     )
     external_id = models.CharField(ugettext_lazy("External ID"), max_length=128)
-    state_id = models.BigIntegerField(ugettext_lazy("State ID"))
+    state_id = models.BigIntegerField(ugettext_lazy("State ID"), null=True,
+                                      blank=True)
     property_id = models.CharField(ugettext_lazy("Property ID"), max_length=128, blank=True)
     name = models.CharField(ugettext_lazy("Name"), max_length=255)
     type = models.PositiveIntegerField(ugettext_lazy("Type"), default=0, choices=TYPE_CHOICES)
@@ -60,7 +61,8 @@ class Establishment(models.Model):
     state = models.CharField(ugettext_lazy("State"), max_length=64)
     postal_code = models.CharField(ugettext_lazy("Postal Code"), max_length=16)
     phone_number = models.CharField(ugettext_lazy("Phone Number"), max_length=64, blank=True)
-    opening_date = models.DateTimeField(ugettext_lazy("Opening Date"))
+    opening_date = models.DateTimeField(ugettext_lazy("Opening Date"),
+                                        null=True, blank=True)
     update_date = models.DateTimeField(ugettext_lazy("Update Date"), null=True, blank=True, db_index=True)
     status = models.CharField(ugettext_lazy("Status"), choices=STATUS_CHOICES, max_length=32,
                               default='active')
@@ -96,7 +98,8 @@ class Inspection(models.Model):
     establishment = models.ForeignKey(Establishment,
                                       verbose_name=ugettext_lazy("Establishment"),
                                       related_name='inspections')
-    external_id = models.CharField(ugettext_lazy("External ID"), max_length=128)
+    external_id = models.CharField(ugettext_lazy("External ID"),
+                                   max_length=128, blank=True)
     date = models.DateTimeField(ugettext_lazy("Date"), db_index=True)
     score = models.FloatField(ugettext_lazy("Score"), null=True, blank=True)
     description = models.TextField(ugettext_lazy("Description"), blank=True)
@@ -118,7 +121,8 @@ class Violation(models.Model):
     inspection = models.ForeignKey(Inspection, related_name='violations',
                                    verbose_name=ugettext_lazy("Inspection"), null=True,
                                    blank=True)
-    external_id = models.CharField(ugettext_lazy("External ID"), max_length=128)
+    external_id = models.CharField(ugettext_lazy("External ID"),
+                                   max_length=128, blank=True)
     date = models.DateTimeField(ugettext_lazy("Date"), db_index=True)
     code = models.CharField(ugettext_lazy("Code"), max_length=32)
     description = models.TextField(ugettext_lazy("Description"), blank=True)

@@ -151,6 +151,7 @@ INSTALLED_APPS = (
     'inspections',
     'users',
     'eatsmart.locations.durham',
+    'eatsmart.locations.wake',
 )
 
 # A sample logging configuration. The only tangible logging

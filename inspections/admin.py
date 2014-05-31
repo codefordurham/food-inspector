@@ -5,9 +5,8 @@ from leaflet.admin import LeafletGeoAdmin
 
 class EstablishmentAdmin(LeafletGeoAdmin):
     search_fields = ('name', 'address')
-    list_display = ('id', 'name', 'type',
-                    'county', 'state_id', 'point', 'update_date')
-    list_filter = ('county', 'postal_code')
+    list_display = ('id', 'name', 'type', 'county', 'point', 'update_date')
+    list_filter = ('county', 'update_date')
     ordering = ('-update_date',)
 
     def point(self, obj):
@@ -16,23 +15,53 @@ class EstablishmentAdmin(LeafletGeoAdmin):
         return None
 
 
+class InspectionCountyFilter(admin.SimpleListFilter):
+    title = 'County'
+    parameter_name = 'county'
+
+    def lookups(self, request, model_admin):
+        counties = Establishment.objects.values_list('county', flat=True)
+        return [(name, name) for name in counties.distinct()]
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(establishment__county=self.value())
+        else:
+            return queryset
+
+
 class InspectionAdmin(admin.ModelAdmin):
     search_fields = ('id', 'establishment__external_id', 'external_id',
                      'establishment__name')
-    list_display = ('id', 'external_id', 'establishment', 'type',
-                    'date', 'update_date')
-    list_filter = ('update_date', 'type')
+    list_display = ('id', 'establishment', 'type',
+                    'date', 'external_id', 'update_date')
+    list_filter = (InspectionCountyFilter, 'type', 'update_date')
     ordering = ('-date',)
     raw_id_fields = ('establishment',)
     date_hierarchy = 'date'
 
 
+class ViolationCountyFilter(admin.SimpleListFilter):
+    title = 'County'
+    parameter_name = 'county'
+
+    def lookups(self, request, model_admin):
+        counties = Establishment.objects.values_list('county', flat=True)
+        return [(name, name) for name in counties.distinct()]
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(inspection__establishment__county=self.value())
+        else:
+            return queryset
+
+
 class ViolationAdmin(admin.ModelAdmin):
     search_fields = ('id', 'external_id', 'code', 'description',
                      'establishment__name')
-    list_display = ('id', 'external_id', 'establishment', 'code',
-                    'date', 'comments')
-    list_filter = ('code',)
+    list_display = ('id', 'establishment', 'code',
+                    'date', 'comments', 'external_id')
+    list_filter = (ViolationCountyFilter, 'date')
     raw_id_fields = ('establishment', 'inspection')
     ordering = ('-date',)
     date_hierarchy = 'date'
