@@ -32,18 +32,30 @@
                     coordinates: [{{ establishment.location.x|stringformat:"f" }}, {{ establishment.location.y|stringformat:"f" }}]
                 },
                 properties: {
-                    title: '{{establishment.name}}',
+                    title: '{{establishment.name|title}}',
+                    link: '{{establishment.pk}}',
                     // one can customize markers by adding simplestyle properties
                     // http://mapbox.com/developers/simplestyle/
+                    
                     'marker-size': 'medium',
                     'marker-color': '#3887be'
                 }
             });
+
         {% endfor %}
         var pointLayer = L.mapbox.featureLayer(points);
         pointLayer.addTo(map);
         map.on('ready', function(e){
             map.fitBounds(pointLayer.getBounds());
+
+            pointLayer.eachLayer(function(layer) {
+
+                // here you call `bindPopup` with a string of HTML you create - the feature
+                // properties declared above are available under `layer.feature.properties`
+
+                var content = '<a href="'+layer.feature.properties.link +'"><h1>' + layer.feature.properties.title + '<\/h1><\/a>';
+                layer.bindPopup(content);
+            });
         })
     </script>
 {% endblock %}
