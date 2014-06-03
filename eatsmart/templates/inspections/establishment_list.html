@@ -2,6 +2,7 @@
 {% load leaflet_tags %}
 
 {% load i18n %}
+{% load establishmentlisttags %}
 
 {% block body_class %}establishments{% endblock %}
 {% block body_id %}establishment-list{% endblock %}
@@ -31,24 +32,35 @@
                     coordinates: [{{ establishment.location.x|stringformat:"f" }}, {{ establishment.location.y|stringformat:"f" }}]
                 },
                 properties: {
-                    title: '{{establishment.name}}',
+                    title: '{{establishment.name|title}}',
+                    link: '{{establishment.pk}}',
                     // one can customize markers by adding simplestyle properties
                     // http://mapbox.com/developers/simplestyle/
+                    
                     'marker-size': 'medium',
                     'marker-color': '#5AC1A8'
                 }
             });
+
         {% endfor %}
         var pointLayer = L.mapbox.featureLayer(points);
         pointLayer.addTo(map);
         map.on('ready', function(e){
             map.fitBounds(pointLayer.getBounds());
+
+            pointLayer.eachLayer(function(layer) {
+
+                // here you call `bindPopup` with a string of HTML you create - the feature
+                // properties declared above are available under `layer.feature.properties`
+
+                var content = '<a href="'+layer.feature.properties.link +'"><h1>' + layer.feature.properties.title + '<\/h1><\/a>';
+                layer.bindPopup(content);
+            });
         })
     </script>
 {% endblock %}
 
 {% block content %}
-
 <div class="row">
     <div class='col-md-12'>
         <form id='search' class="form-inline" role="search" action="{% url 'establishment-list' %}" method="get">
@@ -73,21 +85,22 @@
             </a>
             {% endfor %}
         </div>
-        {% if is_paginated %}
-            <div class="pagination">
-                <span class="page-links">
-                    {% if page_obj.has_previous %}
-                        <a href="{% url 'establishment-list' %}?page={{ page_obj.previous_page_number }}">previous</a>
-                    {% endif %}
-                    <span class="page-current">
-                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        <div class="establishment-pagination">
+            <span>{% blocktrans with count=page_obj.paginator.count %}{{count}} restaurants found{% endblocktrans %}</span>
+            {% if is_paginated %}
+                <ul class="pager">
+                    <li class="previous {% if not page_obj.has_previous %}disabled{% endif %}">
+                        <a href="{% if page_obj.has_previous %}?{% url_replace request 'page' page_obj.previous_page_number %}{% endif %}">{% trans 'Previous' %}</a>
+                    </li>
+                    <span>
+                        {% blocktrans with number_t=page_obj.number num_pages_t=page_obj.paginator.num_pages %}Page {{ number_t }} of {{ num_pages_t }}{% endblocktrans %}
                     </span>
-                    {% if page_obj.has_next %}
-                        <a href="{% url 'establishment-list' %}?page={{ page_obj.next_page_number }}">next</a>
-                    {% endif %}
-                </span>
-            </div>
-        {% endif %}
+                    <li class="next {% if not page_obj.has_next %}disabled{% endif %}">
+                        <a href="{% if page_obj.has_next %}?{% url_replace request 'page' page_obj.next_page_number %}{% endif %}">{% trans 'Next' %}</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
     </div>
 </div>
 {% endblock %}

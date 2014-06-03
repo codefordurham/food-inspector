@@ -103,8 +103,11 @@ a.list-group-item:hover .list-group-item-text {
 }
 /* Custom page footer */
 footer {
-  margin-top: 12px;
   color: #777;
+}
+
+footer hr {
+  margin-top: 8px;
 }
 
 .header h3 {
@@ -265,4 +268,11 @@ div.score .outof {
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
   background-color: #51AE97;
+}
+
+.pager span {
+  display: inline-block;
+  padding-top: 5px; 
+  padding-right: 13px;
+
 }
