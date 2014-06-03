@@ -31,7 +31,7 @@
                     coordinates: [{{ establishment.location.x|stringformat:"f" }}, {{ establishment.location.y|stringformat:"f" }}]
                 },
                 properties: {
-                    title: '{{establishment.name}}',
+                    title: '{{establishment.name|title}}',
                     link: '{{establishment.pk}}',
                     // one can customize markers by adding simplestyle properties
                     // http://mapbox.com/developers/simplestyle/
