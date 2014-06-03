@@ -82,7 +82,7 @@
                 </td>
             </tr>
             {% if inspection.violations.exists or inspection.description %}
-                <tr class='success' style="display: none;">
+                <tr class='violation-detail' style="display: none;">
                     <td class='violation-list' colspan='4'>
                         <dl>
                             {% if inspection.description %}

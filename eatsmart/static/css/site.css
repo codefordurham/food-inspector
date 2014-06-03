@@ -28,7 +28,8 @@ h2 {
 }
 
 .badge-date {
- font-size: 62.5%;
+ font-size: 10px;
+ float: right;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -51,8 +52,7 @@ h2 {
     padding: 7px;
 }
 .navbar-brand img {
-    height: 40px;
-    width: 90px;
+    height: 37px;
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus,
 .navbar-default .navbar-toggle, .navbar-default .navbar-toggle {
@@ -80,14 +80,15 @@ h2 {
     /*border: 1px solid #6f6d72;*/
 }
 .list-group-item:nth-child(even) {
-    background: #e2e0df;
+    /*background: #e2e0df;*/
     /*border: 1px solid #6f6d72;*/
 }
 a.list-group-item:hover {
-    background: #6F6D72;
+    /*background: #e2e0df;*/
 }
 a.list-group-item:hover .list-group-item-heading {
-    color: white;
+    /*color: white;*/
+    font-weight: bold;
 }
 a.list-group-item:hover .list-group-item-text {
     color: #6F6D72;
@@ -192,6 +193,10 @@ td.violation-list dl {
   margin: 0;
 }
 
+tr.violation-detail td {
+  background: rgba(90, 193, 168, 0.35);
+}
+
 @media screen and (min-width: 768px) {
   div.score {
     float: right;
@@ -225,19 +230,25 @@ div.score {
   border-radius: 50%;
 }
 
+div.score.bg-info {
+  background-color: #5AC1A8;
+}
+
 div.score h2 {
   margin-top: 0;
   font-size: 18px;
 }
 
 div.score .value {
-  padding-top: 27px;
+  padding-top: 25px;
   font-size: 25px;
   font-weight: 800;
+  color: #FAD955;
+  text-shadow: 2px 2px 0px #6F6D72;
 }
 
 div.score .outof {
-  color: #999;
+  color: #FFF;
   font-size: 10px;
   margin-top: -13px;
 }
@@ -250,4 +261,8 @@ div.score .outof {
     .main-map {
         height: 150px;
     }
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+  background-color: #51AE97;
 }
