@@ -35,7 +35,7 @@ class EstablishmentForm(forms.ModelForm):
 
     class Meta:
         model = Establishment
-        exclude = ('location',)
+        exclude = ('location','property_id')
 
     def clean_city(self):
         city = self.cleaned_data['city']
