@@ -9,5 +9,5 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         api.EstablishmentImporter().run(limit_set=True)
         lastInsp = api.InspectionImporter().get_last_inspection()
-        api.InspectionImporter().run(limit_set=True)
+        api.InspectionImporter().run(lastInsp)
         api.ViolationImporter().run(lastInsp)

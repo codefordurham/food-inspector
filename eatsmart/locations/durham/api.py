@@ -3,8 +3,6 @@ import io
 import logging
 import requests
 
-from django.db.models import Max
-
 from eatsmart.locations.base import Importer
 from eatsmart.locations.durham.forms import (EstablishmentForm, InspectionForm,
                                              ViolationForm)
@@ -50,15 +48,19 @@ class EstablishmentImporter(Importer):
                   'Premise_Phone', 'Opening_Date',
                   'Update_Date', 'Status',
                   'Lat', 'Lon']
-    LastDate = Model.objects.filter(county='Durham')
-    LastDate = LastDate.aggregate(Max('update_date'))['update_date__max']
+    ColumnList = ','.join(ColumnList)
 
     def run(self, limit_set=False):
         "Fetch all Durham County establishments"
         api_kwargs = {'table': "establishments", 'est_type': 1,
-                      'columns': ','.join(self.ColumnList)}
+                      'columns': self.ColumnList}
         if (limit_set):
-            api_kwargs['Update_Date__gt'] = self.LastDate.strftime('%m/%d/%Y')
+            try:
+                lastDate = Model.objects.filter(
+                    county='Durham').order_by('-update_date')[0].update_date
+                api_kwargs['Update_Date__gt'] = lastDate.strftime('%m/%d/%Y')
+            except IndexError, ex:
+                logger.debug(ex)
         self.fetch(DurhamAPI().get(**api_kwargs))
 
     def get_instance(self, data):
@@ -93,15 +95,14 @@ class InspectionImporter(Importer):
     ColumnList = ['Id', 'Insp_Date',
                   'Insp_Type', 'Score_SUM',
                   'Comments', 'Update_Date']
-    LastDate = Model.objects.filter(establishment__county='Durham')
-    LastDate = LastDate.aggregate(Max('update_date'))['update_date__max']
+    ColumnList = ','.join(ColumnList)
 
-    def run(self, limit_set=False):
+    def run(self, last_insp_date=None):
         "Fetch inspections for all Durham County establishments"
         api_kwargs = {'table': "inspections",
-                      'columns': ','.join(self.ColumnList)}
-        if (limit_set):
-            api_kwargs['Update_Date__gt'] = self.LastDate.strftime('%m/%d/%Y')
+                      'columns': self.ColumnList}
+        if (last_insp_date):
+            api_kwargs['Update_Date__gt'] = last_insp_date.strftime('%m/%d/%Y')
         for est in Establishment.objects.filter(county='Durham'):
             # Only fetch inspections for establishments in our database
             api_kwargs['est_id'] = est.external_id
@@ -112,9 +113,16 @@ class InspectionImporter(Importer):
         return self.Model.objects.get(external_id=data['external_id'],
                                       establishment=establishment)
 
-    def get_last_inspection(self):
+    def last_inspection_date(self):
         "Retrieve the last inspection date"
-        return self.LastDate
+        try:
+            lastDate = Model.objects.filter(
+                establishment__county='Durham').order_by('-update_date')[
+                0].update_date
+            return lastDate
+        except: IndexError, ex:
+            logger.debug(ex)
+            return None
 
     def map_fields(self, api, establishment):
         "Map CSV field names from Durham's API to our database schema"
@@ -133,6 +141,7 @@ class ViolationImporter(Importer):
     Model = Violation
     Form = ViolationForm
     ColumnList = ['Id', 'Item', 'Comments']
+    ColumnList = ','.join(ColumnList)
 
     def run(self, last_insp_date=None):
         "Fetch violations for all Durham County inspections"
@@ -144,7 +153,7 @@ class ViolationImporter(Importer):
             inspections = Inspection.objects.filter(
                 establishment__county='Durham')
         api_kwargs = {'table': "violations",
-                      'columns': ','.join(self.ColumnList)}
+                      'columns': self.ColumnList}
         for insp in inspections.select_related('establishment'):
             # Only fetch violations for inspections in our database
             api_kwargs['inspection_id'] = insp.external_id

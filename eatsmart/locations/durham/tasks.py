@@ -15,3 +15,13 @@ def import_durham_data():
     api.InspectionImporter().run()
     api.ViolationImporter().run()
     logger.info("Finished Durham Import")
+
+@app.task
+def import_durham_data_incr():
+    """Import Durham data"""
+    logger.info("Starting Durham Incremental Import")
+    api.EstablishmentImporter().run(limit_set=True)
+    lastInsp = api.InspectionImporter().get_last_inspection()
+    api.InspectionImporter().run(lastInsp)
+    api.ViolationImporter().run(lastInsp)
+    logger.info("Finished Durham Incremental Import")
