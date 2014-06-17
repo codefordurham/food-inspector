@@ -17,7 +17,7 @@
 
 {% block extra-js %}
     <script>
-        var map = L.mapbox.map('map', 'examples.c7d2024a'),
+        var map = L.mapbox.map('map', 'copelco.ido2b0gk'),
             points = [];
         {% for establishment in establishments %}
             var detailUrl = {% url "establishment-detail" establishment.pk %};
@@ -38,7 +38,7 @@
                     // http://mapbox.com/developers/simplestyle/
                     
                     'marker-size': 'medium',
-                    'marker-color': '#3887be'
+                    'marker-color': '#5AC1A8'
                 }
             });
 
@@ -68,9 +68,6 @@
                 <input name='q' class="form-control" type="text" placeholder="{% trans 'Search restaurants...' %}" value="{{ request.GET.q }}">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="submit">{% trans 'Search' %}</button>
-                    <button class="btn btn-default" title="{% trans 'Update location' %}" id="update-location">
-                      <i class="glyphicon glyphicon-globe"></i>
-                    </button>
                 </span>
             </div>
         </form>
@@ -81,7 +78,7 @@
                 <h5 class="list-group-item-heading">{{ establishment|title }}
                     {% if establishment.property_id %}<span class="glyphicon glyphicon-camera"></span>{% endif %}
                 </h5>
-                {% if establishment.insp_date %}<span class="badge badge-date hidden-xs">{{ establishment.insp_date|date:"M dS Y" }}</span>{% endif %}
+                {% if establishment.insp_date %}<span class="badge-date hidden-xs">{{ establishment.insp_date|date:"M dS Y" }}</span>{% endif %}
                 <p class="list-group-item-text">
                     <span class='text-muted small'>{{ establishment.address|title }} - {{ establishment.distance.mi|floatformat:"2" }} mi</span>
                 </p>
