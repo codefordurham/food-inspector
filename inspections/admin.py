@@ -6,7 +6,7 @@ from leaflet.admin import LeafletGeoAdmin
 class EstablishmentAdmin(LeafletGeoAdmin):
     search_fields = ('name', 'address')
     list_display = ('id', 'name', 'type',
-                    'county', 'state_id', 'point', 'update_date')
+                    'county', 'state_id', 'image_url', 'property_id', 'point', 'update_date')
     list_filter = ('county', 'postal_code')
     ordering = ('-update_date',)
 
