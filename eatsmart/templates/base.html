@@ -48,6 +48,7 @@
                            <img src="{% static 'images/spain.png' %}" height="18" width="18"/>
                        </a>
                    </li>
+                   <li><a href="https://docs.google.com/forms/d/1zbmJDzx54ovrvxpfpH00Tbn8kFUbXImv6spIekhYGgc/viewform">{% trans 'Feedback' %}</a></li>
                    <li><a href="{% url 'about' %}">{% trans 'About' %}</a></li>
                     {% if user.is_authenticated %}
                         {% if user.is_staff %}
