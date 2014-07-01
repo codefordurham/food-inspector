@@ -28,7 +28,8 @@ h2 {
 }
 
 .badge-date {
- font-size: 62.5%;
+ font-size: 10px;
+ float: right;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -41,7 +42,7 @@ h2 {
 
 /* Make the masthead heading the same height as the navigation */
 .navbar-default {
-    background-color: #5996A8;
+    background-color: #5AC1A8;
     border-color: #e7e7e7;
 }
 .navbar-nav>li>a {
@@ -51,8 +52,7 @@ h2 {
     padding: 7px;
 }
 .navbar-brand img {
-    height: 40px;
-    width: 90px;
+    height: 37px;
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus,
 .navbar-default .navbar-toggle, .navbar-default .navbar-toggle {
@@ -75,6 +75,32 @@ h2 {
   color: #FFF;
 }
 
+/* List Style */
+.list-group {
+    /*border: 1px solid #6f6d72;*/
+}
+.list-group-item:nth-child(even) {
+    /*background: #e2e0df;*/
+    /*border: 1px solid #6f6d72;*/
+}
+a.list-group-item:hover {
+    /*background: #e2e0df;*/
+}
+a.list-group-item:hover .list-group-item-heading {
+    /*color: white;*/
+    font-weight: bold;
+}
+a.list-group-item:hover .list-group-item-text {
+    color: #6F6D72;
+}
+.btn.btn-default {
+    background: #5AC1A8;
+    color: white;
+}
+.badge {
+    background: #5AC1A8;
+    border: 1px solid rgb(190, 190, 190);
+}
 /* Custom page footer */
 footer {
   color: #777;
@@ -170,6 +196,10 @@ td.violation-list dl {
   margin: 0;
 }
 
+tr.violation-detail td {
+  background: rgba(90, 193, 168, 0.35);
+}
+
 @media screen and (min-width: 768px) {
   div.score {
     float: right;
@@ -198,8 +228,13 @@ p.latest-type {
 
 div.score {
   text-align: center;
-  padding: 12px;
-  border-radius: 5px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+div.score.bg-info {
+  background-color: #5AC1A8;
 }
 
 div.score h2 {
@@ -208,14 +243,17 @@ div.score h2 {
 }
 
 div.score .value {
+  padding-top: 25px;
   font-size: 25px;
   font-weight: 800;
+  color: #FAD955;
+  text-shadow: 2px 2px 0px #6F6D72;
 }
 
 div.score .outof {
-  color: #999;
+  color: #FFF;
   font-size: 10px;
-  margin-bottom: 0;
+  margin-top: -13px;
 }
 
 .main-map {
@@ -228,8 +266,13 @@ div.score .outof {
     }
 }
 
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+  background-color: #51AE97;
+}
+
 .pager span {
   display: inline-block;
   padding-top: 5px; 
   padding-right: 13px;
+
 }
