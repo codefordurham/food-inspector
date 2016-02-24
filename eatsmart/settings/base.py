@@ -142,11 +142,9 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.gis',
     # External apps
-    'south',
     'compressor',
     'tastypie',
     'leaflet',
-    'users',
     # Internal apps
     'inspections',
     'users',

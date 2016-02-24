@@ -1,118 +1,65 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import migrations, models
+import django.contrib.gis.db.models.fields
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'Establishment'
-        db.create_table('inspections_establishment', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('external_id', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('state_id', self.gf('django.db.models.fields.BigIntegerField')()),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('type', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
-            ('address', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('city', self.gf('django.db.models.fields.CharField')(max_length=64)),
-            ('county', self.gf('django.db.models.fields.CharField')(db_index=True, max_length=64)),
-            ('state', self.gf('django.db.models.fields.CharField')(max_length=64)),
-            ('postal_code', self.gf('django.db.models.fields.CharField')(max_length=16)),
-            ('phone_number', self.gf('django.db.models.fields.CharField')(blank=True, max_length=64)),
-            ('opening_date', self.gf('django.db.models.fields.DateTimeField')()),
-            ('update_date', self.gf('django.db.models.fields.DateTimeField')(blank=True, db_index=True, null=True)),
-            ('status', self.gf('django.db.models.fields.CharField')(default='active', max_length=32)),
-            ('location', self.gf('django.contrib.gis.db.models.fields.PointField')(blank=True, null=True)),
-        ))
-        db.send_create_signal('inspections', ['Establishment'])
+    dependencies = [
+    ]
 
-        # Adding unique constraint on 'Establishment', fields ['external_id', 'county']
-        db.create_unique('inspections_establishment', ['external_id', 'county'])
-
-        # Adding model 'Inspection'
-        db.create_table('inspections_inspection', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('establishment', self.gf('django.db.models.fields.related.ForeignKey')(related_name='inspections', to=orm['inspections.Establishment'])),
-            ('external_id', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('date', self.gf('django.db.models.fields.DateTimeField')(db_index=True)),
-            ('score', self.gf('django.db.models.fields.FloatField')(blank=True, null=True)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('type', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
-            ('update_date', self.gf('django.db.models.fields.DateTimeField')(blank=True, db_index=True, null=True)),
-        ))
-        db.send_create_signal('inspections', ['Inspection'])
-
-        # Adding model 'Violation'
-        db.create_table('inspections_violation', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('establishment', self.gf('django.db.models.fields.related.ForeignKey')(related_name='violations', to=orm['inspections.Establishment'])),
-            ('inspection', self.gf('django.db.models.fields.related.ForeignKey')(related_name='violations', to=orm['inspections.Inspection'], blank=True, null=True)),
-            ('external_id', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('date', self.gf('django.db.models.fields.DateTimeField')(db_index=True)),
-            ('code', self.gf('django.db.models.fields.CharField')(max_length=32)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('update_date', self.gf('django.db.models.fields.DateTimeField')(blank=True, db_index=True, null=True)),
-        ))
-        db.send_create_signal('inspections', ['Violation'])
-
-
-    def backwards(self, orm):
-        # Removing unique constraint on 'Establishment', fields ['external_id', 'county']
-        db.delete_unique('inspections_establishment', ['external_id', 'county'])
-
-        # Deleting model 'Establishment'
-        db.delete_table('inspections_establishment')
-
-        # Deleting model 'Inspection'
-        db.delete_table('inspections_inspection')
-
-        # Deleting model 'Violation'
-        db.delete_table('inspections_violation')
-
-
-    models = {
-        'inspections.establishment': {
-            'Meta': {'object_name': 'Establishment', 'unique_together': "(('external_id', 'county'),)"},
-            'address': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'city': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
-            'county': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '64'}),
-            'external_id': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'location': ('django.contrib.gis.db.models.fields.PointField', [], {'blank': 'True', 'null': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'opening_date': ('django.db.models.fields.DateTimeField', [], {}),
-            'phone_number': ('django.db.models.fields.CharField', [], {'blank': 'True', 'max_length': '64'}),
-            'postal_code': ('django.db.models.fields.CharField', [], {'max_length': '16'}),
-            'state': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
-            'state_id': ('django.db.models.fields.BigIntegerField', [], {}),
-            'status': ('django.db.models.fields.CharField', [], {'default': "'active'", 'max_length': '32'}),
-            'type': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
-            'update_date': ('django.db.models.fields.DateTimeField', [], {'blank': 'True', 'db_index': 'True', 'null': 'True'})
-        },
-        'inspections.inspection': {
-            'Meta': {'object_name': 'Inspection'},
-            'date': ('django.db.models.fields.DateTimeField', [], {'db_index': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'establishment': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'inspections'", 'to': "orm['inspections.Establishment']"}),
-            'external_id': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'score': ('django.db.models.fields.FloatField', [], {'blank': 'True', 'null': 'True'}),
-            'type': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
-            'update_date': ('django.db.models.fields.DateTimeField', [], {'blank': 'True', 'db_index': 'True', 'null': 'True'})
-        },
-        'inspections.violation': {
-            'Meta': {'object_name': 'Violation'},
-            'code': ('django.db.models.fields.CharField', [], {'max_length': '32'}),
-            'date': ('django.db.models.fields.DateTimeField', [], {'db_index': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'establishment': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'violations'", 'to': "orm['inspections.Establishment']"}),
-            'external_id': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'inspection': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'violations'", 'to': "orm['inspections.Inspection']", 'blank': 'True', 'null': 'True'}),
-            'update_date': ('django.db.models.fields.DateTimeField', [], {'blank': 'True', 'db_index': 'True', 'null': 'True'})
-        }
-    }
-
-    complete_apps = ['inspections']
+    operations = [
+        migrations.CreateModel(
+            name='Establishment',
+            fields=[
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
+                ('external_id', models.CharField(max_length=128, verbose_name='External ID')),
+                ('state_id', models.BigIntegerField(verbose_name='State ID')),
+                ('property_id', models.CharField(blank=True, verbose_name='Property ID', max_length=128)),
+                ('name', models.CharField(max_length=255, verbose_name='Name')),
+                ('type', models.PositiveIntegerField(verbose_name='Type', choices=[(0, 'Unknown'), (1, 'Restaurant'), (2, 'Food Stand'), (3, 'Mobile Food'), (4, 'Push Cart'), (5, "Private School's Cafeteria"), (6, 'Educational Food Service'), (9, 'Elderly Nutrition'), (11, "Public School's Cafeteria"), (12, 'Elderly Nutrition'), (14, 'Limited Food'), (15, 'Commissary (Pushcarts/Mobile Food),'), (16, 'Institutional Food Service'), (20, 'Lodging'), (21, 'Bed & Breakfast Home'), (22, 'Summer Camp'), (23, 'Bed & Breakfast Inn'), (25, 'Primitive Experience Camp'), (26, 'Resident Camp'), (30, 'Meat Market'), (40, 'Rest/Nursing Home'), (41, 'Hospital'), (42, 'Child Care'), (43, 'Residential Care'), (44, 'School Building'), (45, 'Local Confinement'), (46, 'Private Boarding School/College'), (47, "Orphanage, Children's Home"), (48, 'Adult Day Care'), (49, 'Adult Day Service'), (50, 'Seasonal Swimming Pool'), (51, 'Seasonal Wading Pool'), (52, 'Seasonal Spa'), (53, 'Year-Round Swimming Pool'), (54, 'Year-Round Wading Pool'), (55, 'Year-Round Spa'), (61, 'Tattoo Artist'), (72, 'Summer Feeding Program'), (73, 'Temporary Food Establishment')], default=0)),
+                ('address', models.CharField(max_length=255, verbose_name='Address')),
+                ('city', models.CharField(max_length=64, verbose_name='City')),
+                ('county', models.CharField(max_length=64, verbose_name='County', db_index=True)),
+                ('state', models.CharField(max_length=64, verbose_name='State')),
+                ('postal_code', models.CharField(max_length=16, verbose_name='Postal Code')),
+                ('phone_number', models.CharField(blank=True, verbose_name='Phone Number', max_length=64)),
+                ('opening_date', models.DateTimeField(verbose_name='Opening Date')),
+                ('update_date', models.DateTimeField(null=True, verbose_name='Update Date', db_index=True, blank=True)),
+                ('status', models.CharField(max_length=32, verbose_name='Status', choices=[('deleted', 'Deleted'), ('active', 'Active')], default='active')),
+                ('location', django.contrib.gis.db.models.fields.PointField(null=True, verbose_name='location', srid=4326, blank=True)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Inspection',
+            fields=[
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
+                ('external_id', models.CharField(max_length=128, verbose_name='External ID')),
+                ('date', models.DateTimeField(verbose_name='Date', db_index=True)),
+                ('score', models.FloatField(null=True, verbose_name='Score', blank=True)),
+                ('description', models.TextField(blank=True, verbose_name='Description')),
+                ('type', models.PositiveIntegerField(verbose_name='Type', choices=[(0, 'Unknown'), (1, 'Routine Inspection'), (2, 'Re-inspection'), (5, 'Permit'), (6, 'Visit'), (8, 'Name Change'), (9, 'Verification'), (10, 'Other'), (12, 'Status Change'), (13, 'Pre-opening Visit'), (31, 'Critical Violation Visit'), (32, 'Critical Violation Followup')], default=0)),
+                ('update_date', models.DateTimeField(null=True, verbose_name='Update Date', db_index=True, blank=True)),
+                ('establishment', models.ForeignKey(related_name='inspections', to='inspections.Establishment', verbose_name='Establishment')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Violation',
+            fields=[
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
+                ('external_id', models.CharField(max_length=128, verbose_name='External ID')),
+                ('date', models.DateTimeField(verbose_name='Date', db_index=True)),
+                ('code', models.CharField(max_length=32, verbose_name='Code')),
+                ('description', models.TextField(blank=True, verbose_name='Description')),
+                ('update_date', models.DateTimeField(null=True, verbose_name='Update Date', db_index=True, blank=True)),
+                ('establishment', models.ForeignKey(related_name='violations', to='inspections.Establishment', verbose_name='Establishment')),
+                ('inspection', models.ForeignKey(null=True, related_name='violations', blank=True, verbose_name='Inspection', to='inspections.Inspection')),
+            ],
+        ),
+        migrations.AlterUniqueTogether(
+            name='establishment',
+            unique_together=set([('external_id', 'county')]),
+        ),
+    ]

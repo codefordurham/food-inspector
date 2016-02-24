@@ -80,6 +80,7 @@ class InspectionForm(forms.ModelForm):
 
     class Meta:
         model = Inspection
+        fields = "__all__"
 
     def clean_score(self):
         # Force empty score value to None so we save to DB as NULL
@@ -104,6 +105,7 @@ class ViolationForm(forms.ModelForm):
 
     class Meta:
         model = Violation
+        fields = "__all__"
 
     def clean_description(self):
         # Force API sent description strings of "0" to empty string
