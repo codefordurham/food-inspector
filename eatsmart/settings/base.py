@@ -215,10 +215,6 @@ LOGGING = {
 # Application settings
 SKIP_SOUTH_TESTS = True
 
-COMPRESS_PRECOMPILERS = (
-    ('text/less', 'lessc {infile} {outfile}'),
-)
-
 # Default user location
 LATITUDE = 35.988611
 LONGITUDE = -78.907222
