@@ -1,3 +1,4 @@
+*.sw[po]
 *.py[co]
 .project
 .pydevproject
@@ -6,10 +7,17 @@
 *.orig
 *.DS_Store
 .coverage
+coverage
 .vagrant
 */settings/local.py
 public/static/
 public/media/
-secrets.sls
+conf/pillar/*/deploy
+*.priv
+.env
+node_modules
+*/static/js/bundle.js
+*/static/js/vendors.js
+*/static/libs/modernizr.js
+*/static/css
 inspections.log*
-*.swp

@@ -1,37 +1,31 @@
 import sys
 
-from eatsmart.settings.base import *
+from eatsmart.settings.base import *  # noqa
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 INSTALLED_APPS += (
     'debug_toolbar',
 )
 
-MIDDLEWARE_CLASSES += (
-     'debug_toolbar.middleware.DebugToolbarMiddleware',
-)
-
 INTERNAL_IPS = ('127.0.0.1', )
 
+#: Don't send emails, just print them on stdout
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-SOUTH_TESTS_MIGRATE = True
-
+#: Run celery tasks synchronously
 CELERY_ALWAYS_EAGER = True
 
-COMPRESS_ENABLED = False
+#: Tell us when a synchronous celery task fails
+CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
+
+SECRET_KEY = os.environ.get('SECRET_KEY', '=ncxm@8_f9(14-6x1dw(f!awl)oq=!1as^m@8x5ubow)4ebhd@')
 
 # Special test settings
 if 'test' in sys.argv:
-    CELERY_ALWAYS_EAGER = True
-
-    COMPRESS_ENABLED = False
-
-    COMPRESS_PRECOMPILERS = ()
-
     PASSWORD_HASHERS = (
         'django.contrib.auth.hashers.SHA1PasswordHasher',
         'django.contrib.auth.hashers.MD5PasswordHasher',
     )
+
+    LOGGING['root']['handlers'] = []
