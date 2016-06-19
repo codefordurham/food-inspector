@@ -75,8 +75,8 @@ for backend in TEMPLATES:
             backend['OPTIONS']['loaders'] = [('django.template.loaders.cached.Loader', loaders)]
 
 # Uncomment if using celery worker configuration
-# CELERY_SEND_TASK_ERROR_EMAILS = True
-# BROKER_URL = 'amqp://eatsmart_%(ENVIRONMENT)s:%(BROKER_PASSWORD)s@%(BROKER_HOST)s/eatsmart_%(ENVIRONMENT)s' % os.environ  # noqa
+CELERY_SEND_TASK_ERROR_EMAILS = True
+BROKER_URL = 'amqp://eatsmart_%(ENVIRONMENT)s:%(BROKER_PASSWORD)s@%(BROKER_HOST)s/eatsmart_%(ENVIRONMENT)s' % os.environ  # noqa
 
 # Environment overrides
 # These should be kept to an absolute minimum

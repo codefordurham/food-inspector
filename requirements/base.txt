@@ -11,5 +11,5 @@ six==1.9.0
 BeautifulSoup4==4.4.0
 -e git://github.com/toastdriven/django-tastypie.git#egg=django-tastypie
 
-django-leaflet==0.10.0
+django-leaflet==0.18.1
 requests==2.2.1
