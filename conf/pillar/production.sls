@@ -3,7 +3,7 @@
 environment: production
 
 # FIXME: Change to match production domain name
-domain: example.com
+domain: eatsmart.rochapps.com
 
 # FIXME: Update to the correct project repo
 repo:
