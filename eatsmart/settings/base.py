@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'eatsmart.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'eatsmart',
         'USER': '',
         'PASSWORD': '',

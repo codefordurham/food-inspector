@@ -57,6 +57,21 @@ secrets:
     =0l/b
     -----END PGP MESSAGE-----
 
+  "BROKER_PASSWORD": |-
+    -----BEGIN PGP MESSAGE-----
+    Version: GnuPG v1.4.11 (GNU/Linux)
+
+    hQEMAxy5mLEdeO4ZAQf+NHAS7mRETVfIA8lvg611HYw2jwkBs2AXphOxs5x76Xyk
+    g+WtBY0IPVkyUIDH4Jmnw8x9ZO7KDksNaDHYKGX4maRwp7k57ekAl8D44I5x379p
+    aT8Yeq6zUAQBAH4LRBUScB4CDeffFne6p61S0cMyxexIDJsDL1RraKG8OG3CkM3K
+    cwxZIlxW+xwl/ISHQzBTa1qanQ1jUDXdRXi42lZXpcRucKB0nRlkATaiTNnfWmgC
+    bUbwp+r48ao1bkftfuIR1ears11cIZ+prXeGReCfQX8GvGPd3SpVO9ZWU6pcyLWW
+    mXycRe6K74Xb8a4xpgvRgze6ldRSKYbKJazlS2bQRNJOAXjitxvCddkpszQCEhf3
+    pE3gUugqAvLQqwO+3BN/mo05dp3/IS/OyL7TqbRGUOgP6AHuwj2Hvc53HAc6wQrQ
+    K8FRUmQZM3jJfLsbb3m+
+    =u+ox
+    -----END PGP MESSAGE-----
+
 
 # Private deploy key. Must be GPG encrypted.
 github_deploy_key: |-

@@ -26,6 +26,7 @@ base:
   'roles:db-master':
     - match: grain
     - project.db
+    - project.db.postgis
   'roles:queue':
     - match: grain
     - project.queue
