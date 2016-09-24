@@ -1,15 +1,36 @@
 /* Space out content a bit */
 body {
   padding-bottom: 20px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 body > .container {
   padding: 60px 15px 0;
 }
+
+h1 {
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 400;
+}
+
 .container .text-muted {
   margin: 20px 0;
 }
 
+.detail-value {
+  padding-bottom: 5px;
+  padding-left: 25px;
+}
+
+.badge-date {
+ font-size: 10px;
+ float: right;
+}
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
@@ -20,6 +41,23 @@ body > .container {
 }
 
 /* Make the masthead heading the same height as the navigation */
+.navbar-default {
+    background-color: #5AC1A8;
+    border-color: #e7e7e7;
+}
+.navbar-nav>li>a {
+    color: white !important;
+}
+.navbar-brand {
+    padding: 7px;
+}
+.navbar-brand img {
+    height: 37px;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle, .navbar-default .navbar-toggle {
+    background-color: white;
+}
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
@@ -37,10 +75,39 @@ body > .container {
   color: #FFF;
 }
 
+/* List Style */
+.list-group {
+    /*border: 1px solid #6f6d72;*/
+}
+.list-group-item:nth-child(even) {
+    /*background: #e2e0df;*/
+    /*border: 1px solid #6f6d72;*/
+}
+a.list-group-item:hover {
+    /*background: #e2e0df;*/
+}
+a.list-group-item:hover .list-group-item-heading {
+    /*color: white;*/
+    font-weight: bold;
+}
+a.list-group-item:hover .list-group-item-text {
+    color: #6F6D72;
+}
+.btn.btn-default {
+    background: #5AC1A8;
+    color: white;
+}
+.badge {
+    background: #5AC1A8;
+    border: 1px solid rgb(190, 190, 190);
+}
 /* Custom page footer */
 footer {
-  margin-top: 12px;
   color: #777;
+}
+
+footer hr {
+  margin-top: 8px;
 }
 
 .header h3 {
@@ -109,4 +176,103 @@ form#search {
   .jumbotron {
     border-bottom: 0;
   }
+}
+.navbar-nav.navbar-right:last-child {
+    margin-right: 0 !important;
+}
+footer a{
+    color: #999;
+}
+div.page-header {
+  margin-top: 0;
+}
+
+table .short-date, table .score, table .violations {
+  text-align: right;
+}
+
+td.violation-list dl {
+  font-size: 12px;
+  margin: 0;
+}
+
+tr.violation-detail td {
+  background: rgba(90, 193, 168, 0.35);
+}
+
+@media screen and (min-width: 768px) {
+  div.score {
+    float: right;
+  }
+  body.establishment-detail address.establishment, body.establishment-detail p.latest-type {
+    text-align: left;
+  }
+  body.establishment-detail p.latest-type {
+    margin-top: 0;
+  }
+  img.property {
+    width: 90%;
+    text-align: center;
+    margin-top: 15px;
+  }
+}
+
+address.establishment {
+  text-align: center;
+}
+
+p.latest-type {
+  margin-top: 10px;
+  text-align: center;
+}
+
+div.score {
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+div.score.bg-info {
+  background-color: #5AC1A8;
+}
+
+div.score h2 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+div.score .value {
+  padding-top: 25px;
+  font-size: 25px;
+  font-weight: 800;
+  color: #FAD955;
+  text-shadow: 2px 2px 0px #6F6D72;
+}
+
+div.score .outof {
+  color: #FFF;
+  font-size: 10px;
+  margin-top: -13px;
+}
+
+.main-map {
+  height: 300px;
+  margin-bottom: 10px;
+}
+@media screen and (max-width: 768px) {
+    .main-map {
+        height: 150px;
+    }
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+  background-color: #51AE97;
+}
+
+.pager span {
+  display: inline-block;
+  padding-top: 5px; 
+  padding-right: 13px;
+
 }

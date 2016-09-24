@@ -1,264 +1,126 @@
+# Models implement the base Local Inspector Value-Entry Specification (LIVES)
+# v1.0 - http://www.yelp.com/healthscores
+
 from django.contrib.gis.db import models
+from django.utils.translation import ugettext_lazy
 
 
 class Establishment(models.Model):
-    id = models.IntegerField(primary_key=True)
-    premise_name = models.CharField(max_length=255, blank=True)
-    county = models.IntegerField()
-    state_id = models.BigIntegerField()
-    prev_state_id = models.BigIntegerField()
-    est_type = models.IntegerField()
-    territory = models.IntegerField()
-    premise_address1 = models.CharField(max_length=255, blank=True)
-    premise_address2 = models.CharField(max_length=255, blank=True)
-    premise_city = models.CharField(max_length=255, blank=True)
-    premise_state = models.CharField(max_length=255, blank=True)
-    premise_zip = models.CharField(max_length=255, blank=True)
-    premise_phone = models.CharField(max_length=255, blank=True)
-    emergency_number = models.CharField(max_length=255, blank=True)
-    premise_fax = models.CharField(max_length=255, blank=True)
-    premise_email = models.CharField(max_length=255, blank=True)
-    website = models.CharField(max_length=255, blank=True)
-    owner_name = models.CharField(max_length=255, blank=True)
-    owner_address1 = models.CharField(max_length=255, blank=True)
-    owner_address2 = models.CharField(max_length=255, blank=True)
-    owner_city = models.CharField(max_length=255, blank=True)
-    owner_state = models.CharField(max_length=255, blank=True)
-    owner_zip = models.CharField(max_length=255, blank=True)
-    owner_phone = models.CharField(max_length=255, blank=True)
-    owner_fax = models.CharField(max_length=255, blank=True)
-    owner_email = models.CharField(max_length=255, blank=True)
-    mailing_name = models.CharField(max_length=255, blank=True)
-    mailing_address1 = models.CharField(max_length=255, blank=True)
-    mailing_address2 = models.CharField(max_length=255, blank=True)
-    mailing_city = models.CharField(max_length=255, blank=True)
-    mailing_state = models.CharField(max_length=255, blank=True)
-    mailing_zip = models.CharField(max_length=255, blank=True)
-    permit_holder = models.CharField(max_length=255, blank=True)
-    manager_name = models.CharField(max_length=255, blank=True)
-    manager_phone = models.CharField(max_length=255, blank=True)
-    hours_of_operation = models.CharField(max_length=255, blank=True)
-    opening_date = models.DateTimeField(null=True)
-    closing_date = models.DateTimeField(null=True)
-    inactivate_date = models.DateTimeField(null=True)
-    reactivate_date = models.DateTimeField(null=True)
-    status_change_date = models.DateTimeField(null=True)
-    before_after_may93 = models.CharField(max_length=255, blank=True)
-    permit_expiration_date = models.DateTimeField(null=True)
-    setup_date = models.DateTimeField(null=True)
-    update_date = models.DateTimeField(null=True)
-    latitude_sum = models.CharField(max_length=255, blank=True)
-    longitude_sum = models.CharField(max_length=255, blank=True)
-    seats = models.CharField(max_length=255, blank=True)
-    comments = models.TextField()
-    ehs = models.CharField(max_length=255, blank=True)
-    status = models.CharField(max_length=255, blank=True)
-    permit_status = models.CharField(max_length=255, blank=True)
-    water = models.CharField(max_length=255, blank=True)
-    sewage = models.CharField(max_length=255, blank=True)
-    insp_freq = models.CharField(max_length=255, blank=True)
-    master_est_number = models.CharField(max_length=255, blank=True)
-    federal_id_number = models.CharField(max_length=255, blank=True)
-    pay_fee_id = models.CharField(max_length=255, blank=True)
-    state_owned_id = models.IntegerField(null=True)
-    group_code = models.CharField(max_length=255, blank=True)
-    group_code_desc = models.CharField(max_length=255, blank=True)
-    owner_type_id = models.IntegerField(null=True)
-    renewal_status_id = models.IntegerField(null=True)
-    print_permit_id = models.IntegerField(null=True)
-    handicap_access_id = models.IntegerField(null=True)
-    bond_type_id = models.IntegerField(null=True)
-    roster_id = models.CharField(max_length=255, blank=True)
-    wic_id = models.IntegerField(null=True)
-    food_stamps_id = models.IntegerField(null=True)
-    language_id = models.IntegerField(null=True)
-    contact_type_id = models.IntegerField(null=True)
-    inspection_type_id = models.IntegerField(null=True)
-    seasonal_code = models.CharField(max_length=255, blank=True)
-    seasonal_desc = models.CharField(max_length=255, blank=True)
-    menu_type_id = models.IntegerField(null=True)
-    license_type_id = models.IntegerField(null=True)
-    certified_manager_id = models.IntegerField(null=True)
-    caterer_id = models.IntegerField(null=True)
-    drivethru_id = models.IntegerField(null=True)
-    licensed_plumber_id = models.IntegerField(null=True)
-    owner_phone2 = models.CharField(max_length=255, blank=True)
-    fee_amount_sum = models.CharField(max_length=255, blank=True)
-    district_id = models.IntegerField(null=True)
-    district_name = models.CharField(max_length=255, blank=True)
-    home_county_id = models.IntegerField(null=True)
-    rpt_area_code = models.CharField(max_length=255, blank=True)
-    service_type1_id = models.IntegerField(null=True)
-    service_type2_id = models.IntegerField(null=True)
-    renewal_sent_date = models.DateTimeField(null=True)
-    renewal_received_date = models.DateTimeField(null=True)
-    permit_print_date = models.DateTimeField(null=True)
-    next_inspection_date = models.DateTimeField(null=True)
-    test_expiration_date = models.DateTimeField(null=True)
-    last_plan_date = models.DateTimeField(null=True)
-    construction_expiration_date = models.DateTimeField(null=True)
-    est_quantity1_code = models.CharField(max_length=255, blank=True)
-    est_quantity1_desc = models.CharField(max_length=255, blank=True)
-    quantity2_units = models.CharField(max_length=255, blank=True)
-    est_quantity2_code = models.CharField(max_length=255, blank=True)
-    est_quantity2_desc = models.CharField(max_length=255, blank=True)
-    census_tract_sum = models.CharField(max_length=255, blank=True)
-    delete_mark = models.CharField(max_length=255, blank=True)
-    rpt_area_num = models.CharField(max_length=255, blank=True)
-    est_type_num = models.CharField(max_length=255, blank=True)
-    insp_interval = models.CharField(max_length=255, blank=True)
-    permit_condition_id = models.CharField(max_length=255, blank=True)
-    permit_conditions = models.TextField()
-    owner_website = models.CharField(max_length=255, blank=True)
-    cert_fname = models.CharField(max_length=255, blank=True)
-    cert_lname = models.CharField(max_length=255, blank=True)
-    cert_address1 = models.CharField(max_length=255, blank=True)
-    cert_address2 = models.CharField(max_length=255, blank=True)
-    cert_city = models.CharField(max_length=255, blank=True)
-    cert_state = models.CharField(max_length=255, blank=True)
-    cert_zip = models.CharField(max_length=255, blank=True)
-    cert_phone1 = models.CharField(max_length=255, blank=True)
-    cert_phone2 = models.CharField(max_length=255, blank=True)
-    cert_number = models.CharField(max_length=255, blank=True)
-    cert_trained_by = models.CharField(max_length=255, blank=True)
-    disinfectant_id = models.IntegerField(null=True)
-    disinfectant_desc = models.CharField(max_length=255, blank=True)
-    update_user_id = models.IntegerField(null=True)
-    update_user_name = models.CharField(max_length=255, blank=True)
-    premise_phone2_ext = models.CharField(max_length=255, blank=True)
-    owner_phone2_ext = models.CharField(max_length=255, blank=True)
-    cert_phone1_ext = models.CharField(max_length=255, blank=True)
-    owner_contact = models.CharField(max_length=255, blank=True)
-    cert_email = models.CharField(max_length=255, blank=True)
-    pool_filter_type_id = models.IntegerField(null=True)
-    pool_filter_type_desc = models.CharField(max_length=255, blank=True)
-    dual_main_drains_yn = models.CharField(max_length=255, blank=True)
-    local_yn = models.CharField(max_length=255, blank=True)
-    property_id = models.IntegerField(null=True)
-    permit_ehs_id = models.IntegerField(null=True)
-    permit_ehs_num = models.CharField(max_length=255, blank=True)
-    number_of_lots_sum = models.CharField(max_length=255, blank=True)
-    permit_paid_yn = models.CharField(max_length=255, blank=True)
-    tattoo_artists_sum = models.CharField(max_length=255, blank=True)
-    corporate_email = models.CharField(max_length=255, blank=True)
-    alt_corporate_email = models.CharField(max_length=255, blank=True)
-    est_group_id = models.IntegerField(null=True)
-    est_group_desc = models.CharField(max_length=255, blank=True)
-    noncompliant_cond = models.CharField(max_length=255, blank=True)
-    parcel = models.CharField(max_length=255, blank=True)
-    smoking_allowed = models.CharField(max_length=255, blank=True)
-    risk = models.CharField(max_length=255, blank=True)
-    type_description = models.CharField(max_length=255, blank=True)
-    rpt_area_desc = models.CharField(max_length=255, blank=True)
-    transitional_type_desc = models.CharField(max_length=255, blank=True)
-    lat = models.DecimalField(max_digits=17, decimal_places=15, null=True)
-    lon = models.DecimalField(max_digits=17, decimal_places=15, null=True)
+    """Business or restaurant property"""
+    STATUS_CHOICES = (('deleted', ugettext_lazy('Deleted')), ('active', ugettext_lazy('Active')))
+    TYPE_CHOICES = (
+        (0, ugettext_lazy('Unknown')),
+        (1, ugettext_lazy('Restaurant')),
+        (2, ugettext_lazy('Food Stand')),
+        (3, ugettext_lazy('Mobile Food')),
+        (4, ugettext_lazy('Push Cart')),
+        (5, ugettext_lazy('Private School\'s Cafeteria')),
+        (6, ugettext_lazy('Educational Food Service')),
+        (9, ugettext_lazy('Elderly Nutrition')),
+        (11, ugettext_lazy('Public School\'s Cafeteria')),
+        (12, ugettext_lazy('Elderly Nutrition')),
+        (14, ugettext_lazy('Limited Food')),
+        (15, ugettext_lazy('Commissary (Pushcarts/Mobile Food),')),
+        (16, ugettext_lazy('Institutional Food Service')),
+        (20, ugettext_lazy('Lodging')),
+        (21, ugettext_lazy('Bed & Breakfast Home')),
+        (22, ugettext_lazy('Summer Camp')),
+        (23, ugettext_lazy('Bed & Breakfast Inn')),
+        (25, ugettext_lazy('Primitive Experience Camp')),
+        (26, ugettext_lazy('Resident Camp')),
+        (30, ugettext_lazy('Meat Market')),
+        (40, ugettext_lazy('Rest/Nursing Home')),
+        (41, ugettext_lazy('Hospital')),
+        (42, ugettext_lazy('Child Care')),
+        (43, ugettext_lazy('Residential Care')),
+        (44, ugettext_lazy('School Building')),
+        (45, ugettext_lazy('Local Confinement')),
+        (46, ugettext_lazy('Private Boarding School/College')),
+        (47, ugettext_lazy('Orphanage, Children\'s Home')),
+        (48, ugettext_lazy('Adult Day Care')),
+        (49, ugettext_lazy('Adult Day Service')),
+        (50, ugettext_lazy('Seasonal Swimming Pool')),
+        (51, ugettext_lazy('Seasonal Wading Pool')),
+        (52, ugettext_lazy('Seasonal Spa')),
+        (53, ugettext_lazy('Year-Round Swimming Pool')),
+        (54, ugettext_lazy('Year-Round Wading Pool')),
+        (55, ugettext_lazy('Year-Round Spa')),
+        (61, ugettext_lazy('Tattoo Artist')),
+        (72, ugettext_lazy('Summer Feeding Program')),
+        (73, ugettext_lazy('Temporary Food Establishment')),
+    )
+    external_id = models.CharField(ugettext_lazy("External ID"), max_length=128)
+    state_id = models.BigIntegerField(ugettext_lazy("State ID"))
+    property_id = models.CharField(ugettext_lazy("Property ID"), max_length=128, blank=True)
+    name = models.CharField(ugettext_lazy("Name"), max_length=255)
+    type = models.PositiveIntegerField(ugettext_lazy("Type"), default=0, choices=TYPE_CHOICES)
+    address = models.CharField(ugettext_lazy("Address"), max_length=255)
+    city = models.CharField(ugettext_lazy("City"), max_length=64)
+    county = models.CharField(ugettext_lazy("County"), max_length=64, db_index=True)
+    state = models.CharField(ugettext_lazy("State"), max_length=64)
+    postal_code = models.CharField(ugettext_lazy("Postal Code"), max_length=16)
+    phone_number = models.CharField(ugettext_lazy("Phone Number"), max_length=64, blank=True)
+    opening_date = models.DateTimeField(ugettext_lazy("Opening Date"))
+    update_date = models.DateTimeField(ugettext_lazy("Update Date"), null=True, blank=True, db_index=True)
+    status = models.CharField(ugettext_lazy("Status"), choices=STATUS_CHOICES, max_length=32,
+                              default='active')
+    location = models.PointField(ugettext_lazy("location"), null=True, blank=True)
 
-    location = models.PointField(null=True)
     objects = models.GeoManager()
 
+    class Meta(object):
+        unique_together = ('external_id', 'county')
+
     def __str__(self):
-        return self.premise_name
+        return self.name
 
 
 class Inspection(models.Model):
-    id = models.IntegerField(primary_key=True)
-    district = models.CharField(max_length=255, blank=True)
-    county = models.IntegerField()
-    est_id = models.ForeignKey("Establishment", related_name='inspections')
-    state_id = models.BigIntegerField()
-    request_number = models.CharField(max_length=255, blank=True)
-    ehs_id = models.IntegerField(null=True)
-    ehs = models.CharField(max_length=255, blank=True)
-    territory = models.IntegerField()
-    est_type = models.CharField(max_length=255, blank=True)
-    insp_type = models.CharField(max_length=255, blank=True)
-    insp_date = models.DateTimeField(null=True)
-    extra_credit = models.CharField(max_length=255, blank=True)
-    grade = models.CharField(max_length=255, blank=True)
-    score_sum = models.CharField(max_length=255, blank=True)
-    final_score_sum = models.CharField(max_length=255, blank=True)
-    seats = models.CharField(max_length=255, blank=True)
-    inspection_time_hrs = models.CharField(max_length=255, blank=True)
-    inspection_time_min = models.CharField(max_length=255, blank=True)
-    sample = models.CharField(max_length=255, blank=True)
-    setup_date = models.DateTimeField(null=True)
-    update_date = models.DateTimeField(null=True)
-    update_user_id = models.IntegerField(null=True)
-    water = models.CharField(max_length=255, blank=True)
-    sewage = models.CharField(max_length=255, blank=True)
-    origin = models.CharField(max_length=255, blank=True)
-    permit_status_id = models.IntegerField(null=True)
-    permit_status = models.CharField(max_length=255, blank=True)
-    time_of_inspection_hr = models.CharField(max_length=255, blank=True)
-    time_of_inspection_mm = models.CharField(max_length=255, blank=True)
-    ampm_of_inspection = models.CharField(max_length=255, blank=True)
-    comments = models.TextField(blank=True)
-    six_point_demerit = models.CharField(max_length=255, blank=True)
-    oss_id = models.IntegerField(null=True)
-    rpt_area_code = models.CharField(max_length=255, blank=True)
-    rpt_area_desc = models.CharField(max_length=255, blank=True)
-    group_code_id = models.IntegerField(null=True)
-    time_of_inspection = models.CharField(max_length=255, blank=True)
-    permit_type_id = models.IntegerField(null=True)
-    complaint_section = models.CharField(max_length=255, blank=True)
-    epi_type_id = models.IntegerField(null=True)
-    epi_type_desc = models.CharField(max_length=255, blank=True)
-    followup_id = models.CharField(max_length=255, blank=True)
-    travel_time_hrs = models.CharField(max_length=255, blank=True)
-    travel_time_min = models.CharField(max_length=255, blank=True)
-    mileage = models.CharField(max_length=255, blank=True)
-    sample_attendance = models.CharField(max_length=255, blank=True)
-    void_date = models.DateTimeField(null=True)
-    delete_mark = models.CharField(max_length=255, blank=True)
-    est_num = models.CharField(max_length=255, blank=True)
-    com_num = models.CharField(max_length=255, blank=True)
-    oss_num = models.CharField(max_length=255, blank=True)
-    ehs_num = models.CharField(max_length=255, blank=True)
-    rpt_area_num = models.CharField(max_length=255, blank=True)
-    est_type_num = models.CharField(max_length=255, blank=True)
-    cdp_est_num = models.CharField(max_length=255, blank=True)
-    violations_id = models.IntegerField(null=True)
-    permit_status = models.CharField(max_length=255, blank=True)
-    comment_sheet_id = models.CharField(max_length=255, blank=True)
-    action_code_id = models.IntegerField(null=True)
-    action_code_desc = models.CharField(max_length=255, blank=True)
-    image_file_path = models.CharField(max_length=255, blank=True)
-    image_file_name = models.CharField(max_length=255, blank=True)
-    chlorine_sum = models.CharField(max_length=255, blank=True)
-    bromine_sum = models.CharField(max_length=255, blank=True)
-    biguanide_sum = models.CharField(max_length=255, blank=True)
-    water_ph_sum = models.CharField(max_length=255, blank=True)
-    water_temp_sum = models.CharField(max_length=255, blank=True)
-    smoking_allowed = models.CharField(max_length=255, blank=True)
-    classification_id = models.IntegerField(null=True)
-    classification_desc = models.CharField(max_length=255, blank=True)
-    end_time_of_inspection_hh = models.CharField(max_length=255, blank=True)
-    end_time_of_inspection_mm = models.CharField(max_length=255, blank=True)
-    end_inspection_ampm = models.CharField(max_length=255, blank=True)
-    sent_to_bets_yn = models.CharField(max_length=255, blank=True)
-    verification_required_date = models.DateTimeField(null=True)
-    inspection_reason_id = models.IntegerField(null=True)
-    inspection_reason_desc = models.CharField(max_length=255, blank=True)
-    num_rf_inter_viol = models.CharField(max_length=255, blank=True)
-    num_repeat_rf_inter_viol = models.CharField(max_length=255, blank=True)
-    est_group_id = models.IntegerField(null=True)
-    est_group_desc = models.CharField(max_length=255, blank=True)
-    person_incharge_lname = models.CharField(max_length=255, blank=True)
-    person_incharge_fname = models.CharField(max_length=255, blank=True)
-    type_description = models.CharField(max_length=255, blank=True)
-    code = models.CharField(max_length=255, blank=True)
+    """Information about inspectors' visits to establishments"""
 
-    objects = models.GeoManager()
+    TYPE_CHOICES = (
+        (0, ugettext_lazy('Unknown')),
+        (1, ugettext_lazy('Routine Inspection')),
+        (2, ugettext_lazy('Re-inspection')),
+        (5, ugettext_lazy('Permit')),
+        (6, ugettext_lazy('Visit')),
+        (8, ugettext_lazy('Name Change')),
+        (9, ugettext_lazy('Verification')),
+        (10, ugettext_lazy('Other')),
+        (12, ugettext_lazy('Status Change')),
+        (13, ugettext_lazy('Pre-opening Visit')),
+        (31, ugettext_lazy('Critical Violation Visit')),
+        (32, ugettext_lazy('Critical Violation Followup')),
+    )
+
+    establishment = models.ForeignKey(Establishment,
+                                      verbose_name=ugettext_lazy("Establishment"),
+                                      related_name='inspections')
+    external_id = models.CharField(ugettext_lazy("External ID"), max_length=128)
+    date = models.DateTimeField(ugettext_lazy("Date"), db_index=True)
+    score = models.FloatField(ugettext_lazy("Score"), null=True, blank=True)
+    description = models.TextField(ugettext_lazy("Description"), blank=True)
+    type = models.PositiveIntegerField(ugettext_lazy("Type"), default=0,
+                                       choices=TYPE_CHOICES)
+    update_date = models.DateTimeField(ugettext_lazy("Update Date"), null=True, blank=True,
+                                       db_index=True)
+
+    def __str__(self):
+        return "Inspection #{}".format(self.pk)
 
 
 class Violation(models.Model):
-    id = models.IntegerField(primary_key=True)
-    inspection_id = models.ForeignKey("Inspection", related_name='violations')
-    item = models.IntegerField()
-    weight_sum = models.FloatField()
-    critical = models.CharField(max_length=255, blank=True)
-    comments = models.TextField(blank=True)
-    rpt_area_desc = models.CharField(max_length=255, blank=True)
+    """Information about specific inspection violations"""
 
-    objects = models.GeoManager()
+    establishment = models.ForeignKey(Establishment,
+                                      verbose_name=ugettext_lazy("Establishment"),
+                                      related_name='violations')
+    inspection = models.ForeignKey(Inspection, related_name='violations',
+                                   verbose_name=ugettext_lazy("Inspection"), null=True,
+                                   blank=True)
+    external_id = models.CharField(ugettext_lazy("External ID"), max_length=128)
+    date = models.DateTimeField(ugettext_lazy("Date"), db_index=True)
+    code = models.CharField(ugettext_lazy("Code"), max_length=32)
+    description = models.TextField(ugettext_lazy("Description"), blank=True)
+    update_date = models.DateTimeField(ugettext_lazy("Update Date"), null=True, blank=True,
+                                       db_index=True)

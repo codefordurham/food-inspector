@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}About{% endblock %}
+{% block body_class %}about{% endblock %}
+{% block body_id %}about{% endblock %}
+
+{% block content %}
+<h1>{% trans 'About NC Food Inspector' %}</h1>
+
+<p>
+    <a href="https://www.flickr.com/photos/mellodave/6183618324" title="durham, nc by David Mello, on Flickr">
+        <img class='img-responsive' src="https://farm7.staticflickr.com/6164/6183618324_049bfe5289_b.jpg" width="1024" height="768" alt="durham, nc">
+    </a>
+</p>
+
+<p>{% trans 'We love the food and restaurants in the Triangle!' %}</p>
+
+<p>{% blocktrans %}How often have you read a great Yelp review for a restaurant only to walk in
+and see that it's got a dismal public health inspection score? If you're the
+kind of person who pays attention to those ratings (or maybe you don't, but
+should!), this is the app for you.{% endblocktrans %}</p>
+
+<p>{% blocktrans %}NC Food Inspector is a brand new app designed to give citizens easy access
+to public health scores at restaurants in our community. It was created by {% endblocktrans %}<a
+href="http://codefordurham.com/">Code for Durham</a>, {% blocktrans %}a non-profit organization
+committed to building helpful resources for our community out of public
+data.{% endblocktrans %}</p>
+
+<p>{% blocktrans %}For now, it's simple: map restaurants according to their public health
+inspection scores. Eventually, we'd like to mash it up with Yelp and{% endblocktrans %}
+<a href="https://www.bullcitybucks.com/">Bull City Bucks</a> {% blocktrans %}to give an
+uber-Durham score that's worthy of our "Tastiest Town of the South" status.
+Give us feedback and keep coming back to see new iterations.{% endblocktrans %}</p>
+
+<h2>{% trans 'Contributors' %}</h2>
+
+<ul>
+    <li>
+        <a href="https://twitter.com/krazykriz">Andrew Krzmarzick</a>
+         - <a href="http://www.govloop.com/">GovLoop</a>
+    </li>
+    <li>
+        <a href="http://github.com/copelco">Colin Copeland</a>
+         - <a href="http://www.caktusgroup.com">Caktus Group</a>
+    </li>
+    <li>
+        <a href="http://github.com/micmaz">Mickey Mazarick</a>
+         - <a href="http://dcotech.org/">Durham County IT</a>
+    </li>
+    <li>
+        <a href="http://github.com/jaycee">J.C. Sackett</a>
+         - <a href="https://juju.ubuntu.com/">Ubuntu Juju</a>
+    </li>
+    <li>
+        <a href="http://github.com/0x1mason">Eric Millin</a>
+    </li>
+    <li>
+        <a href="http://github.com/victor-rocha">Victor Rocha</a>
+         - <a href="http://www.rochapps.com">RochApps</a>
+    </li>
+    <li>
+        <a href="http://github.com/tamcap">Marek Laska</a>
+         - <a href="http://www.tamcap.one.pl/">http://www.tamcap.one.pl/</a>
+    </li>
+    <li>
+        <a href="http://github.com/andyhull">Andy Hull</a>
+         - <a href="http://www.postcode.io/">PostCode</a>
+    </li>
+</ul>
+
+{% endblock %}

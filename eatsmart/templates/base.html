@@ -1,19 +1,27 @@
-{% load compress %}
+{% load compress i18n %}
 {% load static from staticfiles %}
+{% load leaflet_tags %}
+
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}NC Food Inspector{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <meta name="description" content="{% block meta-description %}{% endblock %}">
     <meta name="author" content="{% block meta-author %}{% endblock %}">
     <meta name="keywords" content="{% block meta-keywords %}{% endblock %}">
     {% block extra-meta %}{% endblock %}
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/less" media="all" href="{% static 'css/site.css' %}">
+    <link rel="stylesheet" media="all" href="{% static 'css/site.css' %}">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
     {% block extra-css %}{% endblock %}
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.dev.js"></script>
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
 </head>
 <body id="{% block body_id %}{% endblock body_id %}" class="{% block body_class %}{% endblock body_class %}">
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -25,18 +33,28 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href='{% url "establishment-list" %}'>Eat Smart Durham</a>
+                <a class="navbar-brand" href='{% url "establishment-list" %}'><img src="{% static 'images/NCFL.png' %}" alt="NC Food Inspector"/></a>
             </div>
+            {% get_current_language as LANGUAGE_CODE %}
             <div class="collapse navbar-collapse">
                <ul class="nav navbar-nav navbar-right">
-                   <li><a href="#about">About</a></li>
-                    {% if not user.is_authenticated %}
-                        <li><a href="{% url "admin:index" %}">Log In</a></li>
-                    {% else %}
+                   <li {% if LANGUAGE_CODE == "en-us" %}class="active"{% endif %}>
+                       <a href="{% url 'users-language' %}?lang=en-us">
+                           <img src="{% static 'images/us.png' %}" height="18" width="18"/>
+                       </a>
+                   </li>
+                   <li {% if LANGUAGE_CODE == "es" %}class="active"{% endif %}>
+                       <a href="{% url 'users-language' %}?lang=es">
+                           <img src="{% static 'images/spain.png' %}" height="18" width="18"/>
+                       </a>
+                   </li>
+                   <li><a href="https://docs.google.com/forms/d/1zbmJDzx54ovrvxpfpH00Tbn8kFUbXImv6spIekhYGgc/viewform">{% trans 'Feedback' %}</a></li>
+                   <li><a href="{% url 'about' %}">{% trans 'About' %}</a></li>
+                    {% if user.is_authenticated %}
                         {% if user.is_staff %}
-                          <li><a href="{% url "admin:index" %}">Admin</a></li>
+                          <li><a href="{% url "admin:index" %}">{% trans "Admin" %}</a></li>
                         {% endif %}
-                        <li><a href="{% url "admin:logout" %}">Log Out</a></li>
+                        <li><a href="{% url "admin:logout" %}">{% trans "Log Out" %}</a></li>
                     {% endif %}
                </ul>
             </div><!--/.nav-collapse -->
@@ -57,20 +75,51 @@
                 {% endblock messages-outer %}
             </div>
             <div id="content">
+              {% block map %}{% endblock map %}
               {% block content %}{% endblock content %}
             </div>
         </div>
         {% endblock content-outer %}
         {% block footer %}
-        <footer class='row col-md-12'>
-            <span class='pull-right small'>By <a href='http://codefordurham.com/'>Code for Durham</a>.</span>
-            <p><span class="text-muted small">Eat Smart Durham</span></p>
+        <footer>
+            <div class='row'>
+                <hr>
+                <div class="text-center">
+                    <a href="https://github.com/codefordurham/Durham-Restaurants">
+                        <img src="{% static 'images/GitHub-Mark-32px.png' %}" height="24"/> <strong>{% trans 'Find us on GitHub' %}</strong>
+                    </a><br>
+                    <span>{% trans 'By' %} <a href='http://codefordurham.com/' class="muted">Code for Durham</a></span><br>
+                    <span class="text-muted">NC Food Inspector
+                        {% if request.session.location %}<br>
+                            <a class="muted" href='https://maps.google.com/?q={{ request.session.location.lat|floatformat:5 }},{{ request.session.location.lon|floatformat:5 }}'
+                               title="{{ request.session.location.lat|floatformat:5 }}, {{ request.session.location.lon|floatformat:5 }}">
+                                {% trans 'Where am I?' %}
+                            </a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
         </footer>
         {% endblock footer %}
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="{% static 'js/site.js' %}"></script>
+    <script>
+      var csrf_token = "{{ csrf_token }}";
+      {% if not request.session.location %}
+        UserGeoLocation.init();
+      {% endif %}
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-51183594-1', 'ncfoodinspector.com');
+      ga('send', 'pageview');
+    </script>
     {% block extra-js %}{% endblock %}
 </body>
 </html>

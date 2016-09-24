@@ -1,55 +1,30 @@
 Eat Smart Development Setup
 ===========================
 
-Front-end Setup
----------------
-
-The front-end application is built in HTML, CSS, and JavaScript. If you want to
-help develop it, once you've cloned this repository, you can use Python to
-serve front-end app on your local development machine. Just run the following:
-
-Python 2.x::
-
-    python -m SimpleHTTPServer
-
-Python 3.x::
-
-    python -m http.server
-
-Now you should be able to open http://localhost:8000/ in your browser.
-**Note:** By default the app will connect to the production server for it's
-data. If you want to develop against your local back-end API setup, you'll need
-to adjust the JS code to point locally.
-
-
-Back-end API Setup
-------------------
-
 Below you will find basic setup and deployment instructions for the
-Django-powered API back-end. **Back-end setup is not required if you only want to
-develop front-end JavaScript/HTML/CSS.** To begin you should have the following
+Django-powered API. To begin you should have the following
 applications installed on your local development system:
 
-- Python == 3.3
+- Python == 3.5
 - `pip >= 1.4 <http://www.pip-installer.org/>`_
 - `virtualenv >= 1.10 <http://www.virtualenv.org/>`_
 - `virtualenvwrapper >= 3.0 <http://pypi.python.org/pypi/virtualenvwrapper>`_
 - Postgres >= 9.1
-- PostGIS == 2.0
+- PostGIS >= 2.0
 - git >= 1.7
 
-The deployment uses SSH with agent forwarding so you'll need to enable agent
+[root]/requirements/base.txt contains a list of modules installed automatically. The deployment uses SSH with agent forwarding so you'll need to enable agent
 forwarding if it is not already by adding ``ForwardAgent yes`` to your SSH config.
 
 
 Getting Started
 ~~~~~~~~~~~~~~~
 
-If you need Python 3.3 installed, you can use this PPA::
+If you need Python 3.5 installed, you can use this PPA::
 
     sudo add-apt-repository ppa:fkrull/deadsnakes
     sudo apt-get update
-    sudo apt-get install python3.3 python3.3-dev
+    sudo apt-get install python3.5 python3.5-dev
 
 The tool that we use to deploy code is called `Fabric
 <http://docs.fabfile.org/>`_, which is not yet Python3 compatible. So,
@@ -60,7 +35,7 @@ we need to install that globally in our Python2 environment::
 To setup your local environment you should create a virtualenv and install the
 necessary requirements::
 
-    mkvirtualenv --python=python3.3 eatsmart
+    mkvirtualenv --python=python3.5 eatsmart
     $VIRTUAL_ENV/bin/pip install -r $PWD/requirements/dev.txt
 
 Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use it::
@@ -78,7 +53,6 @@ Create the Postgres database and run the initial syncdb/migrate::
 
     createdb -E UTF-8 eatsmart
     psql eatsmart -c "CREATE EXTENSION postgis;"
-    python manage.py syncdb
     python manage.py migrate
 
 You should now be able to run the development server::
@@ -98,7 +72,7 @@ side your Durham-Restaurants repository, e.g.:
 
 Within your virtual environment, run the following command::
 
-    python manage.py import_data
+    python manage.py import_durham
 
 You should start to see output like this::
 
