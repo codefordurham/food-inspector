@@ -23,9 +23,6 @@ env:
 install:
   - pip install -U pip
   - pip install -U -r requirements/dev.txt
-  - nvm install 4.2
-  - nvm use 4.2
-  - npm install
 
 before_script:
   - createdb -E UTF-8 eatsmart -U postgres -O $USER
@@ -42,7 +39,6 @@ script:
   - coverage report -m --fail-under 80
   - flake8 .
   - make docs
-  - npm test
 
 notifications:
   hipchat:
