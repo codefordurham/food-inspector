@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'inspections',
     'users',
     'eatsmart.locations.durham',
+    'eatsmart.locations.wake',
 ]
 
 MIDDLEWARE_CLASSES = [

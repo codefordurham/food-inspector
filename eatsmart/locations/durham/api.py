@@ -22,7 +22,7 @@ class DurhamAPI(object):
 
     def get(self, *args, **kwargs):
         "Request data and increment page number until response is empty"
-        params = self.params.copy()gm
+        params = self.params.copy()
 
         params.update(kwargs)
         page = 1
