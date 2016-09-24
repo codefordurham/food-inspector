@@ -8,7 +8,7 @@ domain: ncfoodinspector.com
 # FIXME: Update to the correct project repo
 repo:
   url: git@github.com:codefordurham/Durham-Restaurants.git
-  branch: project_template_upgrade
+  branch: master
 
 requirements_file: requirements/production.txt
 
