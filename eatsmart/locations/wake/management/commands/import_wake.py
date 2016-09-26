@@ -5,7 +5,7 @@ from dateutil import parser
 from django.contrib.gis.geos import Point
 from django.core.management.base import BaseCommand
 
-from inspections.models import Establishment
+from inspections.models import Establishment, Inspection
 
 
 class Command(BaseCommand):
@@ -20,7 +20,7 @@ class Command(BaseCommand):
         self.save_restaurants(restaurants)
         # inspections
         inspections = self.get_county_data(self.inspections_url)
-
+        self.save_inspections(inspections)
         # violations
         violations = self.get_county_data(self.violations_url)
 
@@ -58,3 +58,28 @@ class Command(BaseCommand):
             restaurant_obj.__dict__.update(**attributes)
             restaurant_obj.save()
 
+    def save_inspections(self, inspections):
+        for inspection in inspections:
+            properties = inspection['properties']
+            try:
+                establishment = Establishment.objects.get(state_id=int(properties['HSISID']))
+            except:
+                print('No Establishment with HSISID #' + properties['HSISID'])
+                continue
+            insp_date = properties['Date']
+            attributes = {
+                'establishment_id': establishment.id,
+                'external_id': properties['OBJECTID'],
+                'date': parser.parse(insp_date) if insp_date else None,
+                'score': properties['Score'],
+                'description': properties['Description'],
+                # 'type': TODO: figure out a mappping that makes sense
+            }
+            try:
+                inspection_obj = Inspection.objects.get(external_id=properties['HSISID'])
+                print('Already in db')
+            except Inspection.DoesNotExist:
+                inspection_obj = Inspection()
+                print('New record')
+            inspection_obj.__dict__.update(**attributes)
+            inspection_obj.save()
