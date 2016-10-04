@@ -23,6 +23,7 @@ class Command(BaseCommand):
         self.save_inspections(inspections)
         # violations
         violations = self.get_county_data(self.violations_url)
+        self.save_violations(violations)
 
     def get_county_data(self, url):
         resp = requests.get(url)
@@ -73,10 +74,10 @@ class Command(BaseCommand):
                 'date': parser.parse(insp_date) if insp_date else None,
                 'score': properties['Score'],
                 'description': properties['Description'],
-                # 'type': TODO: figure out a mappping that makes sense
+                # 'type': TODO: figure out a mapping that makes sense
             }
             try:
-                inspection_obj = Inspection.objects.get(external_id=properties['HSISID'])
+                inspection_obj = Inspection.objects.get(external_id=properties['OBJECTID'])
                 print('Already in db')
             except Inspection.DoesNotExist:
                 inspection_obj = Inspection()
