@@ -93,14 +93,14 @@ class Command(BaseCommand):
             try:
                 establishment = Establishment.objects.get(state_id=int(properties['HSISID']))
             except Establishment.DoesNotExist:
-                # print('No Establishment with HSISID #' + properties['HSISID'])
+                print('No Establishment with HSISID #' + properties['HSISID'])
                 continue
             try:
                 inspection = Inspection.objects.get(establishment_id=establishment.id,
                                                     date=inspection_date)
             except Inspection.DoesNotExist:
-                # print('No Inspection for HSISID #' + properties['HSISID'] +
-                #       ' with date ' + str(inspection_date))
+                print('No Inspection for HSISID #' + properties['HSISID'] +
+                      ' with date ' + str(inspection_date))
                 continue
             attributes = {
                 'establishment_id': establishment.id,
@@ -117,6 +117,6 @@ class Command(BaseCommand):
                 print('ObjectID: ' + str(properties['OBJECTID']) + ' already in db')
             except Violation.DoesNotExist:
                 violation_obj = Violation()
-                # print('New record')
+                print('New record')
             violation_obj.__dict__.update(**attributes)
             violation_obj.save()
