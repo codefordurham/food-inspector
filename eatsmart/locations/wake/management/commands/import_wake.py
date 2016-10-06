@@ -5,14 +5,14 @@ from dateutil import parser
 from django.contrib.gis.geos import Point
 from django.core.management.base import BaseCommand
 
-from inspections.models import Establishment, Inspection
+from inspections.models import Establishment, Inspection, Violation
 
 
 class Command(BaseCommand):
     """Import saniation data from Durham County API"""
     restaurants_url = 'http://data.wake.opendata.arcgis.com/datasets/124c2187da8c41c59bde04fa67eb2872_0.geojson?where=&geometry={"xmin":-8992487.871106919,"ymin":4226590.155355151,"xmax":-8508182.859892275,"ymax":4318314.589297318,"spatialReference":{"wkid":102100}}'
     inspections_url = 'http://data.wake.opendata.arcgis.com/datasets/ebe3ae7f76954fad81411612d7c4fb17_1.geojson'
-    violations_url = 'http://data.wake.opendata.arcgis.com/datasets/ebe3ae7f76954fad81411612d7c4fb17_1.geojson'
+    violations_url = 'http://data.wake.opendata.arcgis.com/datasets/9b04d0c39abd4e049cbd4656a0a04ba3_2.geojson'
 
     def handle(self, *args, **options):
         # restaurants
@@ -41,7 +41,7 @@ class Command(BaseCommand):
                 'external_id': properties['OBJECTID'],
                 'state_id': properties['HSISID'],
                 'name': properties['Name'],
-                # 'type': TODO: figure out a mappping that makes sense
+                # 'type': TODO: figure out a mapping that makes sense
                 'address': '{0} {1}'.format(properties['Address1'], properties['Address2']).rstrip(),
                 'city': properties['City'],
                 'county': 'Wake',
@@ -77,10 +77,46 @@ class Command(BaseCommand):
                 # 'type': TODO: figure out a mapping that makes sense
             }
             try:
-                inspection_obj = Inspection.objects.get(external_id=properties['OBJECTID'])
+                inspection_obj = Inspection.objects.get(establishment_id=establishment.id,
+                                                        date=insp_date)
                 print('Already in db')
             except Inspection.DoesNotExist:
                 inspection_obj = Inspection()
                 print('New record')
             inspection_obj.__dict__.update(**attributes)
             inspection_obj.save()
+
+    def save_violations(self, violations):
+        for violation in violations:
+            properties = violation['properties']
+            inspection_date = parser.parse(properties['InspectDate'])
+            try:
+                establishment = Establishment.objects.get(state_id=int(properties['HSISID']))
+            except Establishment.DoesNotExist:
+                # print('No Establishment with HSISID #' + properties['HSISID'])
+                continue
+            try:
+                inspection = Inspection.objects.get(establishment_id=establishment.id,
+                                                    date=inspection_date)
+            except Inspection.DoesNotExist:
+                # print('No Inspection for HSISID #' + properties['HSISID'] +
+                #       ' with date ' + str(inspection_date))
+                continue
+            attributes = {
+                'establishment_id': establishment.id,
+                'inspection_id': inspection.id,
+                'external_id': properties['OBJECTID'],
+                'date': inspection_date,
+                'code': properties['ViolationCode'],
+                'description': properties['shortdesc'],
+            }
+            try:
+                violation_obj = Violation.objects.get(establishment_id=establishment.id,
+                                                      date=inspection_date,
+                                                      code=properties['ViolationCode'])
+                print('ObjectID: ' + str(properties['OBJECTID']) + ' already in db')
+            except Violation.DoesNotExist:
+                violation_obj = Violation()
+                # print('New record')
+            violation_obj.__dict__.update(**attributes)
+            violation_obj.save()
