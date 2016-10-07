@@ -95,6 +95,13 @@ class Command(BaseCommand):
             except Establishment.DoesNotExist:
                 print('No Establishment with HSISID #' + properties['HSISID'])
                 continue
+            except TypeError:
+                if not properties['HSISID']:
+                    print('Object #' + str(properties['OBJECTID']) + ' is NoneType')
+
+                else:
+                    print('Object #' + str(properties['OBJECTID']) + ' is  type' + str(type(properties['HSISID'])))
+                continue
             try:
                 inspection = Inspection.objects.get(establishment_id=establishment.id,
                                                     date=inspection_date)
