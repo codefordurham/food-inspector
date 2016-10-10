@@ -255,4 +255,8 @@ CELERYBEAT_SCHEDULE = {
         'task': 'eatsmart.locations.durham.tasks.import_durham_data',
         'schedule': crontab(minute=0, hour=0),  # Execute daily at midnight
     },
+    'import-wake-data': {
+        'task': 'eatsmart.locations.wake.tasks.import_wake_data',
+        'schedule': crontab(minute=0, hour=0),  # Execute daily at midnight
+    }
 }
