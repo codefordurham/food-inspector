@@ -52,6 +52,7 @@ class Establishment(models.Model):
     external_id = models.CharField(ugettext_lazy("External ID"), max_length=128)
     state_id = models.BigIntegerField(ugettext_lazy("State ID"))
     property_id = models.CharField(ugettext_lazy("Property ID"), max_length=128, blank=True)
+    image_url = models.URLField(max_length=255, blank=True)
     name = models.CharField(ugettext_lazy("Name"), max_length=255)
     type = models.PositiveIntegerField(ugettext_lazy("Type"), default=0, choices=TYPE_CHOICES)
     address = models.CharField(ugettext_lazy("Address"), max_length=255)
