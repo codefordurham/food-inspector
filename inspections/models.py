@@ -112,6 +112,16 @@ class Inspection(models.Model):
 
 class Violation(models.Model):
     """Information about specific inspection violations"""
+    RISK_FACTOR_CHOICES = (
+        (0, ugettext_lazy('Unknown')),
+        (1, ugettext_lazy('Improper Holding Temperature')),
+        (2, ugettext_lazy('Improper Cooking Temperature')),
+        (3, ugettext_lazy('Contaminated Equipment')),
+        (4, ugettext_lazy('Poor Hygiene')),
+        (5, ugettext_lazy('Food From Unsafe Sources')),
+        (6, ugettext_lazy('None')),
+    )
+
 
     establishment = models.ForeignKey(Establishment,
                                       verbose_name=ugettext_lazy("Establishment"),
@@ -125,3 +135,5 @@ class Violation(models.Model):
     description = models.TextField(ugettext_lazy("Description"), blank=True)
     update_date = models.DateTimeField(ugettext_lazy("Update Date"), null=True, blank=True,
                                        db_index=True)
+    risk_factor = models.PositiveIntegerField(ugettext_lazy("Risk Factor"), default=0,
+                                        choices=RISK_FACTOR_CHOICES)
