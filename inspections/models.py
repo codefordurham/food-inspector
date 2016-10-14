@@ -136,4 +136,6 @@ class Violation(models.Model):
     update_date = models.DateTimeField(ugettext_lazy("Update Date"), null=True, blank=True,
                                        db_index=True)
     risk_factor = models.PositiveIntegerField(ugettext_lazy("Risk Factor"), default=0,
-                                        choices=RISK_FACTOR_CHOICES)
+                                              choices=RISK_FACTOR_CHOICES)
+    deduction_value = models.DecimalField(ugettext_lazy("Deduction Value"), default=0,
+                                          max_digits=4, decimal_places=2)
