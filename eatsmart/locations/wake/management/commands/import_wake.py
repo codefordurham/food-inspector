@@ -33,6 +33,24 @@ class Command(BaseCommand):
         time.sleep(30)  # wake queues up the response
         return self.get_county_data(url)
 
+    def get_establishment_type(self, wake_type):
+        wake_type_dict = {
+            'Meat Market': 30,
+            'Private School Lunchrooms': 5,
+            'Mobile Food Units': 3,
+            'Limited Food Service': 14,
+            'Restaurant': 1,
+            'Elderly Nutrition Sites (catered)': 9,
+            'Institutional Food Service': 16,
+            'Public School Lunchrooms': 11,
+            'Pushcarts': 4,
+            'Food Stand': 2
+            }
+        try:
+            return wake_type_dict[wake_type]
+        except KeyError:
+            return 0
+
     def save_restaurants(self, restaurants):
         for restaurant in restaurants:
             properties = restaurant['properties']
@@ -41,7 +59,7 @@ class Command(BaseCommand):
                 'external_id': properties['OBJECTID'],
                 'state_id': properties['HSISID'],
                 'name': properties['Name'],
-                # 'type': TODO: figure out a mapping that makes sense
+                'type': self.get_establishment_type(properties['FacilityType']),
                 'address': '{0} {1}'.format(properties['Address1'], properties['Address2']).rstrip(),
                 'city': properties['City'],
                 'county': 'Wake',
