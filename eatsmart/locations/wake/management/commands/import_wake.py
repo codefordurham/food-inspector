@@ -114,6 +114,21 @@ class Command(BaseCommand):
             inspection_obj.__dict__.update(**attributes)
             inspection_obj.save()
 
+    def get_risk_factor_value(self, risk_factor):
+        risk_factor_dict = {
+            'Food from Unsafe Sources': 5,
+            'Improper Holding': 1,
+            'Food from Unsafe Source': 5,
+            'Poor Personal Hygiene': 4,
+            None: 6,
+            'Contaminated Equipment': 3,
+            'Inadequate Cook': 2
+        }
+        try:
+            return risk_factor_dict[risk_factor]
+        except KeyError:
+            return 0
+
     def save_violations(self, violations):
         for violation in violations:
             properties = violation['properties']
@@ -143,6 +158,8 @@ class Command(BaseCommand):
                 'date': inspection_date,
                 'code': properties['ViolationCode'],
                 'description': properties['shortdesc'],
+                'risk_factor': self.get_risk_factor_value(properties['CDCRiskFactor']),
+                'deduction_value': properties['pointValue']
             }
             try:
                 violation_obj = Violation.objects.get(establishment_id=establishment.id,
