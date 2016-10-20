@@ -77,6 +77,16 @@ class Command(BaseCommand):
             restaurant_obj.__dict__.update(**attributes)
             restaurant_obj.save()
 
+    def get_inspection_type(self, inspection_type):
+        inspection_type_dict = {
+            'Inspection': 1,
+            'Re-Inspection': 2
+            }
+        try:
+            return inspection_type_dict[inspection_type]
+        except KeyError:
+            return 0
+
     def save_inspections(self, inspections):
         for inspection in inspections:
             properties = inspection['properties']
@@ -92,7 +102,7 @@ class Command(BaseCommand):
                 'date': parser.parse(insp_date) if insp_date else None,
                 'score': properties['Score'],
                 'description': properties['Description'],
-                # 'type': TODO: figure out a mapping that makes sense
+                'type': self.get_inspection_type(properties['Type'])
             }
             try:
                 inspection_obj = Inspection.objects.get(establishment_id=establishment.id,
@@ -116,7 +126,6 @@ class Command(BaseCommand):
             except TypeError:
                 if not properties['HSISID']:
                     print('Object #' + str(properties['OBJECTID']) + ' is NoneType')
-
                 else:
                     print('Object #' + str(properties['OBJECTID']) + ' is  type' + str(type(properties['HSISID'])))
                 continue
