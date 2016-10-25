@@ -56,7 +56,7 @@ class Command(BaseCommand):
             properties = restaurant['properties']
             open_date = properties['RestaurantOpenDate']
             attributes = {
-                'external_id': properties['OBJECTID'],
+                'external_id': properties['HSISID'],
                 'state_id': properties['HSISID'],
                 'name': properties['Name'],
                 'type': self.get_establishment_type(properties['FacilityType']),
