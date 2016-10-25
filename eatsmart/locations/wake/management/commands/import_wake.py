@@ -16,16 +16,16 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # restaurants
-        # restaurants = self.get_county_data(self.restaurants_url)
-        # self.save_restaurants(restaurants)
+        restaurants = self.get_county_data(self.restaurants_url)
+        self.save_restaurants(restaurants)
         # inspections
-        # inspections = self.get_county_data(self.inspections_url)
-        # self.save_inspections(inspections)
+        inspections = self.get_county_data(self.inspections_url)
+        self.save_inspections(inspections)
         # violations
-        # violations = self.get_county_data(self.violations_url)
-        # self.save_violations(violations)
+        violations = self.get_county_data(self.violations_url)
+        self.save_violations(violations)
 
-        # self.inspection_risk_factors()
+        self.inspection_risk_factors()
         self.establishment_risk_factors()
 
     def get_county_data(self, url):
