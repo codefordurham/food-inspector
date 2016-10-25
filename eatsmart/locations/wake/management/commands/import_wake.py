@@ -16,14 +16,17 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # restaurants
-        restaurants = self.get_county_data(self.restaurants_url)
-        self.save_restaurants(restaurants)
+        # restaurants = self.get_county_data(self.restaurants_url)
+        # self.save_restaurants(restaurants)
         # inspections
-        inspections = self.get_county_data(self.inspections_url)
-        self.save_inspections(inspections)
+        # inspections = self.get_county_data(self.inspections_url)
+        # self.save_inspections(inspections)
         # violations
-        violations = self.get_county_data(self.violations_url)
-        self.save_violations(violations)
+        # violations = self.get_county_data(self.violations_url)
+        # self.save_violations(violations)
+
+        # self.inspection_risk_factors()
+        self.establishment_risk_factors()
 
     def get_county_data(self, url):
         resp = requests.get(url)
@@ -171,3 +174,39 @@ class Command(BaseCommand):
                 print('New record')
             violation_obj.__dict__.update(**attributes)
             violation_obj.save()
+
+    def inspection_risk_factors(self):
+        factors = (('hold_temp', 1), ('cook_temp', 2), ('contamination', 3),
+                   ('hygeine', 4), ('source', 5))
+        inspections = Inspection.objects.all()
+        for inspection in inspections:
+            violations = Violation.objects.filter(inspection_id=inspection.id)
+            attributes = dict()
+            for factor in factors:
+                viols = violations.filter(risk_factor=factor[1])
+                attributes[factor[0]+'_count'] = len(viols)
+                attributes[factor[0]+'_deductions'] = sum([v.deduction_value for v in viols])
+            inspection.__dict__.update(**attributes)
+            inspection.save()
+
+    def establishment_risk_factors(self):
+        factors = ('hold_temp', 'cook_temp', 'contamination', 'hygeine', 'source')
+        establishments = Establishment.objects.all()
+        for establishment in establishments:
+            try:
+                recent_inspection = Inspection.objects.filter(establishment_id=establishment.id, type=1).order_by('-date')[0]
+            except IndexError:
+                print("No Routine Inspections for HSISID #{}".format(establishment.state_id))
+                continue
+            for factor in factors:
+                establishment.hygeine_deductions = recent_inspection.hygeine_deductions
+                establishment.cook_temp_deductions = recent_inspection.cook_temp_deductions
+                establishment.source_deductions = recent_inspection.source_deductions
+                establishment.hold_temp_deductions = recent_inspection.hold_temp_deductions
+                establishment.contamination_deductions = recent_inspection.contamination_deductions
+                establishment.hygeine_count = recent_inspection.hygeine_count
+                establishment.cook_temp_count = recent_inspection.cook_temp_count
+                establishment.source_count = recent_inspection.source_count
+                establishment.hold_temp_count = recent_inspection.hold_temp_count
+                establishment.contamination_count = recent_inspection.contamination_count
+            establishment.save()
