@@ -123,6 +123,22 @@ class Inspection(models.Model):
     update_date = models.DateTimeField(ugettext_lazy("Update Date"), null=True, blank=True,
                                        db_index=True)
 
+    hygeine_deductions = models.DecimalField(ugettext_lazy("Hygeine Deductions"), default=0,
+                                             max_digits=4, decimal_places=2, blank=True)
+    cook_temp_deductions = models.DecimalField(ugettext_lazy("Cooking Temperature Deductions"), default=0,
+                                               max_digits=4, decimal_places=2, blank=True)
+    source_deductions = models.DecimalField(ugettext_lazy("Unsafe Source Deductions"), default=0,
+                                            max_digits=4, decimal_places=2, blank=True)
+    hold_temp_deductions = models.DecimalField(ugettext_lazy("Holding Temperature Deductions"), default=0,
+                                               max_digits=4, decimal_places=2, blank=True)
+    contamination_deductions = models.DecimalField(ugettext_lazy("Contamination Deductions"), default=0,
+                                                   max_digits=4, decimal_places=2, blank=True)
+    hygeine_count = models.PositiveSmallIntegerField(ugettext_lazy("Hygeine Count"), default=0, blank=True)
+    cook_temp_count = models.PositiveSmallIntegerField(ugettext_lazy("Cooking Temperature Count"), default=0, blank=True)
+    source_count = models.PositiveSmallIntegerField(ugettext_lazy("Unsafe Source Count"), default=0, blank=True)
+    hold_temp_count = models.PositiveSmallIntegerField(ugettext_lazy("Holding Temperature Count"), default=0, blank=True)
+    contamination_count = models.PositiveSmallIntegerField(ugettext_lazy("Contamination Count"), default=0, blank=True)
+
     def __str__(self):
         return "Inspection #{}".format(self.pk)
 
