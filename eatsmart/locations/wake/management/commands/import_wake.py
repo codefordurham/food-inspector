@@ -49,10 +49,7 @@ class Command(BaseCommand):
             'Pushcarts': 4,
             'Food Stand': 2
             }
-        try:
-            return wake_type_dict[wake_type]
-        except KeyError:
-            return 0
+        return wake_type_dict.get(wake_type, 0)
 
     def save_restaurants(self, restaurants):
         for restaurant in restaurants:
@@ -85,10 +82,7 @@ class Command(BaseCommand):
             'Inspection': 1,
             'Re-Inspection': 2
             }
-        try:
-            return inspection_type_dict[inspection_type]
-        except KeyError:
-            return 0
+        return inspection_type_dict.get(inspection_type, 0)
 
     def save_inspections(self, inspections):
         for inspection in inspections:
@@ -127,10 +121,7 @@ class Command(BaseCommand):
             'Contaminated Equipment': 3,
             'Inadequate Cook': 2
         }
-        try:
-            return risk_factor_dict[risk_factor]
-        except KeyError:
-            return 0
+        return risk_factor_dict.get(risk_factor, 0)
 
     def save_violations(self, violations):
         for violation in violations:
@@ -178,12 +169,12 @@ class Command(BaseCommand):
     def inspection_risk_factors(self):
         factors = (('hold_temp', 1), ('cook_temp', 2), ('contamination', 3),
                    ('hygeine', 4), ('source', 5))
-        inspections = Inspection.objects.all()
+        inspections = Inspection.objects.all().prefetch_related('violations')
         for inspection in inspections:
-            violations = Violation.objects.filter(inspection_id=inspection.id)
+            # violations = inspection.prefetch_related('violations').filter(id=inspection.id)
             attributes = dict()
             for factor in factors:
-                viols = violations.filter(risk_factor=factor[1])
+                viols = inspection.violations.filter(risk_factor=factor[1])
                 attributes[factor[0]+'_count'] = len(viols)
                 attributes[factor[0]+'_deductions'] = sum([v.deduction_value for v in viols])
             inspection.__dict__.update(**attributes)
