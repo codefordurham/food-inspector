@@ -67,6 +67,23 @@ class Establishment(models.Model):
                               default='active')
     location = models.PointField(ugettext_lazy("location"), null=True, blank=True)
 
+    hygeine_deductions = models.DecimalField(ugettext_lazy("Hygeine Deductions"), default=0,
+                                             max_digits=4, decimal_places=2, blank=True)
+    cook_temp_deductions = models.DecimalField(ugettext_lazy("Cooking Temperature Deductions"), default=0,
+                                               max_digits=4, decimal_places=2, blank=True)
+    source_deductions = models.DecimalField(ugettext_lazy("Unsafe Source Deductions"), default=0,
+                                            max_digits=4, decimal_places=2, blank=True)
+    hold_temp_deductions = models.DecimalField(ugettext_lazy("Holding Temperature Deductions"), default=0,
+                                               max_digits=4, decimal_places=2, blank=True)
+    contamination_deductions = models.DecimalField(ugettext_lazy("Contamination Deductions"), default=0,
+                                                   max_digits=4, decimal_places=2, blank=True)
+    hygeine_count = models.PositiveSmallIntegerField(ugettext_lazy("Hygeine Count"), default=0, blank=True)
+    cook_temp_count = models.PositiveSmallIntegerField(ugettext_lazy("Cooking Temperature Count"), default=0, blank=True)
+    source_count = models.PositiveSmallIntegerField(ugettext_lazy("Unsafe Source Count"), default=0, blank=True)
+    hold_temp_count = models.PositiveSmallIntegerField(ugettext_lazy("Holding Temperature Count"), default=0, blank=True)
+    contamination_count = models.PositiveSmallIntegerField(ugettext_lazy("Contamination Count"), default=0, blank=True)
+
+
     objects = models.GeoManager()
 
     class Meta(object):
@@ -106,12 +123,38 @@ class Inspection(models.Model):
     update_date = models.DateTimeField(ugettext_lazy("Update Date"), null=True, blank=True,
                                        db_index=True)
 
+    hygeine_deductions = models.DecimalField(ugettext_lazy("Hygeine Deductions"), default=0,
+                                             max_digits=4, decimal_places=2, blank=True)
+    cook_temp_deductions = models.DecimalField(ugettext_lazy("Cooking Temperature Deductions"), default=0,
+                                               max_digits=4, decimal_places=2, blank=True)
+    source_deductions = models.DecimalField(ugettext_lazy("Unsafe Source Deductions"), default=0,
+                                            max_digits=4, decimal_places=2, blank=True)
+    hold_temp_deductions = models.DecimalField(ugettext_lazy("Holding Temperature Deductions"), default=0,
+                                               max_digits=4, decimal_places=2, blank=True)
+    contamination_deductions = models.DecimalField(ugettext_lazy("Contamination Deductions"), default=0,
+                                                   max_digits=4, decimal_places=2, blank=True)
+    hygeine_count = models.PositiveSmallIntegerField(ugettext_lazy("Hygeine Count"), default=0, blank=True)
+    cook_temp_count = models.PositiveSmallIntegerField(ugettext_lazy("Cooking Temperature Count"), default=0, blank=True)
+    source_count = models.PositiveSmallIntegerField(ugettext_lazy("Unsafe Source Count"), default=0, blank=True)
+    hold_temp_count = models.PositiveSmallIntegerField(ugettext_lazy("Holding Temperature Count"), default=0, blank=True)
+    contamination_count = models.PositiveSmallIntegerField(ugettext_lazy("Contamination Count"), default=0, blank=True)
+
     def __str__(self):
         return "Inspection #{}".format(self.pk)
 
 
 class Violation(models.Model):
     """Information about specific inspection violations"""
+    RISK_FACTOR_CHOICES = (
+        (0, ugettext_lazy('Unknown')),
+        (1, ugettext_lazy('Improper Holding Temperature')),
+        (2, ugettext_lazy('Improper Cooking Temperature')),
+        (3, ugettext_lazy('Contaminated Equipment')),
+        (4, ugettext_lazy('Poor Hygiene')),
+        (5, ugettext_lazy('Food From Unsafe Sources')),
+        (6, ugettext_lazy('None')),
+    )
+
 
     establishment = models.ForeignKey(Establishment,
                                       verbose_name=ugettext_lazy("Establishment"),
@@ -125,3 +168,7 @@ class Violation(models.Model):
     description = models.TextField(ugettext_lazy("Description"), blank=True)
     update_date = models.DateTimeField(ugettext_lazy("Update Date"), null=True, blank=True,
                                        db_index=True)
+    risk_factor = models.PositiveIntegerField(ugettext_lazy("Risk Factor"), default=0,
+                                              choices=RISK_FACTOR_CHOICES)
+    deduction_value = models.DecimalField(ugettext_lazy("Deduction Value"), default=0,
+                                          max_digits=4, decimal_places=2)
