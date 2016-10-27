@@ -25,6 +25,9 @@ class Command(BaseCommand):
         violations = self.get_county_data(self.violations_url)
         self.save_violations(violations)
 
+        self.inspection_risk_factors()
+        self.establishment_risk_factors()
+
     def get_county_data(self, url):
         resp = requests.get(url)
         json_resp = resp.json()
@@ -46,17 +49,14 @@ class Command(BaseCommand):
             'Pushcarts': 4,
             'Food Stand': 2
             }
-        try:
-            return wake_type_dict[wake_type]
-        except KeyError:
-            return 0
+        return wake_type_dict.get(wake_type, 0)
 
     def save_restaurants(self, restaurants):
         for restaurant in restaurants:
             properties = restaurant['properties']
             open_date = properties['RestaurantOpenDate']
             attributes = {
-                'external_id': properties['OBJECTID'],
+                'external_id': properties['HSISID'],
                 'state_id': properties['HSISID'],
                 'name': properties['Name'],
                 'type': self.get_establishment_type(properties['FacilityType']),
@@ -77,6 +77,13 @@ class Command(BaseCommand):
             restaurant_obj.__dict__.update(**attributes)
             restaurant_obj.save()
 
+    def get_inspection_type(self, inspection_type):
+        inspection_type_dict = {
+            'Inspection': 1,
+            'Re-Inspection': 2
+            }
+        return inspection_type_dict.get(inspection_type, 0)
+
     def save_inspections(self, inspections):
         for inspection in inspections:
             properties = inspection['properties']
@@ -92,7 +99,7 @@ class Command(BaseCommand):
                 'date': parser.parse(insp_date) if insp_date else None,
                 'score': properties['Score'],
                 'description': properties['Description'],
-                # 'type': TODO: figure out a mapping that makes sense
+                'type': self.get_inspection_type(properties['Type'])
             }
             try:
                 inspection_obj = Inspection.objects.get(establishment_id=establishment.id,
@@ -103,6 +110,18 @@ class Command(BaseCommand):
                 print('New record')
             inspection_obj.__dict__.update(**attributes)
             inspection_obj.save()
+
+    def get_risk_factor_value(self, risk_factor):
+        risk_factor_dict = {
+            'Food from Unsafe Sources': 5,
+            'Improper Holding': 1,
+            'Food from Unsafe Source': 5,
+            'Poor Personal Hygiene': 4,
+            None: 6,
+            'Contaminated Equipment': 3,
+            'Inadequate Cook': 2
+        }
+        return risk_factor_dict.get(risk_factor, 0)
 
     def save_violations(self, violations):
         for violation in violations:
@@ -116,7 +135,6 @@ class Command(BaseCommand):
             except TypeError:
                 if not properties['HSISID']:
                     print('Object #' + str(properties['OBJECTID']) + ' is NoneType')
-
                 else:
                     print('Object #' + str(properties['OBJECTID']) + ' is  type' + str(type(properties['HSISID'])))
                 continue
@@ -134,6 +152,8 @@ class Command(BaseCommand):
                 'date': inspection_date,
                 'code': properties['ViolationCode'],
                 'description': properties['shortdesc'],
+                'risk_factor': self.get_risk_factor_value(properties['CDCRiskFactor']),
+                'deduction_value': properties['pointValue']
             }
             try:
                 violation_obj = Violation.objects.get(establishment_id=establishment.id,
@@ -145,3 +165,39 @@ class Command(BaseCommand):
                 print('New record')
             violation_obj.__dict__.update(**attributes)
             violation_obj.save()
+
+    def inspection_risk_factors(self):
+        factors = (('hold_temp', 1), ('cook_temp', 2), ('contamination', 3),
+                   ('hygeine', 4), ('source', 5))
+        inspections = Inspection.objects.all().prefetch_related('violations')
+        for inspection in inspections:
+            # violations = inspection.prefetch_related('violations').filter(id=inspection.id)
+            attributes = dict()
+            for factor in factors:
+                viols = inspection.violations.filter(risk_factor=factor[1])
+                attributes[factor[0]+'_count'] = len(viols)
+                attributes[factor[0]+'_deductions'] = sum([v.deduction_value for v in viols])
+            inspection.__dict__.update(**attributes)
+            inspection.save()
+
+    def establishment_risk_factors(self):
+        factors = ('hold_temp', 'cook_temp', 'contamination', 'hygeine', 'source')
+        establishments = Establishment.objects.all()
+        for establishment in establishments:
+            try:
+                recent_inspection = Inspection.objects.filter(establishment_id=establishment.id, type=1).order_by('-date')[0]
+            except IndexError:
+                print("No Routine Inspections for HSISID #{}".format(establishment.state_id))
+                continue
+            for factor in factors:
+                establishment.hygeine_deductions = recent_inspection.hygeine_deductions
+                establishment.cook_temp_deductions = recent_inspection.cook_temp_deductions
+                establishment.source_deductions = recent_inspection.source_deductions
+                establishment.hold_temp_deductions = recent_inspection.hold_temp_deductions
+                establishment.contamination_deductions = recent_inspection.contamination_deductions
+                establishment.hygeine_count = recent_inspection.hygeine_count
+                establishment.cook_temp_count = recent_inspection.cook_temp_count
+                establishment.source_count = recent_inspection.source_count
+                establishment.hold_temp_count = recent_inspection.hold_temp_count
+                establishment.contamination_count = recent_inspection.contamination_count
+            establishment.save()
