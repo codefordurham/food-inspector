@@ -73,15 +73,34 @@
         </form>
         <div class="list-group">
             {% for establishment in establishments %}
-            <a href="{% url "establishment-detail" establishment.pk %}" class="list-group-item">
-                {% if establishment.grade %}<span class="badge">{{ establishment.grade }}</span>{% endif %}
-                <h5 class="list-group-item-heading">{{ establishment|title }}
+            <a href="{% url "establishment-detail" establishment.pk %}" class="list-group-item foodlisting">
+              
+                 <div class="row">
+                    <h5 class="col-xs-9 col-md-10 list-group-item-heading ">{{ establishment|title }}
                     {% if establishment.property_id %}<span class="glyphicon glyphicon-camera"></span>{% endif %}
-                </h5>
-                {% if establishment.insp_date %}<span class="badge-date hidden-xs">{{ establishment.insp_date|date:"M dS Y" }}</span>{% endif %}
-                <p class="list-group-item-text">
-                    <span class='text-muted small'>{{ establishment.address|title }} - {{ establishment.distance.mi|floatformat:"2" }} mi</span>
-                </p>
+                    </h5>
+                    <div class="col-xs-3 col-md-2 small text-muted text-right">{{ establishment.distance.mi|floatformat:"2" }} mi</div>
+                 </div>
+              
+                <div class="row">
+                  <div class="col-xs-5 col-md-4 small text-muted">
+                  {{ establishment.address|title }}
+                   <br />
+                     {% if establishment.grade %}<span class="badge">{{ establishment.grade }}</span>{% endif %}
+                     {% if establishment.insp_date %}<span class="badge-date hidden-xs">{{ establishment.insp_date|date:"M dS Y" }}</span>{% endif %}
+                  </div>
+                  
+                 
+                  <ul class="risk-factor col-xs-7 col-md-8">
+                    {% if establishment.hygeine_deductions %}<li class="deduction{{ establishment.hygeine_deductions }} hygiene pull-right text-hide">Hygiene</li>{% endif %}
+                    {% if establishment.hold_temp_deductions %}<li class="deduction{{ establishment.hold_temp_deductions }} holding pull-right text-hide">Holding</li>{% endif %}
+                    {% if establishment.contamination_deductions %}<li class="deduction{{ establishment.contamination_deductions }} contamination pull-right text-hide">Contamination</li>{% endif %}
+                    {% if establishment.cook_temp_deductions %}<li class="deduction{{ establishment.cook_temp_deductions }} temperature pull-right text-hide">Temperature</li>{% endif %}
+                    {% if establishment.source_deductions %}<li class="deduction{{ establishment.source_deductions }} source pull-right text-hide">Source</li>{% endif %}
+                  </ul>
+                
+                </div>
+          
             </a>
             {% endfor %}
         </div>
