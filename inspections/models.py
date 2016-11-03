@@ -88,11 +88,11 @@ class Establishment(models.Model):
 
     @property
     def has_risk_data(self):
-        return any([self.hygeine_count,
-                    self.cook_temp_count,
-                    self.source_count,
-                    self.hold_temp_count,
-                    self.contamination_count])
+        return any([self.hygeine_count > -1,
+                    self.cook_temp_count > -1,
+                    self.source_count > -1,
+                    self.hold_temp_count > -1,
+                    self.contamination_count > -1])
 
     class Meta(object):
         unique_together = ('external_id', 'county')
@@ -152,11 +152,11 @@ class Inspection(models.Model):
 
     @property
     def has_risk_data(self):
-        return any([self.hygeine_count,
-                    self.cook_temp_count,
-                    self.source_count,
-                    self.hold_temp_count,
-                    self.contamination_count])
+        return any([self.hygeine_count > -1,
+                    self.cook_temp_count > -1,
+                    self.source_count > -1,
+                    self.hold_temp_count > -1,
+                    self.contamination_count > -1])
 
 
 class Violation(models.Model):
