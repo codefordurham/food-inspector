@@ -86,6 +86,14 @@ class Establishment(models.Model):
 
     objects = models.GeoManager()
 
+    @property
+    def has_risk_data(self):
+        return any([self.hygeine_count,
+                    self.cook_temp_count,
+                    self.source_count,
+                    self.hold_temp_count,
+                    self.contamination_count])
+
     class Meta(object):
         unique_together = ('external_id', 'county')
 
@@ -141,6 +149,14 @@ class Inspection(models.Model):
 
     def __str__(self):
         return "Inspection #{}".format(self.pk)
+
+    @property
+    def has_risk_data(self):
+        return any([self.hygeine_count,
+                    self.cook_temp_count,
+                    self.source_count,
+                    self.hold_temp_count,
+                    self.contamination_count])
 
 
 class Violation(models.Model):
