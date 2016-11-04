@@ -90,14 +90,21 @@
                      {% if establishment.insp_date %}<span class="badge-date hidden-xs">{{ establishment.insp_date|date:"M dS Y" }}</span>{% endif %}
                   </div>
                   
-                 
-                  <ul class="risk-factor col-xs-7 col-md-8">
-                    {% if establishment.hygeine_deductions %}<li class="deduction{{ establishment.hygeine_deductions }} hygiene pull-right text-hide">Hygiene</li>{% endif %}
-                    {% if establishment.hold_temp_deductions %}<li class="deduction{{ establishment.hold_temp_deductions }} holding pull-right text-hide">Holding</li>{% endif %}
-                    {% if establishment.contamination_deductions %}<li class="deduction{{ establishment.contamination_deductions }} contamination pull-right text-hide">Contamination</li>{% endif %}
-                    {% if establishment.cook_temp_deductions %}<li class="deduction{{ establishment.cook_temp_deductions }} temperature pull-right text-hide">Temperature</li>{% endif %}
-                    {% if establishment.source_deductions %}<li class="deduction{{ establishment.source_deductions }} source pull-right text-hide">Source</li>{% endif %}
-                  </ul>
+
+                    <ul class="risk-factor col-xs-7 col-md-8">
+                    {% if establishment.has_risk_data %}
+
+                        {% if establishment.hygeine_count %}<li class="deduction{{ establishment.hygeine_count }} hygiene pull-right text-hide">Hygiene</li>{% endif %}
+                        {% if establishment.hold_temp_count %}<li class="deduction{{ establishment.hold_temp_count }} holding pull-right text-hide">Holding</li>{% endif %}
+                        {% if establishment.contamination_count %}<li class="deduction{{ establishment.contamination_count }} contamination pull-right text-hide">Contamination</li>{% endif %}
+                        {% if establishment.cook_temp_count %}<li class="deduction{{ establishment.cook_temp_count }} temperature pull-right text-hide">Temperature</li>{% endif %}
+                        {% if establishment.source_count %}<li class="deduction{{ establishment.source_count }} source pull-right text-hide">Source</li>{% endif %}
+                    
+                    {% else %}
+                        <!-- No risk factor data for this establishment -->
+                    {% endif %}
+                    
+                    </ul>
                 
                 </div>
           

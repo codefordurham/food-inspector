@@ -20,16 +20,23 @@
     </div>
     
     <div class="col-xs-12 col-sm-5 col-sm-push-2">  
+        {% if establishment.has_risk_data %}
+
+    
         <h4 class="text-center">RISK FACTORS</h4>
         <ul class="detail-risk-factor text-center list-inline">
-            {% if establishment.hygeine_deductions %}<li class="deduction{{ establishment.hygeine_deductions }} hygiene text-hide">Hygiene</li>{% endif %}
-            {% if establishment.hold_temp_deductions %}<li class="deduction{{ establishment.hold_temp_deductions }} holding text-hide">Holding</li>{% endif %}
-            {% if establishment.contamination_deductions %}<li class="deduction{{ establishment.contamination_deductions }} contamination text-hide">Contamination</li>{% endif %}
-            {% if establishment.cook_temp_deductions %}<li class="deduction{{ establishment.cook_temp_deductions }} temperature text-hide">Temperature</li>{% endif %}
-            {% if establishment.source_deductions %}<li class="deduction{{ establishment.source_deductions }} source text-hide">Source</li>{% endif %}
+            {% if establishment.hygeine_count %}<li class="deduction{{ establishment.hygeine_count }} hygiene text-hide">Hygiene</li>{% endif %}
+            {% if establishment.hold_temp_count %}<li class="deduction{{ establishment.hold_temp_count }} holding text-hide">Holding</li>{% endif %}
+            {% if establishment.contamination_count %}<li class="deduction{{ establishment.contamination_count }} contamination text-hide">Contamination</li>{% endif %}
+            {% if establishment.cook_temp_count %}<li class="deduction{{ establishment.cook_temp_count }} temperature text-hide">Temperature</li>{% endif %}
+            {% if establishment.source_count %}<li class="deduction{{ establishment.source_count }} source text-hide">Source</li>{% endif %}
             </ul>
         <p class="text-center"><a target="_blank" title="View FDA Guidance on Foodborne Illness Risk Factors" href="http://www.fda.gov/Food/GuidanceRegulation/RetailFoodProtection/FoodborneIllnessRiskFactorReduction/ucm224321.htm">What do these mean to me? [FDA.gov]</a>
         </p><br/>
+    
+        {% else %}
+            <!-- No risk factor data for this establishment -->
+        {% endif %}
     </div>   
     
     
