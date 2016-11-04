@@ -23,7 +23,7 @@
         {% if establishment.has_risk_data %}
 
     
-        <h4 class="text-center">RISK FACTORS</h4>
+        <h4 class="text-center risk-title">RISK FACTORS</h4>
         <ul class="detail-risk-factor text-center list-inline">
             {% if establishment.hygeine_count %}<li class="deduction{{ establishment.hygeine_count }} hygiene text-hide">Hygiene</li>{% endif %}
             {% if establishment.hold_temp_count %}<li class="deduction{{ establishment.hold_temp_count }} holding text-hide">Holding</li>{% endif %}
