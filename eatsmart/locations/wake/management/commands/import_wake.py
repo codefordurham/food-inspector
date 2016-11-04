@@ -176,7 +176,6 @@ class Command(BaseCommand):
             for factor in factors:
                 viols = inspection.violations.filter(risk_factor=factor[1])
                 attributes[factor[0]+'_count'] = len(viols)
-                attributes[factor[0]+'_deductions'] = sum([v.deduction_value for v in viols])
             inspection.__dict__.update(**attributes)
             inspection.save()
 
@@ -190,11 +189,6 @@ class Command(BaseCommand):
                 print("No Routine Inspections for HSISID #{}".format(establishment.state_id))
                 continue
             for factor in factors:
-                establishment.hygeine_deductions = recent_inspection.hygeine_deductions
-                establishment.cook_temp_deductions = recent_inspection.cook_temp_deductions
-                establishment.source_deductions = recent_inspection.source_deductions
-                establishment.hold_temp_deductions = recent_inspection.hold_temp_deductions
-                establishment.contamination_deductions = recent_inspection.contamination_deductions
                 establishment.hygeine_count = recent_inspection.hygeine_count
                 establishment.cook_temp_count = recent_inspection.cook_temp_count
                 establishment.source_count = recent_inspection.source_count
