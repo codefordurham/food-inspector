@@ -140,21 +140,26 @@ footer hr {
                     
                     
   /* Lights up the icon if there are violations or deductions */    
-    .foodlisting .risk-factor .deduction1,
-    .foodlisting .risk-factor .deduction2,
-    .foodlisting .risk-factor .deduction3,
-    .foodlisting .risk-factor .deduction4,
-    .foodlisting .risk-factor .deduction5,
-    .foodlisting .risk-factor .deduction6
-    .detail-risk-factor .deduction1,
-    .detail-risk-factor .deduction2,
-    .detail-risk-factor .deduction3,
-    .detail-risk-factor .deduction4,
-    .detail-risk-factor .deduction5,
-    .detail-risk-factor .deduction6
-    {
-      opacity: 1;
-    }                
+     
+    .foodlisting .risk-factor .deduction1, 
+    .detail-risk-factor .deduction1 { opacity: 0.2 }
+    .foodlisting .risk-factor .deduction2, 
+    .detail-risk-factor .deduction2 { opacity: 0.4 }   
+    .foodlisting .risk-factor .deduction3, 
+    .detail-risk-factor .deduction3 { opacity: 0.6 }
+    .foodlisting .risk-factor .deduction4, 
+    .detail-risk-factor .deduction4 { opacity: 0.8 }
+    .foodlisting .risk-factor .deduction5, 
+    .detail-risk-factor .deduction5 { opacity: 0.9 }
+    .foodlisting .risk-factor .deduction6, 
+    .detail-risk-factor .deduction6,
+    .foodlisting .risk-factor .deduction7, 
+    .detail-risk-factor .deduction7,
+    .foodlisting .risk-factor .deduction8, 
+    .detail-risk-factor .deduction8 { opacity: 1 }
+    
+    
+     
                     
     /* Individual Icons */
     .detail-risk-factor li[class*="source"],

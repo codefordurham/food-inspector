@@ -93,12 +93,11 @@
                     <!-- Risk Factor icons -->
                     <ul class="risk-factor col-xs-7 col-md-8">
                     {% if establishment.has_risk_data %}
-
-                        {% if establishment.hygeine_count %}<li class="deduction{{ establishment.hygeine_count }} hygiene pull-right text-hide">Hygiene</li>{% endif %}
-                        {% if establishment.hold_temp_count %}<li class="deduction{{ establishment.hold_temp_count }} holding pull-right text-hide">Holding</li>{% endif %}
-                        {% if establishment.contamination_count %}<li class="deduction{{ establishment.contamination_count }} contamination pull-right text-hide">Contamination</li>{% endif %}
-                        {% if establishment.cook_temp_count %}<li class="deduction{{ establishment.cook_temp_count }} temperature pull-right text-hide">Temperature</li>{% endif %}
-                        {% if establishment.source_count %}<li class="deduction{{ establishment.source_count }} source pull-right text-hide">Source</li>{% endif %}
+                        <li class="deduction{{ establishment.hygeine_count }} hygiene pull-right text-hide">Hygiene</li>
+                        <li class="deduction{{ establishment.hold_temp_count }} holding pull-right text-hide">Holding</li>
+                        <li class="deduction{{ establishment.contamination_count }} contamination pull-right text-hide">Contamination</li>
+                        <li class="deduction{{ establishment.cook_temp_count }} temperature pull-right text-hide">Temperature</li>
+                        <li class="deduction{{ establishment.source_count }} source pull-right text-hide">Source</li>
                     
                     {% else %}
                         <!-- No risk factor data for this establishment -->
