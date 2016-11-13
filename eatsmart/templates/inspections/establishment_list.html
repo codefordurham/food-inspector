@@ -79,7 +79,7 @@
             <a href="{% url "establishment-detail" establishment.pk %}" class="list-group-item foodlisting">
 
                  <div class="row">
-                    <h5 class="col-xs-10 list-group-item-heading ">{{ establishment|title }}
+                    <h5 class="col-xs-10 list-group-item-heading ">
                       {% if establishment.pretty_name %}{{ establishment.pretty_name|title }}
                       {% else %}{{ establishment|title }}
                       {% endif %}
