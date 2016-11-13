@@ -1,5 +1,6 @@
 import time
 import requests
+import re
 from dateutil import parser
 
 from django.contrib.gis.geos import Point
@@ -51,6 +52,18 @@ class Command(BaseCommand):
             }
         return wake_type_dict.get(wake_type, 0)
 
+    def name_string_handling(self, name, check=False):
+        sub_strings = (#(r'search_string', r'replacement_string')
+                        (r"`", r"'"),
+                        (r'&amp;', r'&')
+                      )
+        if check:
+            return re.search(r'|'.join(tuple(sub[0] for sub in sub_strings)), name)
+        else:
+            for sub in sub_strings:
+                name = re.sub(sub[0], sub[1], name)
+            return name
+
     def save_restaurants(self, restaurants):
         for restaurant in restaurants:
             properties = restaurant['properties']
@@ -68,6 +81,8 @@ class Command(BaseCommand):
                 'opening_date': parser.parse(open_date) if open_date else None,
                 'location': Point(float(properties['X']), float(properties['Y']))
             }
+            if self.name_string_handling(properties['Name'], check=True):
+                attributes['pretty_name'] = self.name_string_handling(properties['Name'])
             try:
                 restaurant_obj = Establishment.objects.get(state_id=properties['HSISID'])
                 print('Already in db')
