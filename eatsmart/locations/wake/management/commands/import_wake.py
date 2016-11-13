@@ -17,17 +17,17 @@ class Command(BaseCommand):
     violations_url = 'http://data.wake.opendata.arcgis.com/datasets/9b04d0c39abd4e049cbd4656a0a04ba3_2.geojson'
 
     def handle(self, *args, **options):
-        # # restaurants
-        # restaurants = self.get_county_data(self.restaurants_url)
-        # self.save_restaurants(restaurants)
-        # # inspections
-        # inspections = self.get_county_data(self.inspections_url)
-        # self.save_inspections(inspections)
-        # # violations
-        # violations = self.get_county_data(self.violations_url)
-        # self.save_violations(violations)
+        # restaurants
+        restaurants = self.get_county_data(self.restaurants_url)
+        self.save_restaurants(restaurants)
+        # inspections
+        inspections = self.get_county_data(self.inspections_url)
+        self.save_inspections(inspections)
+        # violations
+        violations = self.get_county_data(self.violations_url)
+        self.save_violations(violations)
 
-        # self.inspection_risk_factors()
+        self.inspection_risk_factors()
         self.establishment_risk_factors()
 
     def get_county_data(self, url):
@@ -203,7 +203,7 @@ class Command(BaseCommand):
             try:
                 recent_inspection = Inspection.objects.filter(establishment_id=establishment.id, type=1).order_by('-date')[0]
             except IndexError:
-                # print("No Routine Inspections for HSISID #{}".format(establishment.state_id))
+                print("No Routine Inspections for HSISID #{}".format(establishment.state_id))
                 continue
             for factor in factors:
                 establishment.hygeine_count = recent_inspection.hygeine_count
