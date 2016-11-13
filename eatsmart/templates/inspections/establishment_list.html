@@ -32,11 +32,14 @@
                     coordinates: [{{ establishment.location.x|stringformat:"f" }}, {{ establishment.location.y|stringformat:"f" }}]
                 },
                 properties: {
-                    title: '{{establishment.name|title}}',
+                    title:
+                      {% if establishment.pretty_name %}'{{establishment.pretty_name|title}}'
+                      {% else %}'{{establishment.name|title}}'
+                      {% endif %},
                     link: '{{establishment.pk}}',
                     // one can customize markers by adding simplestyle properties
                     // http://mapbox.com/developers/simplestyle/
-                    
+
                     'marker-size': 'medium',
                     'marker-color': '#5AC1A8'
                 }
@@ -74,14 +77,14 @@
         <div class="list-group">
             {% for establishment in establishments %}
             <a href="{% url "establishment-detail" establishment.pk %}" class="list-group-item foodlisting">
-              
+
                  <div class="row">
                     <h5 class="col-xs-9 col-md-10 list-group-item-heading ">{{ establishment|title }}
                     {% if establishment.property_id %}<span class="glyphicon glyphicon-camera"></span>{% endif %}
                     </h5>
                     <div class="col-xs-3 col-md-2 small text-muted text-right">{{ establishment.distance.mi|floatformat:"2" }} mi</div>
                  </div>
-              
+
                 <div class="row">
                   <div class="col-xs-5 col-md-4 small text-muted">
                   {{ establishment.address|title }}
@@ -89,7 +92,7 @@
                      {% if establishment.grade %}<span class="badge">{{ establishment.grade }}</span>{% endif %}
                      {% if establishment.insp_date %}<span class="badge-date hidden-xs">{{ establishment.insp_date|date:"M dS Y" }}</span>{% endif %}
                   </div>
-                  
+
                     <!-- Risk Factor icons -->
                     <ul class="risk-factor col-xs-7 col-md-8">
                     {% if establishment.has_risk_data %}
@@ -98,15 +101,15 @@
                         <li class="deduction{{ establishment.contamination_count }} contamination pull-right text-hide">Contamination</li>
                         <li class="deduction{{ establishment.cook_temp_count }} temperature pull-right text-hide">Temperature</li>
                         <li class="deduction{{ establishment.source_count }} source pull-right text-hide">Source</li>
-                    
+
                     {% else %}
                         <!-- No risk factor data for this establishment -->
                     {% endif %}
-                    
+
                     </ul>
-                
+
                 </div>
-          
+
             </a>
             {% endfor %}
         </div>
