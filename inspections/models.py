@@ -54,6 +54,7 @@ class Establishment(models.Model):
     property_id = models.CharField(ugettext_lazy("Property ID"), max_length=128, blank=True)
     image_url = models.URLField(max_length=255, blank=True)
     name = models.CharField(ugettext_lazy("Name"), max_length=255)
+    pretty_name = models.CharField(ugettext_lazy("Pretty Name"), max_length=255, blank=True)
     type = models.PositiveIntegerField(ugettext_lazy("Type"), default=0, choices=TYPE_CHOICES)
     address = models.CharField(ugettext_lazy("Address"), max_length=255)
     city = models.CharField(ugettext_lazy("City"), max_length=64)
@@ -67,24 +68,22 @@ class Establishment(models.Model):
                               default='active')
     location = models.PointField(ugettext_lazy("location"), null=True, blank=True)
 
-    hygeine_deductions = models.DecimalField(ugettext_lazy("Hygeine Deductions"), default=0,
-                                             max_digits=4, decimal_places=2, blank=True)
-    cook_temp_deductions = models.DecimalField(ugettext_lazy("Cooking Temperature Deductions"), default=0,
-                                               max_digits=4, decimal_places=2, blank=True)
-    source_deductions = models.DecimalField(ugettext_lazy("Unsafe Source Deductions"), default=0,
-                                            max_digits=4, decimal_places=2, blank=True)
-    hold_temp_deductions = models.DecimalField(ugettext_lazy("Holding Temperature Deductions"), default=0,
-                                               max_digits=4, decimal_places=2, blank=True)
-    contamination_deductions = models.DecimalField(ugettext_lazy("Contamination Deductions"), default=0,
-                                                   max_digits=4, decimal_places=2, blank=True)
-    hygeine_count = models.PositiveSmallIntegerField(ugettext_lazy("Hygeine Count"), default=0, blank=True)
-    cook_temp_count = models.PositiveSmallIntegerField(ugettext_lazy("Cooking Temperature Count"), default=0, blank=True)
-    source_count = models.PositiveSmallIntegerField(ugettext_lazy("Unsafe Source Count"), default=0, blank=True)
-    hold_temp_count = models.PositiveSmallIntegerField(ugettext_lazy("Holding Temperature Count"), default=0, blank=True)
-    contamination_count = models.PositiveSmallIntegerField(ugettext_lazy("Contamination Count"), default=0, blank=True)
+    hygeine_count = models.SmallIntegerField(ugettext_lazy("Hygeine Count"), default=-1, blank=True)
+    cook_temp_count = models.SmallIntegerField(ugettext_lazy("Cooking Temperature Count"), default=-1, blank=True)
+    source_count = models.SmallIntegerField(ugettext_lazy("Unsafe Source Count"), default=-1, blank=True)
+    hold_temp_count = models.SmallIntegerField(ugettext_lazy("Holding Temperature Count"), default=-1, blank=True)
+    contamination_count = models.SmallIntegerField(ugettext_lazy("Contamination Count"), default=-1, blank=True)
 
 
     objects = models.GeoManager()
+
+    @property
+    def has_risk_data(self):
+        return any([self.hygeine_count > -1,
+                    self.cook_temp_count > -1,
+                    self.source_count > -1,
+                    self.hold_temp_count > -1,
+                    self.contamination_count > -1])
 
     class Meta(object):
         unique_together = ('external_id', 'county')
@@ -123,24 +122,22 @@ class Inspection(models.Model):
     update_date = models.DateTimeField(ugettext_lazy("Update Date"), null=True, blank=True,
                                        db_index=True)
 
-    hygeine_deductions = models.DecimalField(ugettext_lazy("Hygeine Deductions"), default=0,
-                                             max_digits=4, decimal_places=2, blank=True)
-    cook_temp_deductions = models.DecimalField(ugettext_lazy("Cooking Temperature Deductions"), default=0,
-                                               max_digits=4, decimal_places=2, blank=True)
-    source_deductions = models.DecimalField(ugettext_lazy("Unsafe Source Deductions"), default=0,
-                                            max_digits=4, decimal_places=2, blank=True)
-    hold_temp_deductions = models.DecimalField(ugettext_lazy("Holding Temperature Deductions"), default=0,
-                                               max_digits=4, decimal_places=2, blank=True)
-    contamination_deductions = models.DecimalField(ugettext_lazy("Contamination Deductions"), default=0,
-                                                   max_digits=4, decimal_places=2, blank=True)
-    hygeine_count = models.PositiveSmallIntegerField(ugettext_lazy("Hygeine Count"), default=0, blank=True)
-    cook_temp_count = models.PositiveSmallIntegerField(ugettext_lazy("Cooking Temperature Count"), default=0, blank=True)
-    source_count = models.PositiveSmallIntegerField(ugettext_lazy("Unsafe Source Count"), default=0, blank=True)
-    hold_temp_count = models.PositiveSmallIntegerField(ugettext_lazy("Holding Temperature Count"), default=0, blank=True)
-    contamination_count = models.PositiveSmallIntegerField(ugettext_lazy("Contamination Count"), default=0, blank=True)
+    hygeine_count = models.SmallIntegerField(ugettext_lazy("Hygeine Count"), default=-1, blank=True)
+    cook_temp_count = models.SmallIntegerField(ugettext_lazy("Cooking Temperature Count"), default=-1, blank=True)
+    source_count = models.SmallIntegerField(ugettext_lazy("Unsafe Source Count"), default=-1, blank=True)
+    hold_temp_count = models.SmallIntegerField(ugettext_lazy("Holding Temperature Count"), default=-1, blank=True)
+    contamination_count = models.SmallIntegerField(ugettext_lazy("Contamination Count"), default=-1, blank=True)
 
     def __str__(self):
         return "Inspection #{}".format(self.pk)
+
+    @property
+    def has_risk_data(self):
+        return any([self.hygeine_count > -1,
+                    self.cook_temp_count > -1,
+                    self.source_count > -1,
+                    self.hold_temp_count > -1,
+                    self.contamination_count > -1])
 
 
 class Violation(models.Model):
