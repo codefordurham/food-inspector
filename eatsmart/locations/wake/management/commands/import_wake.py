@@ -1,6 +1,7 @@
 import time
 import requests
 import re
+import datetime
 from dateutil import parser
 
 from django.contrib.gis.geos import Point
@@ -16,17 +17,17 @@ class Command(BaseCommand):
     violations_url = 'http://data.wake.opendata.arcgis.com/datasets/9b04d0c39abd4e049cbd4656a0a04ba3_2.geojson'
 
     def handle(self, *args, **options):
-        # restaurants
-        restaurants = self.get_county_data(self.restaurants_url)
-        self.save_restaurants(restaurants)
-        # inspections
-        inspections = self.get_county_data(self.inspections_url)
-        self.save_inspections(inspections)
-        # violations
-        violations = self.get_county_data(self.violations_url)
-        self.save_violations(violations)
+        # # restaurants
+        # restaurants = self.get_county_data(self.restaurants_url)
+        # self.save_restaurants(restaurants)
+        # # inspections
+        # inspections = self.get_county_data(self.inspections_url)
+        # self.save_inspections(inspections)
+        # # violations
+        # violations = self.get_county_data(self.violations_url)
+        # self.save_violations(violations)
 
-        self.inspection_risk_factors()
+        # self.inspection_risk_factors()
         self.establishment_risk_factors()
 
     def get_county_data(self, url):
@@ -197,11 +198,12 @@ class Command(BaseCommand):
     def establishment_risk_factors(self):
         factors = ('hold_temp', 'cook_temp', 'contamination', 'hygeine', 'source')
         establishments = Establishment.objects.all()
+        curr_time = datetime.datetime.utcnow()
         for establishment in establishments:
             try:
                 recent_inspection = Inspection.objects.filter(establishment_id=establishment.id, type=1).order_by('-date')[0]
             except IndexError:
-                print("No Routine Inspections for HSISID #{}".format(establishment.state_id))
+                # print("No Routine Inspections for HSISID #{}".format(establishment.state_id))
                 continue
             for factor in factors:
                 establishment.hygeine_count = recent_inspection.hygeine_count
@@ -209,4 +211,6 @@ class Command(BaseCommand):
                 establishment.source_count = recent_inspection.source_count
                 establishment.hold_temp_count = recent_inspection.hold_temp_count
                 establishment.contamination_count = recent_inspection.contamination_count
+            if datetime.datetime.utcfromtimestamp(recent_inspection.date.timestamp()) - curr_time > datetime.timedelta(weeks=72):
+                establishment.status = 'deleted'
             establishment.save()
