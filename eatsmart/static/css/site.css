@@ -120,64 +120,64 @@ footer hr {
     .foodlisting              {padding:10px}
     .foodlisting .badge       {margin-top:5px;}
     .foodlisting .text-muted  {margin:0;}
-    
+
     .foodlisting .risk-factor { margin-top:10px;margin-bottom:0px;}
-  
-    .foodlisting .risk-factor li { 
+
+    .foodlisting .risk-factor li {
                       background-size: 25px 25px;
                       width:25px;
                       height:25px;
-                      opacity:0.1;}
+                      opacity:0.3;}
 
     .detail-risk-factor {margin-top:-15px;margin-left:5px;}
-  
+
     .detail-risk-factor li { background-size:50px;
                       width:50px;
                       height:50px;
-                      opacity:0.1;}                                                
-                    
-                    
-                    
-                    
-  /* Lights up the icon if there are violations or deductions */    
-     
-    .foodlisting .risk-factor .deduction1, 
-    .detail-risk-factor .deduction1 { opacity: 0.2 }
-    .foodlisting .risk-factor .deduction2, 
-    .detail-risk-factor .deduction2 { opacity: 0.4 }   
-    .foodlisting .risk-factor .deduction3, 
-    .detail-risk-factor .deduction3 { opacity: 0.6 }
-    .foodlisting .risk-factor .deduction4, 
-    .detail-risk-factor .deduction4 { opacity: 0.8 }
-    .foodlisting .risk-factor .deduction5, 
+                      opacity:0.3;}
+
+
+
+
+  /* Lights up the icon if there are violations or deductions */
+
+    .foodlisting .risk-factor .deduction1,
+    .detail-risk-factor .deduction1 { opacity: 0.5 }
+    .foodlisting .risk-factor .deduction2,
+    .detail-risk-factor .deduction2 { opacity: 0.65 }
+    .foodlisting .risk-factor .deduction3,
+    .detail-risk-factor .deduction3 { opacity: 0.8 }
+    .foodlisting .risk-factor .deduction4,
+    .detail-risk-factor .deduction4 { opacity: 0.85 }
+    .foodlisting .risk-factor .deduction5,
     .detail-risk-factor .deduction5 { opacity: 0.9 }
-    .foodlisting .risk-factor .deduction6, 
+    .foodlisting .risk-factor .deduction6,
     .detail-risk-factor .deduction6,
-    .foodlisting .risk-factor .deduction7, 
+    .foodlisting .risk-factor .deduction7,
     .detail-risk-factor .deduction7,
-    .foodlisting .risk-factor .deduction8, 
+    .foodlisting .risk-factor .deduction8,
     .detail-risk-factor .deduction8 { opacity: 1 }
-    
-    
-     
-                    
+
+
+
+
     /* Individual Icons */
     .detail-risk-factor li[class*="source"],
     .foodlisting .risk-factor li[class*="source"]        {background-image:url('source-icon.svg');}
-    
+
     .detail-risk-factor li[class*="temperature"],
     .foodlisting .risk-factor li[class*="temperature"]   {background-image:url('temperature-icon.svg');}
-    
+
     .detail-risk-factor li[class*="contamination"],
     .foodlisting .risk-factor li[class*="contamination"] {background-image:url('contamination-icon.svg');}
-    
+
     .detail-risk-factor li[class*="holding"],
     .foodlisting .risk-factor li[class*="holding"]       {background-image:url('holding-icon.svg');}
-    
+
     .detail-risk-factor li[class*="hygiene"],
     .foodlisting .risk-factor li[class*="hygiene"]       {background-image:url('hygiene-icon.svg');}
 
- 
+
 
 
 /* Customize container */
@@ -338,7 +338,7 @@ div.score .outof {
 
 .pager span {
   display: inline-block;
-  padding-top: 5px; 
+  padding-top: 5px;
   padding-right: 13px;
 
 }
