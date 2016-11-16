@@ -206,16 +206,16 @@ p.value {
 		content: url(https://ncfoodinspector.com/static/css/hygiene-icon.svg);
 	}
  
-    .risk-factor li[class*="source"]        {background:url('https://ncfoodinspector.com/static/css/source-icon.svg') no-repeat; }
+    .risk-factor li[class*="source"]        {background:url('https://ncfoodinspector.com/static/css/source-icon.svg') no-repeat; background-size:25px 25px;}
 	
     
-    .foodlisting .risk-factor li[class*="temperature"]   {background:url('https://ncfoodinspector.com/static/css/temperature-icon.svg') no-repeat;}
+    .foodlisting .risk-factor li[class*="temperature"]   {background:url('https://ncfoodinspector.com/static/css/temperature-icon.svg') no-repeat; background-size:25px 25px;}
 
-    .foodlisting .risk-factor li[class*="contamination"] {background:url('https://ncfoodinspector.com/static/css/contamination-icon.svg') no-repeat;}
+    .foodlisting .risk-factor li[class*="contamination"] {background:url('https://ncfoodinspector.com/static/css/contamination-icon.svg') no-repeat; background-size:25px 25px;}
 
-    .foodlisting .risk-factor li[class*="holding"]       {background:url('https://ncfoodinspector.com/static/css/holding-icon.svg') no-repeat;}
+    .foodlisting .risk-factor li[class*="holding"]       {background:url('https://ncfoodinspector.com/static/css/holding-icon.svg') no-repeat; background-size:25px 25px;}
 
-    .foodlisting .risk-factor li[class*="hygiene"]       {background:url('https://ncfoodinspector.com/static/css/hygiene-icon.svg') no-repeat;}
+    .foodlisting .risk-factor li[class*="hygiene"]       {background:url('https://ncfoodinspector.com/static/css/hygiene-icon.svg') no-repeat; background-size:25px 25px;}
 
 
 
