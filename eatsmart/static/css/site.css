@@ -115,8 +115,19 @@ footer hr {
   font-size: 20px;
 }
 
+p.value {
+	font-size:40px;
+	float:left;
+	display:block;
+	padding:0 15px 0 0;	
+	margin:-7px 0 0 0;
+}
 
-/* Formatting ajustments for icons*/
+.page-header h3 {
+	margin:0 0 10px 0;
+}
+
+/* Formatting adjustments for icons*/
     .foodlisting              {padding:10px}
     .foodlisting .badge       {margin-top:5px;}
     .foodlisting .text-muted  {margin:0;}
@@ -129,12 +140,24 @@ footer hr {
                       height:25px;
                       opacity:0.3;}
 
-    .detail-risk-factor {margin-top:-15px;margin-left:5px;}
+	
+	.detail-risk-factor li {
+			list-style:none;
+			line-height:60px;
+			text-align:left;
+			margin:0 0 10px 15px;
+			padding:0;
+			clear:left;
+	 }
 
-    .detail-risk-factor li { background-size:50px;
+    .detail-risk-factor li::before { 
                       width:50px;
                       height:50px;
-                      opacity:0.3;}
+                      opacity:0.2;
+					  display:block;
+					  float:left;
+					  margin-right:20px;
+	}
 
 
 
@@ -142,40 +165,57 @@ footer hr {
   /* Lights up the icon if there are violations or deductions */
 
     .foodlisting .risk-factor .deduction1,
-    .detail-risk-factor .deduction1 { opacity: 0.5 }
+    .detail-risk-factor .deduction1::before { opacity: 0.5 }
     .foodlisting .risk-factor .deduction2,
-    .detail-risk-factor .deduction2 { opacity: 0.65 }
+    .detail-risk-factor .deduction2::before { opacity: 0.5 }
     .foodlisting .risk-factor .deduction3,
-    .detail-risk-factor .deduction3 { opacity: 0.8 }
+    .detail-risk-factor .deduction3::before { opacity: 0.5 }
     .foodlisting .risk-factor .deduction4,
-    .detail-risk-factor .deduction4 { opacity: 0.85 }
+    .detail-risk-factor .deduction4::before { opacity: 1 }
     .foodlisting .risk-factor .deduction5,
-    .detail-risk-factor .deduction5 { opacity: 0.9 }
+    .detail-risk-factor .deduction5::before { opacity: 1 }
     .foodlisting .risk-factor .deduction6,
-    .detail-risk-factor .deduction6,
+    .detail-risk-factor .deduction6::before,
     .foodlisting .risk-factor .deduction7,
-    .detail-risk-factor .deduction7,
+    .detail-risk-factor .deduction7::before,
     .foodlisting .risk-factor .deduction8,
-    .detail-risk-factor .deduction8 { opacity: 1 }
+    .detail-risk-factor .deduction8::before { opacity: 1 }
 
 
 
 
     /* Individual Icons */
-    .detail-risk-factor li[class*="source"],
-    .foodlisting .risk-factor li[class*="source"]        {background-image:url('source-icon.svg');}
+	
+	.detail-risk-factor li.source::before {
+		content: url(https://ncfoodinspector.com/static/css/source-icon.svg);
+	}
+	
+	.detail-risk-factor li.temperature::before {
+		content: url(https://ncfoodinspector.com/static/css/temperature-icon.svg);
+	}
+	
+	.detail-risk-factor li.contamination::before {
+		content: url(https://ncfoodinspector.com/static/css/contamination-icon.svg);
+	}
+	
+	.detail-risk-factor li.holding::before {
+		content: url(https://ncfoodinspector.com/static/css/holding-icon.svg);
+	}
+	
+	.detail-risk-factor li.hygiene::before {
+		content: url(https://ncfoodinspector.com/static/css/hygiene-icon.svg);
+	}
+ 
+    .foodlisting .risk-factor li[class*="source"]        {background:url('https://ncfoodinspector.com/static/css/source-icon.svg') no-repeat;}
+	
+    
+    .foodlisting .risk-factor li[class*="temperature"]   {background:url('https://ncfoodinspector.com/static/css/temperature-icon.svg') no-repeat;}
 
-    .detail-risk-factor li[class*="temperature"],
-    .foodlisting .risk-factor li[class*="temperature"]   {background-image:url('temperature-icon.svg');}
+    .foodlisting .risk-factor li[class*="contamination"] {background:url('https://ncfoodinspector.com/static/css/contamination-icon.svg') no-repeat;}
 
-    .detail-risk-factor li[class*="contamination"],
-    .foodlisting .risk-factor li[class*="contamination"] {background-image:url('contamination-icon.svg');}
+    .foodlisting .risk-factor li[class*="holding"]       {background:url('https://ncfoodinspector.com/static/css/holding-icon.svg') no-repeat;}
 
-    .detail-risk-factor li[class*="holding"],
-    .foodlisting .risk-factor li[class*="holding"]       {background-image:url('holding-icon.svg');}
-
-    .detail-risk-factor li[class*="hygiene"],
-    .foodlisting .risk-factor li[class*="hygiene"]       {background-image:url('hygiene-icon.svg');}
+    .foodlisting .risk-factor li[class*="hygiene"]       {background:url('https://ncfoodinspector.com/static/css/hygiene-icon.svg') no-repeat;}
 
 
 
@@ -249,7 +289,7 @@ form#search {
 footer a{
     color: #999;
 }
-div.page-header {
+.page-header {
   margin-top: 0;
 }
 
@@ -267,14 +307,11 @@ tr.violation-detail td {
 }
 
 @media screen and (min-width: 768px) {
-  div.score {
-    float: right;
-  }
   body.establishment-detail address.establishment, body.establishment-detail p.latest-type {
     text-align: left;
   }
   body.establishment-detail p.latest-type {
-    margin-top: 0;
+    margin: 0;
   }
   img.property {
     width: 90%;
@@ -283,44 +320,7 @@ tr.violation-detail td {
   }
 }
 
-address.establishment {
-  text-align: center;
-}
 
-p.latest-type {
-  margin-top: 10px;
-  text-align: center;
-}
-
-div.score {
-  text-align: center;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-}
-
-div.score.bg-info {
-  background-color: #5AC1A8;
-}
-
-div.score h2 {
-  margin-top: 0;
-  font-size: 18px;
-}
-
-div.score .value {
-  padding-top: 25px;
-  font-size: 25px;
-  font-weight: 800;
-  color: #FAD955;
-  text-shadow: 2px 2px 0px #6F6D72;
-}
-
-div.score .outof {
-  color: #FFF;
-  font-size: 10px;
-  margin-top: -13px;
-}
 
 .main-map {
   height: 300px;
