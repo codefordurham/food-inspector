@@ -205,7 +205,11 @@ p.value {
 		content: url(https://ncfoodinspector.com/static/css/hygiene-icon.svg);
 	}
  
-    .foodlisting .risk-factor li[class*="source"]        {background:url('https://ncfoodinspector.com/static/css/source-icon.svg') no-repeat;}
+    .risk-factor li.source::before        {
+		content:url('https://ncfoodinspector.com/static/css/source-icon.svg') ;
+		height:25px;
+		width:25px;
+}
 	
     
     .foodlisting .risk-factor li[class*="temperature"]   {background:url('https://ncfoodinspector.com/static/css/temperature-icon.svg') no-repeat;}
