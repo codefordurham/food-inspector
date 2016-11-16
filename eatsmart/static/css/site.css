@@ -134,11 +134,10 @@ p.value {
 
     .foodlisting .risk-factor { margin-top:10px;margin-bottom:0px;}
 
-    .foodlisting .risk-factor li {
-                      background-size: 25px 25px;
+    .risk-factor li {
                       width:25px;
                       height:25px;
-                      opacity:0.3;}
+                      opacity:0.2;}
 
 	
 	.detail-risk-factor li {
