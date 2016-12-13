@@ -7,41 +7,15 @@
 
 {% block content %}
 
-<div class="page-header">
-  <h1>{% if establishment.pretty_name %} {{ establishment.pretty_name|title}}
+
+<div class='row page-header'>
+
+	<div class="col-xs-6">
+	<h3>{% if establishment.pretty_name %} {{ establishment.pretty_name|title}}
       {% else %}{{ establishment|title }}
-      {% endif %}</h1>
-</div>
+      {% endif %}</h3>
+	  
 
-<div class='row'>
-    <div class='col-xs-12 col-sm-2 col-sm-push-10'>
-        <div class='score bg-info'>
-            <p class='value'>{{ latest.score }}</p>
-            <p class='outof'>{% trans 'out of 100' %}</p>
-        </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-5 col-sm-push-2">
-        {% if establishment.has_risk_data %}
-        <h4 class="text-center risk-title">RISK FACTORS</h4>
-        <ul class="detail-risk-factor text-center list-inline">
-            <li class="deduction{{ establishment.hygeine_count }} hygiene text-hide">Hygiene</li>
-            <li class="deduction{{ establishment.hold_temp_count }} holding text-hide">Holding</li>
-            <li class="deduction{{ establishment.contamination_count }} contamination text-hide">Contamination</li>
-            <li class="deduction{{ establishment.cook_temp_count }} temperature text-hide">Temperature</li>
-            <li class="deduction{{ establishment.source_count }} source text-hide">Source</li>
-            </ul>
-        <p class="text-center"><a target="_blank" title="View FDA Guidance on Foodborne Illness Risk Factors" href="http://www.fda.gov/Food/GuidanceRegulation/RetailFoodProtection/FoodborneIllnessRiskFactorReduction/ucm224321.htm">What do these mean to me? [FDA.gov]</a>
-        </p><br/>
-
-        {% else %}
-            <!-- No risk factor data for this establishment -->
-        {% endif %}
-    </div>
-
-
-    <div class='col-xs-12 col-sm-4 col-sm-pull-7'>
-        <p class='latest-type'>{{ latest.get_type_display }}<br>{{ latest.date|date:"l, F j, Y" }}</p>
         <address class='establishment'>
           {{ establishment.address|title }}<br>
           {{ establishment.city }}, {{ establishment.state }} {{ establishment.postal_code }}<br>
@@ -50,18 +24,37 @@
           {% endif %}
         </address>
     </div>
+
+	<div class="col-xs-6">
+		<p class='value'>{{ latest.score }}</p>
+	    <p class='latest-type'>{{ latest.get_type_display }}<br>{{ latest.date|date:"l, F j, Y" }}</p>
+	</div>
+
+
+
 </div>
 
-{% if establishment.property_id %}
 <div class="row">
-    <div class='col-md-12'>
-        <div class="clear-fix center-block text-center">
-            <img src='http://www.ustaxdata.com/nc/durham/photos_renamed/{{establishment.property_id}}.jpg' class="property img-responsive img-thumbnail" />
-        </div>
-    </div>
-</div>
-{% endif %}
 
+    <div class="col-sm-6">
+        {% if establishment.has_risk_data %}
+        <h2>Risk Factors</h2>
+        <ul class="detail-risk-factor text-center">
+            <li class="deduction{{ establishment.hygeine_count }} hygiene">Personal Hygiene</li>
+            <li class="deduction{{ establishment.hold_temp_count }} holding">Improper Holding</li>
+            <li class="deduction{{ establishment.contamination_count }} contamination">Contamination</li>
+            <li class="deduction{{ establishment.cook_temp_count }} temperature">Inadequate Cooking</li>
+            <li class="deduction{{ establishment.source_count }} source">Unsafe Food Source</li>
+            </ul>
+        <p class="text-center"><a target="_blank" title="View FDA Guidance on Foodborne Illness Risk Factors" href="http://www.fda.gov/Food/GuidanceRegulation/RetailFoodProtection/FoodborneIllnessRiskFactorReduction/ucm224321.htm">What do these mean to me? [FDA.gov]</a>
+        </p><br/>
+
+        {% else %}
+            <!-- No risk factor data for this establishment -->
+        {% endif %}
+    </div>
+	
+<div class="col-sm-6">
 {% if latest.violations.exists %}
 <h2>{% trans 'Violations' %}</h2>
 <dl>
@@ -71,6 +64,9 @@
     {% endfor %}
 </dl>
 {% endif %}
+</div>
+
+</div>
 
 {% if inspections.exists %}
 <div class="row">
