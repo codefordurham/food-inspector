@@ -37,7 +37,7 @@ env:
 #    -----BEGIN PGP MESSAGE-----
 #    -----END PGP MESSAGE-----
 
-# Uncomment and update ssl_key and ssl_cert to enabled signed SSL
+# Uncomment and update ssl_key and ssl_cert to enable signed SSL
 # Must be GPG encrypted.
 # {% if 'balancer' in grains['roles'] %}
 # ssl_key: |
