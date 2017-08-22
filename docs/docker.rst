@@ -27,19 +27,21 @@ Setup the environment for the docker client::
   eval $(docker-machine env dockervm)
 
 
-Local Development Setup
------------------------
+Initial Local Development Setup
+-------------------------------
 
 Configure environment to use docker settings file::
 
   echo "DJANGO_SETTINGS_MODULE=eatsmart.settings.docker" > .env
 
-Build the app::
+Build the containers::
 
   docker-compose build
-  docker-compose up
 
-If the PostgreSQL container starts after Django, you may see some database connection errors. If so, just re-run ``docker-compose up``.
+Bring up the containers in this order (any way around this to avoid errors?)::
+
+  docker-compose up -d db
+  docker-compose up -d app
 
 To view in a browser, obtain the IP address of the dockervm::
 
