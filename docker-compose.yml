@@ -8,6 +8,15 @@ services:
       - ./pgdata:/var/lib/postgresql/data
     expose:
       - "5432"
+  queue:
+    hostname: queue
+    image: rabbitmq:3.6-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    ports:
+      - "5672:5672"  # we forward this port because it's useful for debugging
+      - "15672:15672"  # here, we can access rabbitmq management plugin
   app:
     env_file: .env
     build:

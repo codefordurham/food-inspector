@@ -43,6 +43,6 @@ RUN set -ex \
 
 COPY . /code/
 
-RUN /venv/bin/python manage.py collectstatic --noinput
+RUN /venv/bin/python /code/manage.py collectstatic --noinput
 
-CMD ["/code/compose/django/runserver.sh"]
+CMD ["/code/compose/django/gunicorn.sh"]
