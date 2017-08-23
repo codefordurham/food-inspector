@@ -1,23 +1,11 @@
 version: '3'
 
 services:
-  db:
-    restart: always
-    image: mdillon/postgis:9.3
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data
-    expose:
-      - "5432"
   app:
-    env_file: .env
+    environment:
+      - DJANGO_SETTINGS_MODULE=eatsmart.settings.docker
     build:
       context: .
-      dockerfile: ./compose/django/Dockerfile
+      dockerfile: ./compose/django/Dockerfile.override
     volumes:
       - .:/code
-    links:
-      - db:db
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db

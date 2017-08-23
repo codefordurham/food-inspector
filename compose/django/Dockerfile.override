@@ -35,12 +35,12 @@ RUN set -x \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Build Python virtualenv
-ADD ./requirements /code/requirements
+COPY ./requirements /code/requirements
 RUN set -ex \
     && pip install -U virtualenv \
     && virtualenv /venv \
     && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "/venv/bin/pip install -r /code/requirements/dev.txt"
 
-ADD . /code/
+COPY . /code/
 
 CMD ["/code/compose/django/runserver.sh"]
