@@ -13,6 +13,8 @@ services:
     build:
       context: .
       dockerfile: ./compose/django/Dockerfile
+    volumes:
+      - .:/code
     links:
       - db:db
     ports:
