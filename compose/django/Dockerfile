@@ -35,14 +35,15 @@ RUN set -x \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Build Python virtualenv
+ARG DJANGO_REQUIREMENTS
 COPY ./requirements /code/requirements
 RUN set -ex \
     && pip install -U virtualenv \
     && virtualenv /venv \
-    && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "/venv/bin/pip install -r /code/requirements/production.txt"
+    && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "/venv/bin/pip install -r /code/requirements/$DJANGO_REQUIREMENTS.txt"
 
 COPY . /code/
 
 RUN /venv/bin/python /code/manage.py collectstatic --noinput
 
-CMD ["/code/compose/django/gunicorn.sh"]
+# CMD ["/code/compose/django/gunicorn.sh"]

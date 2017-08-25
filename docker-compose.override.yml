@@ -2,10 +2,9 @@ version: '3'
 
 services:
   app:
-    environment:
-      - DJANGO_SETTINGS_MODULE=eatsmart.settings.docker
     build:
-      context: .
-      dockerfile: ./compose/django/Dockerfile.override
+      args:
+        DJANGO_REQUIREMENTS: dev
+    command: /code/compose/django/runserver.sh
     volumes:
       - .:/code
