@@ -76,6 +76,5 @@ Some useful commands::
   docker-compose -f docker-compose.yml -f docker-compose.deploy.yml logs -f
   docker-compose -f docker-compose.yml -f docker-compose.deploy.yml images
   docker-compose -f docker-compose.yml -f docker-compose.deploy.yml ps -q | xargs docker stats
-
-
-  .. docker-compose run app /venv/bin/python manage.py migrate
+  docker-compose -f docker-compose.yml -f docker-compose.deploy.yml run app /venv/bin/python manage.py shell
+  docker-compose -f docker-compose.yml -f docker-compose.deploy.yml run app /venv/bin/python manage.py shell --command="from eatsmart.locations.wake import tasks; tasks.import_wake_data.delay()"
