@@ -24,6 +24,22 @@ services:
     depends_on:
       - db
       - queue
+  beat:
+    env_file: .env
+    environment:
+      - C_FORCE_ROOT=1
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+      args:
+        DJANGO_REQUIREMENTS: production
+    command: /venv/bin/celery -A eatsmart beat --loglevel=DEBUG
+    links:
+      - db
+      - queue
+    depends_on:
+      - db
+      - queue
   app:
     depends_on:
       - db

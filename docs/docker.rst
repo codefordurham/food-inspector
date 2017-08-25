@@ -69,7 +69,7 @@ Build the containers::
 Bring up the containers in this order::
 
   docker-compose -f docker-compose.yml -f docker-compose.deploy.yml up -d db queue
-  docker-compose -f docker-compose.yml -f docker-compose.deploy.yml up -d worker app
+  docker-compose -f docker-compose.yml -f docker-compose.deploy.yml up -d worker beat app
 
 Some useful commands::
 
