@@ -49,7 +49,7 @@ You'll see a few errors for ``auth_permission``, ``django_content_type``, and ``
 Deploy Setup
 ------------
 
-This environment will provide you with PostgreSQL, RabbitMQ, Celery, and Django containers. The configuration is loaded from ``docker-compose.dev.yml`` and ``docker-compose.yml``, respectively.
+This environment will provide you with PostgreSQL, RabbitMQ, Celery, and Django containers. The configuration is loaded from ``docker-compose.deploy.yml`` and ``docker-compose.yml``, respectively.
 
 Create environment variables in ``.env``::
 
