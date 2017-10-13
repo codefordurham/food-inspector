@@ -77,7 +77,7 @@ for backend in TEMPLATES:
 
 # Uncomment if using celery worker configuration
 CELERY_SEND_TASK_ERROR_EMAILS = True
-# BROKER_URL = 'amqp://%(RABBITMQ_DEFAULT_USER)s:%(RABBITMQ_DEFAULT_PASS)s@%(RABBITMQ_DEFAULT_HOST)s/' % os.environ  # noqa
+BROKER_URL = os.environ.get('REDIS_URL', '')
 
 # Environment overrides
 # These should be kept to an absolute minimum
