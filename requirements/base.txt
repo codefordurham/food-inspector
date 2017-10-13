@@ -2,11 +2,11 @@ psycopg2==2.7.3.1
 Pillow==4.3.0
 Django==1.8.18
 django-dotenv==1.4.1
-celery==3.1.19
+celery==3.1.25
 redis==2.10.6
 
 BeautifulSoup4==4.4.0
-django-tastypie==0.14.0
+django-tastypie==0.13.3
 
 django-leaflet==0.18.1
 requests==2.18.4
