@@ -8,6 +8,10 @@ INSTALLED_APPS += (
     'debug_toolbar',
 )
 
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda request: True,
+}
+
 INTERNAL_IPS = ('127.0.0.1', )
 
 #: Don't send emails, just print them on stdout
