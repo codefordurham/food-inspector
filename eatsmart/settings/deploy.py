@@ -48,7 +48,7 @@ else:
     default_smtp_port = 25
 EMAIL_PORT = os.environ.get('EMAIL_PORT', default_smtp_port)
 EMAIL_SUBJECT_PREFIX = '[Eatsmart %s] ' % ENVIRONMENT.title()
-DEFAULT_FROM_EMAIL = 'noreply@%(DOMAIN)s' % os.environ
+# DEFAULT_FROM_EMAIL = 'noreply@%(DOMAIN)s' % os.environ
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 # CSRF_COOKIE_SECURE = True
@@ -77,7 +77,7 @@ for backend in TEMPLATES:
 
 # Uncomment if using celery worker configuration
 CELERY_SEND_TASK_ERROR_EMAILS = True
-BROKER_URL = 'amqp://%(RABBITMQ_DEFAULT_USER)s:%(RABBITMQ_DEFAULT_PASS)s@%(RABBITMQ_DEFAULT_HOST)s/' % os.environ  # noqa
+# BROKER_URL = 'amqp://%(RABBITMQ_DEFAULT_USER)s:%(RABBITMQ_DEFAULT_PASS)s@%(RABBITMQ_DEFAULT_HOST)s/' % os.environ  # noqa
 
 # Environment overrides
 # These should be kept to an absolute minimum
