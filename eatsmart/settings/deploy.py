@@ -18,13 +18,11 @@ DATABASES['default'].update(db_from_env)  # noqa: F405
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-WEBSERVER_ROOT = '/var/www/eatsmart/'
+PUBLIC_ROOT = os.path.join(PROJECT_ROOT, 'public')
 
-PUBLIC_ROOT = os.path.join(WEBSERVER_ROOT, 'public')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
-STATIC_ROOT = os.path.join(PUBLIC_ROOT, 'static')
-
-MEDIA_ROOT = os.path.join(PUBLIC_ROOT, 'media')
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 
 # CACHES = {
 #     'default': {
