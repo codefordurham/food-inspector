@@ -1,18 +1,14 @@
-psycopg2==2.6.1
-Pillow==3.0.0
-Django==1.8.6
+psycopg2==2.7.3.1
+Pillow==4.3.0
+Django==1.8.18
 django-dotenv==1.4.1
 celery==3.1.19
 redis==2.10.6
--e git://github.com/vkurup/django_compressor.git@develop#egg=django_compressor
-# Required by django-compressor
-django-appconf==0.6
-six==1.9.0
 
 BeautifulSoup4==4.4.0
--e git://github.com/toastdriven/django-tastypie.git#egg=django-tastypie
+django-tastypie==0.14.0
 
 django-leaflet==0.18.1
-requests==2.2.1
+requests==2.18.4
 whitenoise==3.3.0
 dj-database-url==0.4.2
