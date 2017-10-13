@@ -15,3 +15,4 @@ BeautifulSoup4==4.4.0
 django-leaflet==0.18.1
 requests==2.2.1
 whitenoise==3.3.0
+dj-database-url==0.4.2

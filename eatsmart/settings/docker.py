@@ -1,12 +1,5 @@
 from eatsmart.settings.dev import *   # noqa
 
-# Override settings here
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432,
-    }
-}
+import dj_database_url
+
+DATABASES['default'].update(dj_database_url.config())
