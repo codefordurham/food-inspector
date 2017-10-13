@@ -49,7 +49,7 @@ else:
 EMAIL_PORT = os.environ.get('EMAIL_PORT', default_smtp_port)
 EMAIL_SUBJECT_PREFIX = '[Eatsmart %s] ' % ENVIRONMENT.title()
 # DEFAULT_FROM_EMAIL = 'noreply@%(DOMAIN)s' % os.environ
-SERVER_EMAIL = DEFAULT_FROM_EMAIL
+# SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 # CSRF_COOKIE_SECURE = True
 
