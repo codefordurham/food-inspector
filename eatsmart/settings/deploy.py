@@ -81,6 +81,6 @@ CELERY_SEND_TASK_ERROR_EMAILS = True
 
 # Environment overrides
 # These should be kept to an absolute minimum
-if ENVIRONMENT.upper() == 'LOCAL':
-    # Don't send emails from the Vagrant boxes
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# if ENVIRONMENT.upper() == 'LOCAL':
+# Don't send emails from the Vagrant boxes
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
