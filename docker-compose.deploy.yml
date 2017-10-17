@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  queue:
+    image: rabbitmq:3.6-management-alpine
+    hostname: queue
+    env_file: .env
+    ports:
+      - "5672"
+      - "15672:15672"  # management plugin
+  worker:
+    env_file: .env
+    environment:
+      - C_FORCE_ROOT=1
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+      args:
+        DJANGO_REQUIREMENTS: production
+    command: /venv/bin/celery -A eatsmart worker --loglevel=DEBUG
+    links:
+      - db
+      - queue
+    depends_on:
+      - db
+      - queue
+  beat:
+    env_file: .env
+    environment:
+      - C_FORCE_ROOT=1
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+      args:
+        DJANGO_REQUIREMENTS: production
+    command: /venv/bin/celery -A eatsmart beat --loglevel=DEBUG
+    links:
+      - db
+      - queue
+    depends_on:
+      - db
+      - queue
+  app:
+    depends_on:
+      - db
+      - queue
+
+
+# http://vsupalov.com/docker-env-vars/
+# https://github.com/docker/docker-bench-security
