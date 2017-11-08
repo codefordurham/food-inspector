@@ -103,11 +103,16 @@ h2 {
 }
 
 .navbar-brand {
+  color: white !important;
+  font-size: 22px;
+  font-weight: 900;
   padding: 7px;
+  text-shadow: 1.5px 1.5px 0px #707070;
 }
 
 .navbar-brand img {
   height: 37px;
+  margin-left: 3px;
 }
 
 .header {

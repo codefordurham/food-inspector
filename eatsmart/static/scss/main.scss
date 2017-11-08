@@ -59,9 +59,16 @@ h2 {
     color: white !important;
 }
 .navbar-brand {
+  color: white !important;
+  font: {
+    size: 22px;
+    weight: 900;
+  }
   padding: 7px;
+  text-shadow: 1.5px 1.5px 0px #707070;
   img {
     height: 37px;
+    margin-left: 3px;
   }
 }
 //------------------------------
