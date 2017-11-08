@@ -1,0 +1,667 @@
+// compileExpanded, expandedFilenamePattern: ../css/site.css
+/* Space out content a bit */
+@import 'components/icons';
+
+body {
+  padding-bottom: 20px;
+  font-family: 'Open Sans', sans-serif;
+  &> .container {
+    padding: 60px 15px 0;
+  }
+}
+
+h1 {
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.container {
+  .text-muted {
+    margin: 20px 0;
+  }
+}
+
+.detail-value {
+  padding-bottom: 5px;
+  padding-left: 25px;
+}
+
+.badge-date {
+ font-size: 10px;
+ float: right;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+//NAVBAR-------------------
+
+.navbar-default {
+  background-color: #5AC1A8;
+  border-color: #e7e7e7;
+  .navbar-toggle {
+    background-color: white;
+    &:hover, &:focus {
+      background-color: white;
+    }
+  }
+}
+.navbar-nav>li>a {
+    color: white !important;
+}
+.navbar-brand {
+  padding: 7px;
+  img {
+    height: 37px;
+  }
+}
+//------------------------------
+.header{
+  background-color: #ADBABF;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-shadow: 0 1px 2px rgba(30, 30, 30,.5);
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    font-size: 20px;
+  }
+  a {
+    color: #FFF;
+  }
+}
+
+.list-group {
+    /*border: 1px solid #6f6d72;*/
+}
+.list-group-item {
+  &:nth-child(even) {
+    /*background: #e2e0df;*/
+    /*border: 1px solid #6f6d72;*/
+  }
+}
+a.list-group-item:hover {
+  /*background: #e2e0df;*/
+  .list-group-item-heading {
+    /*color: white;*/
+    font-weight: bold;
+  }
+  .list-group-item-text {
+    color: #6F6D72;
+  }
+}
+
+.btn.btn-default {
+    background: #5AC1A8;
+    color: white;
+}
+.badge {
+    background: #5AC1A8;
+    border: 1px solid rgb(190, 190, 190);
+}
+
+footer {
+  color: #777;
+}
+
+footer hr {
+  margin-top: 8px;
+}
+
+p.value {
+	font-size:40px;
+	float:left;
+	display:block;
+	padding:0 15px 0 0;
+	margin:-7px 0 0 0;
+}
+
+.page-header h3 {
+	margin:0 0 10px 0;
+}
+
+.foodlisting {
+  padding: 10px;
+  .badge {
+    margin-top: 5px;
+  }
+  .text-muted {
+    margin: 0;
+  }
+  .risk-factor {
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
+}
+.risk-factor li {
+  background-size: 25px 25px;
+  width: 25px;
+  height: 25px;
+  opacity: 0.2;
+}
+
+.detail-risk-factor li {
+    list-style:none;
+    line-height:60px;
+    text-align:left;
+    margin:0 0 10px 15px;
+    padding:0;
+    clear:left;
+    &::before {
+      width:50px;
+      height:50px;
+      opacity:0.2;
+      display:block;
+      float:left;
+      margin-right:20px;
+    }
+ }
+
+/* Lights up the icon if there are violations or deductions */
+
+.foodlisting .risk-factor .deduction1,
+.detail-risk-factor .deduction1::before {
+  opacity: 0.5
+}
+.foodlisting .risk-factor .deduction2,
+.detail-risk-factor .deduction2::before {
+  opacity: 0.5
+}
+.foodlisting .risk-factor .deduction3,
+.detail-risk-factor .deduction3::before {
+  opacity: 0.5
+}
+.foodlisting .risk-factor .deduction4,
+.detail-risk-factor .deduction4::before {
+  opacity: 1
+}
+.foodlisting .risk-factor .deduction5,
+.detail-risk-factor .deduction5::before {
+  opacity: 1
+}
+.foodlisting .risk-factor .deduction6,
+.detail-risk-factor .deduction6::before,
+.foodlisting .risk-factor .deduction7,
+.detail-risk-factor .deduction7::before,
+.foodlisting .risk-factor .deduction8,
+.detail-risk-factor .deduction8::before {
+  opacity: 1
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+ul#establishments {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+ul#establishments li {
+  padding-top: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #DEDFFF;
+}
+
+form#search {
+  margin-bottom: 10px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+.navbar-nav.navbar-right:last-child {
+    margin-right: 0 !important;
+}
+footer a{
+    color: #999;
+}
+.page-header {
+  margin-top: 0;
+}
+
+table .short-date, table .score, table .violations {
+  text-align: right;
+}
+
+td.violation-list dl {
+  font-size: 12px;
+  margin: 0;
+}
+
+tr.violation-detail td {
+  background: rgba(90, 193, 168, 0.35);
+}
+
+@media screen and (min-width: 768px) {
+  body.establishment-detail address.establishment, body.establishment-detail p.latest-type {
+    text-align: left;
+  }
+  body.establishment-detail p.latest-type {
+    margin: 0;
+  }
+  img.property {
+    width: 90%;
+    text-align: center;
+    margin-top: 15px;
+  }
+}
+
+
+
+.main-map {
+  height: 300px;
+  margin-bottom: 10px;
+}
+@media screen and (max-width: 768px) {
+    .main-map {
+        height: 150px;
+    }
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+  background-color: #51AE97;
+}
+
+.pager span {
+  display: inline-block;
+  padding-top: 5px;
+  padding-right: 13px;
+
+}
+//
+//copypasta from original css file before scss conversion
+/* Space out content a bit */
+// body {
+//   padding-bottom: 20px;
+//   font-family: 'Open Sans', sans-serif;
+// }
+//
+// body > .container {
+//   padding: 60px 15px 0;
+// }
+
+// h1 {
+//   font-size: 30px;
+//   margin-bottom: 12px;
+// }
+//
+// h2 {
+//   font-size: 24px;
+//   font-weight: 400;
+// }
+
+// .container .text-muted {
+//   margin: 20px 0;
+// }
+
+// .detail-value {
+//   padding-bottom: 5px;
+//   padding-left: 25px;
+// }
+//
+// .badge-date {
+//  font-size: 10px;
+//  float: right;
+// }
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+// .header,
+// .marketing,
+// .footer {
+//   padding-right: 15px;
+//   padding-left: 15px;
+// }
+
+/* Make the masthead heading the same height as the navigation */
+// .navbar-default {
+//     background-color: #5AC1A8;
+//     border-color: #e7e7e7;
+// }
+// .navbar-nav>li>a {
+//     color: white !important;
+// }
+// .navbar-brand {
+//     padding: 7px;
+// }
+// .navbar-brand img {
+//     height: 37px;
+// }
+// .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus,
+// .navbar-default .navbar-toggle, .navbar-default .navbar-toggle {
+//     background-color: white;
+// }
+// .header h3 {
+//   margin-top: 0;
+//   margin-bottom: 0;
+//   line-height: 40px;
+// }
+//
+// .header {
+//   background-color: #ADBABF;
+//   padding-top: 5px;
+//   padding-bottom: 5px;
+//   text-shadow: 0 1px 2px rgba(30, 30, 30,.5);
+// }
+//
+// .header a {
+//   color: #FFF;
+// }
+
+
+/* List Style */
+// .list-group {
+//     /*border: 1px solid #6f6d72;*/
+// }
+// .list-group-item:nth-child(even) {
+//     /*background: #e2e0df;*/
+//     /*border: 1px solid #6f6d72;*/
+// }
+// a.list-group-item:hover {
+//     /*background: #e2e0df;*/
+// }
+// a.list-group-item:hover .list-group-item-heading {
+//     /*color: white;*/
+//     font-weight: bold;
+// }
+// a.list-group-item:hover .list-group-item-text {
+//     color: #6F6D72;
+// }
+// .btn.btn-default {
+//     background: #5AC1A8;
+//     color: white;
+// }
+// .badge {
+//     background: #5AC1A8;
+//     border: 1px solid rgb(190, 190, 190);
+// }
+/* Custom page footer */
+// footer {
+//   color: #777;
+// }
+//
+// footer hr {
+//   margin-top: 8px;
+// }
+
+// .header h3 {
+//   font-size: 20px;
+// }
+
+// p.value {
+// 	font-size:40px;
+// 	float:left;
+// 	display:block;
+// 	padding:0 15px 0 0;
+// 	margin:-7px 0 0 0;
+// }
+//
+// .page-header h3 {
+// 	margin:0 0 10px 0;
+// }
+
+/* Formatting adjustments for icons*/
+    // .foodlisting              {padding:10px}
+    // .foodlisting .badge       {margin-top:5px;}
+    // .foodlisting .text-muted  {margin:0;}
+    //
+    // .foodlisting .risk-factor { margin-top:10px;margin-bottom:0px;}
+    //
+    // .risk-factor li {
+		// 			background-size:25px 25px;
+    //                   width:25px;
+    //                   height:25px;
+    //                   opacity:0.2;}
+    //
+
+	// .detail-risk-factor li {
+	// 		list-style:none;
+	// 		line-height:60px;
+	// 		text-align:left;
+	// 		margin:0 0 10px 15px;
+	// 		padding:0;
+	// 		clear:left;
+	//  }
+  //
+  //   .detail-risk-factor li::before {
+  //                     width:50px;
+  //                     height:50px;
+  //                     opacity:0.2;
+	// 				  display:block;
+	// 				  float:left;
+	// 				  margin-right:20px;
+	// }
+
+
+
+
+  /* Lights up the icon if there are violations or deductions */
+
+    // .foodlisting .risk-factor .deduction1,
+    // .detail-risk-factor .deduction1::before { opacity: 0.5 }
+    // .foodlisting .risk-factor .deduction2,
+    // .detail-risk-factor .deduction2::before { opacity: 0.5 }
+    // .foodlisting .risk-factor .deduction3,
+    // .detail-risk-factor .deduction3::before { opacity: 0.5 }
+    // .foodlisting .risk-factor .deduction4,
+    // .detail-risk-factor .deduction4::before { opacity: 1 }
+    // .foodlisting .risk-factor .deduction5,
+    // .detail-risk-factor .deduction5::before { opacity: 1 }
+    // .foodlisting .risk-factor .deduction6,
+    // .detail-risk-factor .deduction6::before,
+    // .foodlisting .risk-factor .deduction7,
+    // .detail-risk-factor .deduction7::before,
+    // .foodlisting .risk-factor .deduction8,
+    // .detail-risk-factor .deduction8::before { opacity: 1 }
+
+
+
+
+    /* Individual Icons */
+
+// 	.detail-risk-factor li.source::before {
+// 		content: url(https://ncfoodinspector.com/static/css/source-icon.svg);
+// 	}
+//
+// 	.detail-risk-factor li.temperature::before {
+// 		content: url(https://ncfoodinspector.com/static/css/temperature-icon.svg);
+// 	}
+//
+// 	.detail-risk-factor li.contamination::before {
+// 		content: url(https://ncfoodinspector.com/static/css/contamination-icon.svg);
+// 	}
+//
+// 	.detail-risk-factor li.holding::before {
+// 		content: url(https://ncfoodinspector.com/static/css/holding-icon.svg);
+// 	}
+//
+// 	.detail-risk-factor li.hygiene::before {
+// 		content: url(https://ncfoodinspector.com/static/css/hygiene-icon.svg);
+// 	}
+//
+//     .risk-factor li[class*="source"]        {background:url('source-icon.svg') no-repeat; background-size:25px 25px;}
+//
+//
+//     .foodlisting .risk-factor li[class*="temperature"]   {background:url('temperature-icon.svg') no-repeat; background-size:25px 25px;}
+//
+//     .foodlisting .risk-factor li[class*="contamination"] {background:url('contamination-icon.svg') no-repeat; background-size:25px 25px;}
+//
+//     .foodlisting .risk-factor li[class*="holding"]       {background:url('holding-icon.svg') no-repeat; background-size:25px 25px;}
+//
+//     .foodlisting .risk-factor li[class*="hygiene"]       {background:url('hygiene-icon.svg') no-repeat; background-size:25px 25px;}
+//
+//
+//
+//
+// /* Customize container */
+// @media (min-width: 768px) {
+//   .container {
+//     max-width: 730px;
+//   }
+// }
+// .container-narrow > hr {
+//   margin: 30px 0;
+// }
+//
+// /* Main marketing message and sign up button */
+// .jumbotron {
+//   text-align: center;
+//   border-bottom: 1px solid #e5e5e5;
+// }
+// .jumbotron .btn {
+//   padding: 14px 24px;
+//   font-size: 21px;
+// }
+//
+// /* Supporting marketing content */
+// .marketing {
+//   margin: 40px 0;
+// }
+// .marketing p + h4 {
+//   margin-top: 28px;
+// }
+//
+// ul#establishments {
+//   list-style-type: none;
+//   padding-left: 0px;
+// }
+//
+// ul#establishments li {
+//   padding-top: 18px;
+//   padding-bottom: 18px;
+//   border-bottom: 1px solid #DEDFFF;
+// }
+//
+// form#search {
+//   margin-bottom: 10px;
+// }
+//
+// /* Responsive: Portrait tablets and up */
+// @media screen and (min-width: 768px) {
+//   /* Remove the padding we set earlier */
+//   .header,
+//   .marketing,
+//   .footer {
+//     padding-right: 0;
+//     padding-left: 0;
+//   }
+//   /* Space out the masthead */
+//   .header {
+//     margin-bottom: 30px;
+//     padding-right: 15px;
+//     padding-left: 15px;
+//   }
+//   /* Remove the bottom border on the jumbotron for visual effect */
+//   .jumbotron {
+//     border-bottom: 0;
+//   }
+// }
+// .navbar-nav.navbar-right:last-child {
+//     margin-right: 0 !important;
+// }
+// footer a{
+//     color: #999;
+// }
+// .page-header {
+//   margin-top: 0;
+// }
+//
+// table .short-date, table .score, table .violations {
+//   text-align: right;
+// }
+//
+// td.violation-list dl {
+//   font-size: 12px;
+//   margin: 0;
+// }
+//
+// tr.violation-detail td {
+//   background: rgba(90, 193, 168, 0.35);
+// }
+//
+// @media screen and (min-width: 768px) {
+//   body.establishment-detail address.establishment, body.establishment-detail p.latest-type {
+//     text-align: left;
+//   }
+//   body.establishment-detail p.latest-type {
+//     margin: 0;
+//   }
+//   img.property {
+//     width: 90%;
+//     text-align: center;
+//     margin-top: 15px;
+//   }
+// }
+//
+//
+//
+// .main-map {
+//   height: 300px;
+//   margin-bottom: 10px;
+// }
+// @media screen and (max-width: 768px) {
+//     .main-map {
+//         height: 150px;
+//     }
+// }
+//
+// .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+//   background-color: #51AE97;
+// }
+//
+// .pager span {
+//   display: inline-block;
+//   padding-top: 5px;
+//   padding-right: 13px;
+//
+// }

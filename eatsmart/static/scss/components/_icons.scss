@@ -1,0 +1,38 @@
+// !compileOnSave
+// compileOnSave: false
+.detail-risk-factor li {
+  &.source::before {
+    content: url(https://ncfoodinspector.com/static/css/source-icon.svg);
+  }
+  &.temperature::before {
+    content: url(https://ncfoodinspector.com/static/css/temperature-icon.svg);
+  }
+  &.contamination::before {
+    content: url(https://ncfoodinspector.com/static/css/contamination-icon.svg);
+  }
+  &.holding::before {
+    content: url(https://ncfoodinspector.com/static/css/holding-icon.svg);
+  }
+  &.hygiene::before {
+    content: url(https://ncfoodinspector.com/static/css/hygiene-icon.svg);
+  }
+}
+
+.risk-factor li[class*="source"] {
+  background:url('source-icon.svg') no-repeat;
+  background-size:25px 25px;
+}
+.foodlisting .risk-factor {
+  li[class*="temperature"] {
+    background:url('temperature-icon.svg') no-repeat; background-size:25px 25px;
+  }
+  li[class*="contamination"] {
+    background:url('contamination-icon.svg') no-repeat; background-size:25px 25px;
+  }
+  li[class*="holding"] {
+    background:url('holding-icon.svg') no-repeat; background-size:25px 25px;
+  }
+  li[class*="hygiene"] {
+    background:url('hygiene-icon.svg') no-repeat; background-size:25px 25px;
+  }
+}
