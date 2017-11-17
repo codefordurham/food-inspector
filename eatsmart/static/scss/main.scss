@@ -1,7 +1,7 @@
 // compileExpanded, expandedFilenamePattern: ../css/site.css
 /* Space out content a bit */
 @import 'components/icons';
-
+@import 'components/navbar';
 body {
   padding-bottom: 20px;
   font-family: 'Open Sans', sans-serif;
@@ -45,32 +45,6 @@ h2 {
 }
 //NAVBAR-------------------
 
-.navbar-default {
-  background-color: #5AC1A8;
-  border-color: #e7e7e7;
-  .navbar-toggle {
-    background-color: white;
-    &:hover, &:focus {
-      background-color: white;
-    }
-  }
-}
-.navbar-nav>li>a {
-    color: white !important;
-}
-.navbar-brand {
-  color: white !important;
-  font: {
-    size: 22px;
-    weight: 900;
-  }
-  padding: 7px;
-  text-shadow: 1.5px 1.5px 0px #707070;
-  img {
-    height: 37px;
-    margin-left: 3px;
-  }
-}
 //------------------------------
 .header{
   background-color: #ADBABF;
@@ -108,10 +82,7 @@ a.list-group-item:hover {
   }
 }
 
-.btn.btn-default {
-    background: #5AC1A8;
-    color: white;
-}
+
 .badge {
     background: #5AC1A8;
     border: 1px solid rgb(190, 190, 190);
@@ -243,10 +214,6 @@ ul#establishments li {
   border-bottom: 1px solid #DEDFFF;
 }
 
-form#search {
-  margin-bottom: 10px;
-}
-
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
@@ -267,9 +234,7 @@ form#search {
     border-bottom: 0;
   }
 }
-.navbar-nav.navbar-right:last-child {
-    margin-right: 0 !important;
-}
+
 footer a{
     color: #999;
 }
@@ -316,9 +281,7 @@ tr.violation-detail td {
     }
 }
 
-.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
-  background-color: #51AE97;
-}
+
 
 .pager span {
   display: inline-block;
