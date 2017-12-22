@@ -2,18 +2,6 @@ Server Provisioning
 ========================
 
 
-Dokku Setup
------------
-
-Install dokku plugins::
-
-    ssh copelco@cfd sudo dokku plugin:install https://github.com/michaelshobbs/dokku-logspout.git
-    ssh copelco@cfd sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
-    ssh copelco@cfd sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git postgres
-    ssh copelco@cfd sudo dokku plugin:install https://github.com/dokku/dokku-redis.git redis
-    ssh cfd logspout:server syslog+tls://logs2.papertrailapp.com:20851
-
-
 NC Food Inspector
 -----------------
 
@@ -68,6 +56,10 @@ Now you should be able to set up the rest::
     # Tell local git about the dokku server and push
     $ git remote add cfd cfd:ncfoodinspector
     $ git push cfd dokku
+
+    # Domains
+    ssh cfd domains:add ncfoodinspector ncfoodinspector.com
+    ssh cfd redirect:set ncfoodinspector www.ncfoodinspector.com ncfoodinspector.com
 
     # Setup SSL
     ssh cfd config:set ncfoodinspector --no-restart DOKKU_LETSENCRYPT_EMAIL='code-for-durham-team@codeforamerica.org'
