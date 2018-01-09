@@ -13,7 +13,7 @@ Initial Local Development Setup
 
 Checkout the code repository::
 
-  git@github.com:codefordurham/food-inspector.git
+  git clone git@github.com:codefordurham/food-inspector.git
   cd food-inspector/
 
 The default development environment will provide you with running PostgreSQL and Django containers:
