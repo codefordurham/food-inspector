@@ -54,5 +54,5 @@ If you've modified the DB locally and want a fresh start, follow these steps fir
 
   docker-compose down
   docker volume rm -rf ./pgdata  # remove existing PostgreSQL data
-  docker-compose up -d db # wait 5-10 seconds after running this
+  docker-compose up -d db  # wait 5-10 seconds after running this
   docker-compose up -d app  # this will run manage.py migrate and provide a fresh DB
