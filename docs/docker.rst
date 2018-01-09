@@ -11,6 +11,11 @@ Install `Docker for Mac <https://www.docker.com/docker-mac>`_ .
 Initial Local Development Setup
 -------------------------------
 
+Checkout the code repository::
+
+  git@github.com:codefordurham/food-inspector.git
+  cd food-inspector/
+
 The default development environment will provide you with running PostgreSQL and Django containers:
 
 * PostgreSQL: v9.3 w/ PostGIS v2.3. ``./pgdata`` is mounted from the host environment to persist data.
