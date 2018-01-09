@@ -44,42 +44,15 @@ Load DB Dump
 
 The easiest way to get data is to load a db dump::
 
-  wget https://s3.amazonaws.com/ncfoodinspector/eatsmart.tar.zip
-  unzip eatsmart.tar.zip
-  docker exec -i "`docker-compose ps -q db`" pg_restore --data-only --clean --no-acl --no-owner -U "postgres" -d "postgres" < eatsmart.tar
+  curl -O https://s3.amazonaws.com/ncfoodinspector/ncfoodinspector.dump.zip
+  unzip ncfoodinspector.dump.zip
+  docker exec -i "`docker-compose ps -q db`" pg_restore --data-only --no-acl --no-owner -U "postgres" -d "postgres" < db.dump
 
 You'll see a few errors for ``auth_permission``, ``django_content_type``, and ``django_migrations`` tables, but it will still work.
 
+If you've modified the DB locally and want a fresh start, follow these steps first::
 
-Deploy Setup
-------------
-
-This environment will provide you with PostgreSQL, RabbitMQ, Celery, and Django containers. The configuration is loaded from ``docker-compose.deploy.yml`` and ``docker-compose.yml``, respectively.
-
-Create environment variables in ``.env``::
-
-  DJANGO_SETTINGS_MODULE=eatsmart.settings.deploy
-  ENVIRONMENT=LOCAL  # LOCAL = testing production env with compose
-  SECRET_KEY=<fill-me-in>
-  DOMAIN=localhost
-  DATABASE_URL=postgis://postgres:postgres@db:5432/postgres
-  RABBITMQ_DEFAULT_USER=admin
-  RABBITMQ_DEFAULT_PASS=admin
-  RABBITMQ_DEFAULT_HOST=queue
-
-Build the containers::
-
-  docker-compose -f docker-compose.yml -f docker-compose.deploy.yml build
-
-Bring up the containers in this order::
-
-  docker-compose -f docker-compose.yml -f docker-compose.deploy.yml up -d db queue
-  docker-compose -f docker-compose.yml -f docker-compose.deploy.yml up -d worker beat app
-
-Some useful commands::
-
-  docker-compose -f docker-compose.yml -f docker-compose.deploy.yml logs -f
-  docker-compose -f docker-compose.yml -f docker-compose.deploy.yml images
-  docker-compose -f docker-compose.yml -f docker-compose.deploy.yml ps -q | xargs docker stats
-  docker-compose -f docker-compose.yml -f docker-compose.deploy.yml run app /venv/bin/python manage.py shell
-  docker-compose -f docker-compose.yml -f docker-compose.deploy.yml run app /venv/bin/python manage.py shell --command="from eatsmart.locations.wake import tasks; tasks.import_wake_data.delay()"
+  docker-compose down
+  docker volume rm -rf ./pgdata  # remove existing PostgreSQL data
+  docker-compose up -d db # wait 5-10 seconds after running this
+  docker-compose up -d app  # this will run manage.py migrate and provide a fresh DB
