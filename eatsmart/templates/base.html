@@ -27,37 +27,8 @@
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <a class="navbar-brand" href='{% url "establishment-list" %}'><img src="{% static 'images/NCFL.png' %}" alt="NC Food Inspector"/></a>
             </div>
-            {% get_current_language as LANGUAGE_CODE %}
-            <div class="collapse navbar-collapse">
-               <ul class="nav navbar-nav navbar-right">
-                   <li {% if LANGUAGE_CODE == "en-us" %}class="active"{% endif %}>
-                       <a href="{% url 'users-language' %}?lang=en-us">
-                           <img src="{% static 'images/us.png' %}" height="18" width="18"/>
-                       </a>
-                   </li>
-                   <li {% if LANGUAGE_CODE == "es" %}class="active"{% endif %}>
-                       <a href="{% url 'users-language' %}?lang=es">
-                           <img src="{% static 'images/spain.png' %}" height="18" width="18"/>
-                       </a>
-                   </li>
-                   <li><a href="https://docs.google.com/forms/d/1zbmJDzx54ovrvxpfpH00Tbn8kFUbXImv6spIekhYGgc/viewform">{% trans 'Feedback' %}</a></li>
-                   <li><a href="{% url 'about' %}">{% trans 'About' %}</a></li>
-                    {% if user.is_authenticated %}
-                        {% if user.is_staff %}
-                          <li><a href="{% url "admin:index" %}">{% trans "Admin" %}</a></li>
-                        {% endif %}
-                        <li><a href="{% url "admin:logout" %}">{% trans "Log Out" %}</a></li>
-                    {% endif %}
-               </ul>
-            </div><!--/.nav-collapse -->
         </div>
     </div>
     <div class='container'>
@@ -82,9 +53,18 @@
         {% endblock content-outer %}
         {% block footer %}
         <footer>
-            <div class='row'>
+            <div class="row text-center">
                 <hr>
-                <div class="text-center">
+                <div class="col-md-4">
+                    <a href="{% url 'about' %}">{% trans 'About' %}</a>
+                    {% if user.is_authenticated %}
+                        {% if user.is_staff %}
+                            <a href="{% url "admin:index" %}">{% trans "Admin" %}</a>
+                        {% endif %}
+                            <a href="{% url "admin:logout" %}">{% trans "Log Out" %}</a>
+                    {% endif %}
+                </div>
+                <div class="col-md-4">
                     <a href="https://github.com/codefordurham/Durham-Restaurants">
                         <img src="{% static 'images/GitHub-Mark-32px.png' %}" height="24"/> <strong>{% trans 'Find us on GitHub' %}</strong>
                     </a><br>
@@ -97,6 +77,9 @@
                             </a>
                         {% endif %}
                     </span>
+                </div>
+                <div class="col-md-4">
+                    <a href="https://docs.google.com/forms/d/1zbmJDzx54ovrvxpfpH00Tbn8kFUbXImv6spIekhYGgc/viewform">{% trans 'Feedback' %}</a>
                 </div>
             </div>
         </footer>
