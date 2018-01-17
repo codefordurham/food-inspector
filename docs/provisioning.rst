@@ -16,7 +16,7 @@ Now you should be able to set up the rest::
     $ ssh cfd apps:create ncfoodinspector
 
     # Set deploy branch
-    ssh cfd config:set ncfoodinspector --no-restart DOKKU_DEPLOY_BRANCH=dokku
+    ssh cfd config:set ncfoodinspector --no-restart DOKKU_DEPLOY_BRANCH=master
     # SECRET_KEY
     ssh cfd config:set ncfoodinspector --no-restart SECRET_KEY=<fill-me-in>
     # ENVIRONMENT
@@ -33,7 +33,7 @@ Now you should be able to set up the rest::
     export POSTGRES_IMAGE_VERSION="9.6"
     dokku postgres:create ncfoodinspector
 
-    # If successful, you can connect and create the PostgreSQL exention:
+    # If successful, you can connect and create the PostgreSQL extension:
     $ ssh cfd postgres:connect ncfoodinspector
     ncfoodinspector=# CREATE EXTENSION postgis;
 
