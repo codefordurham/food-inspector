@@ -56,7 +56,11 @@ h2 {
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus,
 .navbar-default .navbar-toggle, .navbar-default .navbar-toggle {
-    background-color: white;
+    background-color: #5AC1A8;
+    border: none;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #51AE97;
 }
 .header h3 {
   margin-top: 0;
