@@ -8,6 +8,5 @@ To contribute to the project, you can checkout the code and follow these guides:
 * `Docker setup (recommended) <docs/docker.rst>`_
 * `Manual setup <docs/dev-setup.rst>`_
 
-.. image:: https://travis-ci.org/codefordurham/Durham-Restaurants.svg?branch=develop
- :target: https://travis-ci.org/codefordurham/Durham-Restaurants
-
+.. image:: https://travis-ci.org/codefordurham/food-inspector.svg?branch=develop
+ :target: https://travis-ci.org/codefordurham/food-inspector
