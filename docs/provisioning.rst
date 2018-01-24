@@ -55,7 +55,7 @@ Now you should be able to set up the rest::
 
     # Tell local git about the dokku server and push
     $ git remote add cfd cfd:ncfoodinspector
-    $ git push cfd dokku
+    $ git push cfd master
 
     # Domains
     ssh cfd domains:add ncfoodinspector ncfoodinspector.com
