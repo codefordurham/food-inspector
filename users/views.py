@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.views.generic import View
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import translation
 
 logger = logging.getLogger(__name__)
 
@@ -42,5 +43,6 @@ class UserLanguageView(View):
     def get(self, request, *args, **kwargs):
         lang = self.request.GET.get('lang', 'en-us')
         # set language for current user
-        request.session['django_language'] = lang
+        translation.activate(lang)
+        request.session[translation.LANGUAGE_SESSION_KEY] = lang
         return redirect(request.META.get('HTTP_REFERER', '/'))
